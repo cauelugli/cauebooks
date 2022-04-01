@@ -1,6 +1,8 @@
 .post {
   width: 385px;
   margin: 10px;
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 
 .postInfo {
@@ -23,16 +25,15 @@
   font-family: "Josefin Sans", sans-serif;
   font-size: 24px;
   font-weight: 700;
-  margin-top: 15px;
   cursor: pointer;
 }
 
 .postDate {
   font-family: "Lora", serif;
   font-style: italic;
-  font-size: 13px;
+  font-size: 12px;
   color: #999;
-  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .postDesc {
@@ -44,6 +45,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
