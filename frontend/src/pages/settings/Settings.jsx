@@ -4,6 +4,7 @@ import { Context } from "../../context/Context";
 import axios from "axios";
 
 export default function Settings() {
+  const [avatar, setAvatar] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +19,7 @@ export default function Settings() {
     dispatch({ type: "UPDATE_START" });
     const updatedUser = {
       userId: user._id,
+      avatar,
       username,
       email,
       password,
@@ -39,7 +41,7 @@ export default function Settings() {
         <form className="settingsForm" onSubmit={handleSubmit}>
           <label>Avatar</label>
           <div className="dropdown">
-            <a className="dropbtn">
+            <a className="dropbtn" onClick={(e) => setAvatar(e.target.value)}>
               <img src={window.location.origin + '/baseAvatars.png'} alt="" />
             </a>
             <div className="dropdown-content">
