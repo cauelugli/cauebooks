@@ -1,6 +1,9 @@
 import "./settings.css";
 import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Avatar from '@mui/material/Avatar';
 import axios from "axios";
 
 export default function Settings() {
@@ -32,6 +35,7 @@ export default function Settings() {
       dispatch({ type: "UPDATE_FAILURE" });
     }
   };
+
   return (
     <div className="settings">
       <div className="settingsWrapper">
@@ -41,14 +45,14 @@ export default function Settings() {
         <form className="settingsForm" onSubmit={handleSubmit}>
           <label>Avatar</label>
           <div className="dropdown">
-            <a className="dropbtn" onClick={(e) => setAvatar(e.target.value)}>
+            <a className="dropbtn" >
               <img src={window.location.origin + '/baseAvatars.png'} alt="" />
             </a>
-            <div className="dropdown-content">
+            <div className="dropdown-content" focused='false'>
               {images.map((p) => (
                 <div className="dropdown-item">
                   <a href='#'>
-                    <img src={window.location.origin + '/'+ p +'.png'}></img>
+                    <Avatar src={window.location.origin + '/'+ p +'.png'}></Avatar>
                   </a>
                 </div>
               ))}
