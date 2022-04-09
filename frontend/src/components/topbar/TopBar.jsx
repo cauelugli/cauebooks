@@ -28,18 +28,12 @@ export default function TopBar() {
               BROWSE
             </Link>
           </li>
-          <li className="topListItem">
-            <Link className="link" to="/write">
-              WRITE
-            </Link>
-          </li>
-          
         </ul>
       </div>
       <div className="topRight">
         {user ? (
           <Link to="/settings">
-            <img className="topImg" src={window.location.origin + '/1.png'} alt="" />
+            <img className="topImg" src={window.location.origin + '/' + user.avatar + '.png'} alt="" />
           </Link>
         ) : (
           <ul className="topList">

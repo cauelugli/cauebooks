@@ -2,16 +2,18 @@ import "./settings.css";
 import { useContext, useState } from "react";
 import { Context } from "../../context/Context";
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Avatar from '@mui/material/Avatar';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import axios from "axios";
 
 export default function Settings() {
   const [avatar, setAvatar] = useState("");
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
+
+  function handleAvatarChange(e) {setAvatar(e.target.value);}
 
   const { user, dispatch } = useContext(Context);
   
@@ -23,7 +25,6 @@ export default function Settings() {
     const updatedUser = {
       userId: user._id,
       avatar,
-      username,
       email,
       password,
     };
@@ -44,22 +45,19 @@ export default function Settings() {
         </div>
         <form className="settingsForm" onSubmit={handleSubmit}>
           <label>Avatar</label>
-          <div className="dropdown">
-            <a className="dropbtn" >
-              <img src={window.location.origin + '/baseAvatars.png'} alt="" />
-            </a>
-            <div className="dropdown-content" focused='false'>
-              {images.map((p) => (
-                <div className="dropdown-item">
-                  <a href='#'>
-                    <Avatar src={window.location.origin + '/'+ p +'.png'}></Avatar>
-                  </a>
-                </div>
-              ))}
-            </div>
-          </div>
-          <label>Username</label>
-          <input type="text" placeholder={(user.username || "New Username")} onChange={(e) => setUsername(e.target.value)} />
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <Select value={avatar} onChange={handleAvatarChange} >
+              <MenuItem value={'1'}><img src={window.location.origin + '/1.png'} alt="avatar1" /></MenuItem>
+              <MenuItem value={'2'}><img src={window.location.origin + '/2.png'} alt="avatar2" /></MenuItem>
+              <MenuItem value={'3'}><img src={window.location.origin + '/3.png'} alt="avatar3" /></MenuItem>
+              <MenuItem value={'4'}><img src={window.location.origin + '/4.png'} alt="avatar4" /></MenuItem>
+              <MenuItem value={'5'}><img src={window.location.origin + '/5.png'} alt="avatar5" /></MenuItem>
+              <MenuItem value={'6'}><img src={window.location.origin + '/6.png'} alt="avatar6" /></MenuItem>
+              <MenuItem value={'7'}><img src={window.location.origin + '/7.png'} alt="avatar7" /></MenuItem>
+              <MenuItem value={'8'}><img src={window.location.origin + '/8.png'} alt="avatar8" /></MenuItem>
+              <MenuItem value={'9'}><img src={window.location.origin + '/9.png'} alt="avatar9" /></MenuItem>
+            </Select>
+          </FormControl>
           <label>Email</label>
           <input type="email" onChange={(e) => setEmail(e.target.value)} />
           <label>New Password</label>
