@@ -15,10 +15,9 @@ export default function Settings() {
 
   function handleAvatarChange(e) {setAvatar(e.target.value);}
 
+  // const { user, dispatch } = useContext(Context);
   const { user, dispatch } = useContext(Context);
   
-  const images = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch({ type: "UPDATE_START" });
