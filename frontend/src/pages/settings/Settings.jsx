@@ -8,15 +8,17 @@ import Select from '@mui/material/Select';
 import axios from "axios";
 
 export default function Settings() {
-  const [avatar, setAvatar] = useState("");
+  const [avatar, setAvatar] = useState("1");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
 
-  function handleAvatarChange(e) {setAvatar(e.target.value);}
+  function handleAvatarChange(e) {setAvatar(e.target.value)};
 
   // const { user, dispatch } = useContext(Context);
   const { user, dispatch } = useContext(Context);
+
+  console.log(user.avatar);
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,7 +48,7 @@ export default function Settings() {
           <label>Avatar</label>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <Select value={avatar} onChange={handleAvatarChange} >
-              <MenuItem value={'1'}><img src={window.location.origin + '/1.png'} alt="avatar1" /></MenuItem>
+              <MenuItem selected={true} value={'1'}><img src={window.location.origin + '/1.png'} alt="avatar1" /></MenuItem>
               <MenuItem value={'2'}><img src={window.location.origin + '/2.png'} alt="avatar2" /></MenuItem>
               <MenuItem value={'3'}><img src={window.location.origin + '/3.png'} alt="avatar3" /></MenuItem>
               <MenuItem value={'4'}><img src={window.location.origin + '/4.png'} alt="avatar4" /></MenuItem>
