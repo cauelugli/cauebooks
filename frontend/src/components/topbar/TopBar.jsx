@@ -28,7 +28,12 @@ export default function TopBar() {
           </li>
           <li className="topListItem">
             <Link className="link" to="/">
-              BROWSE
+              BUSQUE
+            </Link>
+          </li>
+          <li className="topListItem">
+            <Link className="link" to="/about">
+              SOBRE
             </Link>
           </li>
         </ul>
@@ -47,7 +52,7 @@ export default function TopBar() {
             </li>
             <li className="topListItem">
               <Link className="link" to="/register">
-                REGISTER
+                REGISTRE-SE
               </Link>
             </li>
           </ul>

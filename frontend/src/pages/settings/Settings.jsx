@@ -8,17 +8,13 @@ import Select from '@mui/material/Select';
 import axios from "axios";
 
 export default function Settings() {
-  const [avatar, setAvatar] = useState("1");
+  const { user, dispatch } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
+  const [avatar, setAvatar] = useState(user.avatar);
 
   function handleAvatarChange(e) {setAvatar(e.target.value)};
-
-  // const { user, dispatch } = useContext(Context);
-  const { user, dispatch } = useContext(Context);
-
-  console.log(user.avatar);
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,13 +38,13 @@ export default function Settings() {
     <div className="settings">
       <div className="settingsWrapper">
         <div className="settingsTitle">
-          <span className="settingsUpdateTitle">Update Your Account</span>
+          <span className="settingsUpdateTitle">Atualize seu Perfil</span>
         </div>
         <form className="settingsForm" onSubmit={handleSubmit}>
           <label>Avatar</label>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <Select value={avatar} onChange={handleAvatarChange} >
-              <MenuItem selected={true} value={'1'}><img src={window.location.origin + '/1.png'} alt="avatar1" /></MenuItem>
+              <MenuItem value={'1'}><img src={window.location.origin + '/1.png'} alt="avatar1" /></MenuItem>
               <MenuItem value={'2'}><img src={window.location.origin + '/2.png'} alt="avatar2" /></MenuItem>
               <MenuItem value={'3'}><img src={window.location.origin + '/3.png'} alt="avatar3" /></MenuItem>
               <MenuItem value={'4'}><img src={window.location.origin + '/4.png'} alt="avatar4" /></MenuItem>
@@ -61,16 +57,16 @@ export default function Settings() {
           </FormControl>
           <label>Email</label>
           <input type="email" onChange={(e) => setEmail(e.target.value)} />
-          <label>New Password</label>
+          <label>Nova Senha</label>
           <input type="password" onChange={(e) => setPassword(e.target.value)} />
           <button className="settingsSubmit" type="submit">
-            Update
+            Atualizar
           </button>
           {success && (
-            <span style={{ color: "green", textAlign: "center", marginTop: "20px" }}> Profile has been updated!</span>
+            <span style={{ color: "green", textAlign: "center", marginTop: "20px" }}> Seu perfil foi atualizado com sucesso!</span>
           )}
         </form>
-        <span className="settingsDeleteTitle">Delete Account</span>
+        <span className="settingsDeleteTitle">Deletar Conta</span>
       </div>
     </div>
   );
