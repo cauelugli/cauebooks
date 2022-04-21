@@ -19,7 +19,7 @@ export default function Home() {
   }, [search]);
   return (
     <>
-      <Header />
+      <Header data={posts}/>
       <div className="home">
         <Posts posts={posts} />
         <Sidebar />

@@ -1,13 +1,17 @@
+import SearchBar from "../searchbar/SearchBar";
 import "./header.css";
 
-export default function Header() {
+export default function Header({data}) {
   return (
-    <div className="header">
-      <img
-        className="headerImg"
-        src={window.location.origin + '/logo.png'}
-        alt=""
-      />
-    </div>
+    <>
+      <SearchBar data={data} />
+      <div className="header">
+        <img
+          className="headerImg"
+          src={window.location.origin + '/logo.png'}
+          alt=""
+        />
+      </div>
+    </>
   );
 }
