@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
-import { Box, Paper, InputBase, Grid, Link } from '@mui/material';
+
+import { Paper, InputBase, Grid, Link } from '@mui/material';
+
+import './searchbar.css'
 
 const SearchBar = ({ data }) => {
     const [filteredData, setFilteredData] = useState([])
@@ -19,25 +22,24 @@ const SearchBar = ({ data }) => {
     return (
         <Grid
             container
-            spacing={0}
             direction="column"
             alignItems="center"
             justifyContent="center"
+            marginTop={3}
         >
-            <Grid item xs={4} width="50%">
+            <Grid item xs={4} width="60%">
                 <Paper>
-                    <InputBase onChange={handleFilter} sx={{ m: 1 }} placeholder="Procure por Textos" />
+                    <InputBase onChange={handleFilter} sx={{ m: 1, fontSize: 22, pl: 2 }} placeholder="Busque Conhecimento" />
                 </Paper>
-                {filteredData.slice(0, 8).length != 0 &&
-                    (<div>
-                    {filteredData.map((value, key) => {
-                     return (
-                     <a href="/"> 
-                        <p>{value.title}</p>
-                    </a>)
-                 })}
+                <div>
+                    {filteredData.map((value) => {
+                        return (
+                            <a href={`/post/${value._id}`}>
+                                <Paper className="dataResult">{value.title}</Paper>
+                            </a>
+                        )
+                    })}
                 </div>
-                )}
             </Grid>
         </Grid>
     )

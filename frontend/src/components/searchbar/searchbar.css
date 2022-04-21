@@ -1,0 +1,27 @@
+a {
+    text-decoration: none;
+}
+
+.dataResult {
+    margin-top: 4px;
+    padding: 10px;
+    padding-left: 12px;
+    background-color: white;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.dataResult::-webkit-scrollbar {
+    display: none;
+}
+
+.dataResult .dataItem {
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+.dataItem p {
+    margin-left: 10px;
+}
+
