@@ -2,8 +2,6 @@ import * as React from "react";
 
 import { CardContent, Box, Typography } from "@mui/material";
 
-import Footer from "../../components/footer/Footer";
-
 export default function About() {
   return (
     <>
@@ -72,7 +70,6 @@ export default function About() {
           </CardContent>
         </Box>
       </div>
-      <Footer />
     </>
   );
 }

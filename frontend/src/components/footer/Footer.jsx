@@ -4,12 +4,8 @@ export default function Footer() {
   return (
     <div className="footer">
       <div className="footerItem">
-        <span className="footerTitle">SOCIAL</span>
-        <div className="footerSocial">
-          <i className="footerIcon fab fa-facebook-square"></i>
-          <i className="footerIcon fab fa-twitter-square"></i>
-          <i className="footerIcon fab fa-instagram-square"></i>
-        </div>
+        <p className="footerTitle">OUR ROOTS RUN DEEPER</p>
+        <span style={{ fontStyle: "italic", marginTop: '4%' }}>4c</span>
       </div>
     </div>
   );
