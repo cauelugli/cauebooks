@@ -34,7 +34,7 @@ export default function About() {
                 alignItems: "center",
                 justifyContent: "space-around",
                 textAlign: "justify",
-                margin: "4%"
+                margin: "2%"
               }}
             >
               <img style={{ width: "30%" }} src={window.location.origin + '/adventurer.png'} alt="adventurer" />
