@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../../context/Context";
 
 import "./header.css";
 
-import { Context } from "../../context/Context";
 import SearchBar from "../searchbar/SearchBar";
+import SettingsMenu from "../settingsMenu/SettingsMenu";
 
 export default function Header({ data }) {
   // eslint-disable-next-line
@@ -38,9 +39,7 @@ export default function Header({ data }) {
         </div>
         <div className="topRight">
           {user ? (
-            <Link to="/settings">
-              <img className="topImg" src={window.location.origin + '/' + user.avatar + '.png'} alt="" />
-            </Link>
+            <SettingsMenu />
           ) : (
             <ul className="topList">
               <li className="topListItem">

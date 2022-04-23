@@ -28,15 +28,6 @@
   cursor: pointer;
 }
 
-.topImg {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-top: 20%;
-  object-fit: cover;
-  cursor: pointer;
-}
-
 .topList {
   display: flex;
   justify-content: center;
@@ -50,38 +41,4 @@
   font-size: 18px;
   font-weight: 300;
   cursor: pointer;
-}
-
-.searchbar {
-  margin-top: 70px;
-  margin-bottom: 50px;
-  
-}
-
-.searchbarTitles {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: "Lora", serif;
-  color: #444;
-}
-
-.searchbarTitleSm {
-  position: absolute;
-  top: 10%;
-  font-size: 20px;
-}
-
-.searchbarTitleLg {
-  position: absolute;
-  top: 12%;
-  font-size: 100px;
-}
-
-.searchbarImg{
-    width: 20%;
-    height: 20%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
