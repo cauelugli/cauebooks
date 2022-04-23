@@ -9,7 +9,7 @@ import Register from "./pages/register/Register";
 import About from "./pages/about/About";
 
 
-import Footer from "./components/footer/Footer";
+
 import Header from "./components/header/Header";
 import SinglePost from "./components/singlePost/SinglePost";
 
@@ -28,8 +28,7 @@ function App() {
         <Route path="/about">{user ? <About /> : <About />}</Route>
         <Route path="/post/:postId" ><SinglePost /> </Route>
       </Switch>
-      
-    <Footer />
+     
     </Router>
     </>
   );
