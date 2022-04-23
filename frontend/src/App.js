@@ -8,8 +8,10 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import About from "./pages/about/About";
 
+
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
+import SinglePost from "./components/singlePost/SinglePost";
 
 function App() {
   const { user } = useContext(Context);
@@ -24,8 +26,7 @@ function App() {
         <Route path="/login">{user ? <Home /> : <Login />}</Route>
         <Route path="/settings">{user ? <Settings /> : <Register />}</Route>
         <Route path="/about">{user ? <About /> : <About />}</Route>
-        <Route path="/post/:postId">
-        </Route>
+        <Route path="/post/:postId" ><SinglePost /> </Route>
       </Switch>
       
     <Footer />
