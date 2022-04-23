@@ -63,13 +63,6 @@ export default function Header({ data }) {
         </div>
       </div>
       <SearchBar data={data} />
-      <div className="header">
-        <img
-          className="headerImg"
-          src={window.location.origin + '/logo.png'}
-          alt=""
-        />
-      </div>
     </>
   );
 }
