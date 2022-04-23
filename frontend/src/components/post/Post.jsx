@@ -1,24 +1,20 @@
-import "./post.css";
 import { Link } from "react-router-dom";
+
+import "./post.css";
+
+import { Card } from '@mui/material';
 
 export default function Post({ post }) {
   return (
-    <div className="post">
-      <div className="postInfo">
-        <div className="postCats">
-          {post.categories.map((c) => (
-            <span className="postCat">{c.name}</span>
-          ))}
-        </div>
-        <Link to={`/post/${post._id}`} className="link">
-          <span className="postTitle">{post.title}</span>
-        </Link>
-        <hr />
-        <span className="postDate">
-          {new Date(post.createdAt).toDateString()}
-        </span>
-      </div>
+    <Card className="post" elevation={3}>
+      <Link to={`/post/${post._id}`} className="link">
+        <span className="postTitle">{post.title}</span>
+      </Link>
+      <hr/>
+      <span className="postDate">
+        {new Date(post.createdAt).toDateString()}
+      </span>
       <p className="postDesc">{post.desc}</p>
-    </div>
+    </Card>
   );
 }

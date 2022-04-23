@@ -3,22 +3,7 @@
   margin: 10px;
   margin-top: 20px;
   margin-bottom: 50px;
-}
-
-.postInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.postCat {
-  font-family: "Varela Round", sans-serif;
-  font-size: 11px;
-  color: #be9656;
-  line-height: 20px;
-  margin-top: 15px;
-  margin-right: 10px;
-  cursor: pointer;
+  padding: 3%;
 }
 
 .postTitle {
@@ -26,6 +11,7 @@
   font-size: 24px;
   font-weight: 700;
   cursor: pointer;
+  padding: 4%;
 }
 
 .postDate {

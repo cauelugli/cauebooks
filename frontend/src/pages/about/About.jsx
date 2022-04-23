@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { CardContent, Box, Typography } from "@mui/material";
-import Sidebar from "../../components/sidebar/Sidebar";
 
 export default function About() {
   return (
@@ -55,7 +54,6 @@ export default function About() {
             </Box>
           </CardContent>
         </Box>
-        <Sidebar />
       </div>
     </>
   );
