@@ -17,37 +17,33 @@ export default function Header({ data }) {
 
   return (
     <>
-      <div className="top">
-        <div className="topLeft">
-          <i className="topIcon fab fa-facebook-square"></i>
-          <i className="topIcon fab fa-twitter-square"></i>
-          <i className="topIcon fab fa-instagram-square"></i>
-        </div>
-        <div className="topCenter">
-          <ul className="topList">
-            <li className="topListItem">
+      <div className="header">
+        <div id="ghost_div" className="headerLeft"></div>
+        <div className="headerCenter">
+          <ul className="headerList">
+            <li className="headerListItem">
               <Link className="link" to="/">
                 HOME
               </Link>
             </li>
-            <li className="topListItem">
+            <li className="headerListItem">
               <Link className="link" to="/about">
                 SOBRE
               </Link>
             </li>
           </ul>
         </div>
-        <div className="topRight">
+        <div className="headerRight">
           {user ? (
             <SettingsMenu />
           ) : (
-            <ul className="topList">
-              <li className="topListItem">
+            <ul className="headerList">
+              <li className="headerListItem">
                 <Link className="link" to="/login">
                   LOGIN
                 </Link>
               </li>
-              <li className="topListItem">
+              <li className="headerListItem">
                 <Link className="link" to="/register">
                   REGISTRE-SE
                 </Link>
