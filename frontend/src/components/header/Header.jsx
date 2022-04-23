@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import "./header.css";
@@ -7,17 +7,12 @@ import { Context } from "../../context/Context";
 import SearchBar from "../searchbar/SearchBar";
 
 export default function Header({ data }) {
-  const [searchbarMenu, setSearchbarMenu] = useState(null)
   // eslint-disable-next-line
   const { user, dispatch } = useContext(Context);
 
   // const handleLogout = () => {
   //   dispatch({ type: "LOGOUT" });
   // };
-
-  const handleSearchBarmenu = () => {
-    setSearchbarMenu(true)
-  }
 
   return (
     <>
