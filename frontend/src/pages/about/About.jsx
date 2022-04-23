@@ -8,25 +8,21 @@ export default function About() {
         <Box
           sx={{
             display: 'block',
-            p: 1,
-            m: 1,
             color: 'grey.800',
             border: '1px solid',
-            margin: '1% 5% 5% 5%',
+            margin: '2%',
             borderColor: 'grey.300',
             borderRadius: 2,
             fontWeight: '700',
           }}
         >
           <CardContent>
-            <Typography component="div">
-              <Box sx={{
+              <Typography sx={{
                 fontStyle: 'italic',
                 color: "text.secondary",
               }}
               >
                 "Pescador de ilusões. Todos nós somos."
-              </Box>
             </Typography>
             <Box
               sx={{
@@ -39,7 +35,7 @@ export default function About() {
             >
               <img style={{ width: "30%" }} src={window.location.origin + '/adventurer.png'} alt="adventurer" />
 
-              <Typography sx={{ padding: '6%', lineHeight: 1.8, fontSize: '150%' }}>
+              <Typography sx={{ padding: '5%', lineHeight: 1.8, fontSize: '150%' }}>
                 Porque a ideia é ser feito por ele, e nessa frase mora todo o propósito disto aqui.
                 "Por que a ideia...": tem que virar a ação.
                 "...é ser feito...": pois há o fato de fazer por fazer.

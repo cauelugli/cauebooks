@@ -1,4 +1,7 @@
-.home{
-    display: flex;
-    flex-wrap: wrap;
+.home {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  padding: 5%;
 }

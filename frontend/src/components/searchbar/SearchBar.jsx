@@ -38,12 +38,13 @@ const SearchBar = () => {
       alignItems="center"
       justifyContent="center"
       marginTop={3}
+      paddingBottom={'2%'}
     >
       <Grid item xs={4} width="60%">
         <Paper>
           <InputBase
             onChange={handleFilter}
-            sx={{ m: 1, fontSize: 22, pl: 2 }}
+            sx={{ m: 1, fontSize: 22, p: '1%' }}
             placeholder="Busque Conhecimento"
           />
         </Paper>
