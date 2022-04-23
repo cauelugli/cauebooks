@@ -10,6 +10,7 @@ import About from "./pages/about/About";
 import SinglePost from "./pages/singlePost/SinglePost";
 
 import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
 
 function App() {
   const { user } = useContext(Context);
@@ -27,6 +28,7 @@ function App() {
         <Route path="/post/:postId" >{user ? <SinglePost /> : <Login />} </Route>
       </Switch>
      
+     <Footer />
     </Router>
     </>
   );
