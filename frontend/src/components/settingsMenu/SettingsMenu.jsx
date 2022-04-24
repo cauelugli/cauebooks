@@ -21,6 +21,10 @@ export default function BasicMenu() {
     setAnchorEl(null);
   };
 
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
+  };
+
   return (
     <div>
       <IconButton
@@ -36,7 +40,6 @@ export default function BasicMenu() {
 
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
 
-        {/* <MenuItem onClick={handleClose}> */}
         <MenuItem onClick={() => alert('one day')}>
           <FavoriteBorderOutlinedIcon style={{ marginRight: "10%" }} />
           <p style={{ marginRight: "5px" }}>Favoritos</p>
@@ -49,11 +52,11 @@ export default function BasicMenu() {
           </MenuItem>
         </Link>
 
-        {/* <MenuItem onClick={handleClose}> */}
-        <MenuItem onClick={() => alert('one day')}>
+        <MenuItem onClick={handleLogout}>
           <MeetingRoomOutlinedIcon style={{ marginRight: "10%" }} />
           <p style={{ marginRight: "5px" }}>Logout</p>
         </MenuItem>
+
       </Menu>
     </div>
   );
