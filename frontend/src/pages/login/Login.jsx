@@ -94,8 +94,7 @@ export default function Login() {
           <button className="loginSubmit" type="submit">Login</button>
           <a className="loginSubmit" href="/register">Registre-se</a>
 
-          {error && (<span style={{ color: "red", textAlign: "center", marginTop: "20px" }}>Algo de errado não está certo!</span>)}
-          
+          {error && (<span style={{ color: "red", textAlign: "center", marginTop: "5%" }}>Algo de errado não está certo!</span>)}
         </form>
 
       </div>

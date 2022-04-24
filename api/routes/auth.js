@@ -1,6 +1,7 @@
 const router = require("express").Router();
-const User = require("../models/User");
 const bcrypt = require("bcrypt");
+
+const User = require("../models/User");
 
 //REGISTERING
 router.post("/register", async (req, res) => {
@@ -25,15 +26,15 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
-    !user && res.status(400).json("Usuário ou senha inválido!");
+    !user && res.status(400).json();
 
     const validated = await bcrypt.compare(req.body.password, user.password);
-    !validated && res.status(400).json("Usuário ou senha inválido!");
+    !validated && res.status(400).json();
 
     const { password, ...others } = user._doc;
     res.status(200).json(others);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(400);
   }
 });
 
