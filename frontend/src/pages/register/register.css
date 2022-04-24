@@ -42,6 +42,7 @@
 .registerSubmit{
   width: 150px;
   align-self: center;
+  text-align: center;
   border: none;
   border-radius: 10px;
   color: #f1f1f1;

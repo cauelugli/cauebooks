@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState }  from "react";
 import axios from "axios";
 
 import {
@@ -15,6 +14,7 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+
 import "./register.css";
 
 export default function Register() {
@@ -62,6 +62,7 @@ export default function Register() {
         <div className="registerTitle">
           <span className="registerUpdateTitle">Crie seu Perfil</span>
         </div>
+
         <form className="registerForm" onSubmit={handleSubmit}>
           <label>Escolha um Avatar</label>
           <FormControl sx={{ m: 3 }}>
@@ -144,24 +145,15 @@ export default function Register() {
               }
             />
           </FormControl>
-          <button className="registerSubmit" type="submit">
-            Registrar
-          </button>
-          {error && (
-            <span
-              style={{ color: "red", textAlign: "center", marginTop: "20px" }}
-            >
-              Algo de errado não está certo!
-            </span>
-          )}
-          {success && (
-            <span
-              style={{ color: "green", textAlign: "center", marginTop: "20px" }}
-            >
-              Seu perfil foi criado com sucesso!
-            </span>
-          )}
+
+          <button className="registerSubmit" type="submit">Registrar</button>
+          <a className="loginSubmit" href='/login'>Já possuo uma Conta</a>
+
+          {error && (<span style={{ color: "red", textAlign: "center", marginTop: "20px" }}>Algo de errado não está certo!</span>)}
+          {success && (<span style={{ color: "green", textAlign: "center", marginTop: "20px" }}>Seu perfil foi criado com sucesso!</span>)}
+
         </form>
+
       </div>
     </div>
   );
