@@ -1,55 +1,52 @@
 .register {
-  height: calc(100vh - 50px);
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ),
-    url("https://images.pexels.com/photos/317355/pexels-photo-317355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-  background-size: cover;
+}
+
+.registerWrapper {
+  flex: 9;
+  padding: 20px;
+  margin: 1%;
 }
 
 .registerTitle {
-  font-size: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.registerUpdateTitle {
+  font-size: 30px;
+  margin-left: 8%;
+  color: lightcoral;
+}
+
+.registerDeleteTitle {
+  color: red;
+  font-size: 12px;
+  margin-left: 70%;
+  cursor: pointer;
 }
 
 .registerForm {
-  margin-top: 20px;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
 }
 
 .registerForm > label {
-  margin: 10px 0;
+  font-size: 22px;
+  margin-bottom: -0.5%;
 }
 
-.registerInput {
-  padding: 10px;
-  background-color: white;
+.registerSubmit{
+  width: 150px;
+  align-self: center;
   border: none;
-}
-
-.registerButton {
-  margin-top: 20px;
-  cursor: pointer;
+  border-radius: 10px;
+  color: #f1f1f1;
   background-color: teal;
-  border: none;
-  color: white;
-  border-radius: 10px;
   padding: 10px;
-}
-
-.registerLoginButton {
-  position: absolute;
-  top: 60px;
-  right: 20px;
-  background-color: lightcoral;
+  margin-top: 50px;
   cursor: pointer;
-  border: none;
-  padding: 10px;
-  color: white;
-  border-radius: 10px;
 }
