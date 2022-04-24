@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 import {
@@ -64,7 +64,7 @@ export default function Register() {
         </div>
         <form className="registerForm" onSubmit={handleSubmit}>
           <label>Escolha um Avatar</label>
-          <FormControl autoWidth sx={{ m: 3 }}>
+          <FormControl sx={{ m: 3 }}>
             <Select value={avatar} onChange={handleAvatarChange}>
               <MenuItem value={"1"}>
                 <img src={window.location.origin + "/1.png"} alt="avatar1" />
