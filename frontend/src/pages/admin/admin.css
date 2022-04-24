@@ -1,0 +1,52 @@
+.admin {
+  display: flex;
+}
+
+.adminWrapper {
+  flex: 9;
+  padding: 20px;
+  margin: 1%;
+}
+
+.adminTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.adminUpdateTitle {
+  font-size: 30px;
+  margin-left: 8%;
+  color: lightcoral;
+}
+
+.adminDeleteTitle {
+  color: red;
+  font-size: 12px;
+  margin-left: 70%;
+  cursor: pointer;
+}
+
+.adminForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.adminForm > label {
+  font-size: 22px;
+  margin-bottom: -0.5%;
+}
+
+.adminSubmit{
+  width: 150px;
+  align-self: center;
+  border: none;
+  border-radius: 10px;
+  color: #f1f1f1;
+  background-color: teal;
+  padding: 10px;
+  margin-top: 50px;
+  cursor: pointer;
+}
