@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "./context/Context";
 
+import Admin from "./pages/admin/Admin";
 import Home from "./pages/home/Home";
 import Settings from "./pages/settings/Settings";
 import Login from "./pages/login/Login";
@@ -26,6 +27,7 @@ function App() {
         <Route path="/settings">{user ? <Settings /> : <Login />}</Route>
         <Route path="/about">{user ? <About /> : <Login />}</Route>
         <Route path="/post/:postId" >{user ? <SinglePost /> : <Login />} </Route>
+        {user?.isAdmin && <Route exact path="/admin"><Admin /></Route>}
       </Switch>
      
      <Footer />
