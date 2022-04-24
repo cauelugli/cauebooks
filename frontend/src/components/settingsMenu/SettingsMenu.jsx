@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { IconButton, Menu, MenuItem } from "@mui/material";
+import { IconButton, Menu, MenuItem, Divider } from "@mui/material";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import MeetingRoomOutlinedIcon from '@mui/icons-material/MeetingRoomOutlined';
+import MeetingRoomOutlinedIcon from "@mui/icons-material/MeetingRoomOutlined";
 
 import { Context } from "../../context/Context";
 
@@ -39,8 +39,15 @@ export default function BasicMenu() {
       </IconButton>
 
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+        
+        <MenuItem disabled>
+          <strong style={{ margin: "10px 4px 10px 8px"}}>Olá, </strong>
+          <strong>{user.username}</strong>
+          <strong style={{ margin: "10px 8px 10px 14px" }}>(: </strong>
+        </MenuItem>
+        <Divider />
 
-        <MenuItem onClick={() => alert('one day')}>
+        <MenuItem onClick={() => alert("one day")}>
           <FavoriteBorderOutlinedIcon style={{ marginRight: "10%" }} />
           <p style={{ marginRight: "5px" }}>Favoritos</p>
         </MenuItem>
@@ -56,7 +63,6 @@ export default function BasicMenu() {
           <MeetingRoomOutlinedIcon style={{ marginRight: "10%" }} />
           <p style={{ marginRight: "5px" }}>Logout</p>
         </MenuItem>
-
       </Menu>
     </div>
   );
