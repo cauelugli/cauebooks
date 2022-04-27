@@ -1,5 +1,5 @@
-import React from "react";
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
+
 import axios from "axios";
 
 import {
@@ -11,10 +11,10 @@ import {
   FormControl,
   Select,
 } from "@mui/material";
+
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-import "./settings.css";
 
 import { Context } from "../../context/Context";
 

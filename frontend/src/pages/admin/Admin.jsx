@@ -1,5 +1,5 @@
-import React from "react";
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
+
 import axios from "axios";
 
 import {
@@ -7,10 +7,9 @@ import {
   OutlinedInput,
   FormControl,
 } from "@mui/material";
-import "./admin.css";
 
 // import { Context } from "../../context/Context";
-import CategoriesMenu from "../../components/categoriesMenu/CategoriesMenu";
+import AdminCategoriesMenu from "../../components/adminCategoriesMenu/AdminCategoriesMenu";
 
 export default function Admin() {
   const [email, setEmail] = useState("");
@@ -44,7 +43,7 @@ export default function Admin() {
               label="Titulo"
             />
           </FormControl>
-          <CategoriesMenu />
+          <AdminCategoriesMenu />
           <FormControl sx={{ m: 3 }} variant="outlined">
             <InputLabel>Email</InputLabel>
             <OutlinedInput

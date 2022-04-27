@@ -1,0 +1,429 @@
+/* ADMIN */
+.admin {
+  display: flex;
+}
+
+.adminWrapper {
+  flex: 9;
+  padding: 20px;
+  margin: 1%;
+}
+
+.adminTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.adminUpdateTitle {
+  font-size: 30px;
+  margin-left: 8%;
+  color: lightcoral;
+}
+
+.adminDeleteTitle {
+  color: red;
+  font-size: 12px;
+  margin-left: 70%;
+  cursor: pointer;
+}
+
+.adminForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.adminForm > label {
+  font-size: 22px;
+  margin-bottom: -0.5%;
+}
+
+.adminSubmit {
+  width: 150px;
+  align-self: center;
+  border: none;
+  border-radius: 10px;
+  color: #f1f1f1;
+  background-color: teal;
+  padding: 10px;
+  margin-top: 50px;
+  cursor: pointer;
+}
+/* ADMIN */
+
+/* HOME */
+.home {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  padding: 5%;
+}
+
+/* HOME */
+
+/* REGISTER */
+.register {
+  display: flex;
+}
+
+.registerWrapper {
+  flex: 9;
+  padding: 20px;
+  margin: 1%;
+}
+
+.registerTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.registerUpdateTitle {
+  font-size: 30px;
+  margin-left: 8%;
+  color: lightcoral;
+}
+
+.registerDeleteTitle {
+  color: red;
+  font-size: 12px;
+  margin-left: 70%;
+  cursor: pointer;
+}
+
+.registerForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.registerForm > label {
+  font-size: 22px;
+  margin-bottom: -0.5%;
+}
+
+.registerSubmit {
+  width: 150px;
+  align-self: center;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  color: #f1f1f1;
+  background-color: teal;
+  padding: 10px;
+  margin-top: 50px;
+  cursor: pointer;
+}
+/* REGISTER */
+
+/* SEARCHBAR */
+a {
+  text-decoration: none;
+}
+
+.dataResult {
+  margin-top: 4px;
+  padding: 10px;
+  padding-left: 12px;
+  background-color: white;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.dataResult::-webkit-scrollbar {
+  display: none;
+}
+
+.dataResult .dataItem {
+  display: flex;
+  align-items: center;
+  color: black;
+}
+
+.dataItem p {
+  margin-left: 10px;
+}
+
+/* SEARCHBAR */
+
+/* SETTINGS */
+.settings {
+  display: flex;
+}
+
+.settingsWrapper {
+  flex: 9;
+  padding: 20px;
+  margin: 1%;
+}
+
+.settingsTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.settingsUpdateTitle {
+  font-size: 30px;
+  margin-left: 8%;
+  color: lightcoral;
+}
+
+.settingsDeleteTitle {
+  color: red;
+  font-size: 12px;
+  margin-left: 70%;
+  cursor: pointer;
+}
+
+.settingsForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.settingsForm > label {
+  font-size: 22px;
+  margin-bottom: -0.5%;
+}
+
+.settingsSubmit {
+  width: 150px;
+  align-self: center;
+  border: none;
+  border-radius: 10px;
+  color: #f1f1f1;
+  background-color: teal;
+  padding: 10px;
+  margin-top: 50px;
+  cursor: pointer;
+}
+/* SETTINGS */
+
+/* SINGLEPOST */
+.singlePost {
+  flex: 9;
+}
+
+.singlePostWrapper {
+  padding: 20px;
+  padding-right: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.singlePostImg {
+  width: 100%;
+  height: 300px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.singlePostTitle {
+  text-align: center;
+  margin: 10px;
+  font-family: "Lora", serif;
+  font-size: 28px;
+}
+
+.singlePostTitleInput {
+  margin: 10px;
+  font-family: "Lora", serif;
+  font-size: 28px;
+  text-align: center;
+  border: none;
+  color: gray;
+  border-bottom: 1px solid lightgray;
+}
+
+.singlePostTitleInput:focus {
+  outline: none;
+}
+
+.singlePostIconThumbsUp {
+  margin-left: 10px;
+  cursor: pointer;
+  color: teal;
+}
+
+.singlePostIconStar {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #b39656;
+}
+
+.singlePostIconDots {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #c24f2c;
+}
+
+.singlePostInfo {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-family: "Varela Round", sans-serif;
+  color: #b39656;
+}
+
+.singlePostDesc {
+  text-align: justify;
+  margin: auto;
+  width: 80%;
+  padding: 10px;
+  color: #666;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.singlePostDesc::first-letter {
+  margin-left: 20px;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.singlePostDescInput {
+  border: none;
+  color: #666;
+  font-size: 22px;
+  line-height: 25px;
+}
+
+.singlePostDescInput:focus {
+  outline: none;
+}
+.singlePostButton {
+  width: 100px;
+  border: none;
+  background-color: teal;
+  padding: 5px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-top: 20px;
+}
+
+/* SINGLEPOST */
+
+/* FOOTER */
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15%;
+  margin-bottom: 2%;
+}
+
+.footerItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footerTitle {
+  padding: 1%;
+  border-top: 1px solid #a7a4a4;
+  border-bottom: 1px solid #a7a4a4;
+  font-family: "Varela Round", sans-serif;
+  font-size: 10px;
+  color: #222;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+}
+/* FOOTER */
+
+/* HEADER */
+.header {
+  background-color: white;
+  margin-top: 2%;
+  display: flex;
+  align-items: center;
+  font-family: "Josefin Sans", sans-serif;
+  z-index: 999;
+}
+
+.headerLeft,
+.headerRight {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerCenter {
+  flex: 8;
+}
+
+.headerList {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.headerListItem {
+  margin: 1%;
+  font-size: 18px;
+  font-weight: 300;
+  cursor: pointer;
+}
+/* HEADER */
+
+/* POST */
+.post {
+  width: 385px;
+  margin: 10px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  padding: 3%;
+}
+
+.postTitle {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4%;
+}
+
+.postDate {
+  font-family: "Lora", serif;
+  font-style: italic;
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 15px;
+}
+
+.postDesc {
+  font-family: "Varela Round", sans-serif;
+  font-size: 14px;
+  color: #444;
+  line-height: 24px;
+  margin-top: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* POST */
+
+/* POSTS */
+.posts {
+  flex: 12;
+  display: inline-grid;
+  grid-template-columns: auto auto auto;
+  margin-top: 20px;
+  padding: 20px;
+}
+/* POSTS */

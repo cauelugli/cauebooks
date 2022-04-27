@@ -2,8 +2,6 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../../context/Context";
 
-import "./header.css";
-
 import SearchBar from "../searchbar/SearchBar";
 import SettingsMenu from "../settingsMenu/SettingsMenu";
 

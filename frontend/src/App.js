@@ -1,5 +1,8 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useContext } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import './app.css'
+
 import { Context } from "./context/Context";
 
 import Admin from "./pages/admin/Admin";

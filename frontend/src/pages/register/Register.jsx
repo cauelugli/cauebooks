@@ -1,4 +1,5 @@
 import React, { useState }  from "react";
+
 import axios from "axios";
 
 import {
@@ -14,8 +15,6 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-
-import "./register.css";
 
 export default function Register() {
   const [username, setUsername] = useState("");

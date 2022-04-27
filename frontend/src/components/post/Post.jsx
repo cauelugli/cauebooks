@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 
-import "./post.css";
-
 import { Card } from '@mui/material';
 
 export default function Post({ post }) {

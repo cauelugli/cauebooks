@@ -1,9 +1,11 @@
-import "./singlePost.css";
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import { Context } from "../../context/Context";
+
+import axios from "axios";
+
 import { Box, Paper, Typography } from "@mui/material";
+
+import { Context } from "../../context/Context";
 
 export default function SinglePost() {
   const location = useLocation();

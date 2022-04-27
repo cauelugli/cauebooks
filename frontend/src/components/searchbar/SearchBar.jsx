@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
+
 import axios from "axios";
 
 import { Paper, InputBase, Grid } from "@mui/material";
-
-import "./searchbar.css";
 
 const SearchBar = () => {
   const [filteredData, setFilteredData] = useState([]);
