@@ -6,7 +6,6 @@ import {
   Paper,
   Select,
   MenuItem,
-  OutlinedInput,
   ListItemText,
   InputLabel
 } from "@mui/material";
@@ -18,6 +17,8 @@ const categoriesList = [
   "Pessoal",
   "Filosofia",
   "Tecnologia",
+  "Brisas Fortes",
+  "Esportes",
   "É um Erro",
 ];
 

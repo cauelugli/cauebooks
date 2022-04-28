@@ -1,6 +1,7 @@
-import React, { 
+import React, {
   // useContext,
-  useState } from "react";
+  useState,
+} from "react";
 
 // import axios from "axios";
 
@@ -8,6 +9,8 @@ import {
   InputLabel,
   OutlinedInput,
   FormControl,
+  Button,
+  Box,
 } from "@mui/material";
 
 // import { Context } from "../../context/Context";
@@ -17,6 +20,11 @@ import AdminParagraph from "../../components/adminParagraph/AdminParagraph";
 export default function Admin() {
   const [title, setTitle] = useState("");
   const [success, setSuccess] = useState(false);
+  const [paragraphList, setParagraphList] = useState([]);
+
+  const onAddBtnClick = (event) => {
+    setParagraphList(paragraphList.concat(<AdminParagraph key={paragraphList.length} />));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +45,7 @@ export default function Admin() {
     <div className="admin">
       <div className="adminWrapper">
         <form className="adminForm" onSubmit={handleSubmit}>
-          <FormControl sx={{ m: 3, width:"50%" }} variant="outlined">
+          <FormControl sx={{ m: 3, width: "50%" }} variant="outlined">
             <InputLabel>Titulo</InputLabel>
             <OutlinedInput
               type={"text"}
@@ -47,16 +55,26 @@ export default function Admin() {
             />
           </FormControl>
           <AdminCategoriesMenu />
-          <AdminParagraph label="Intro"/>
-          <AdminParagraph label="Tese"/>
-          <AdminParagraph label="Antítese"/>
-          <AdminParagraph label="Síntese"/>
-          <AdminParagraph label="Finish Him"/>
-          <button className="adminSubmit" type="submit">
-            Dalhe
-          </button>
-          {success && (<span style={{ color: "green", textAlign: "center", marginTop: "20px" }}>Boa poka!</span>)}
+          <AdminParagraph />
+          {paragraphList}
+          {success && (
+            <span
+              style={{ color: "green", textAlign: "center", marginTop: "20px" }}
+            >
+              Boa poka!
+            </span>
+          )}
         </form>
+        <Box textAlign="center">
+          <Button
+            variant="contained"
+            color="success"
+            onClick={onAddBtnClick}
+            sx={{ alignContent: "center", margin: 3 }}
+          >
+            ADD PARAGRAPH
+          </Button>
+        </Box>
       </div>
     </div>
   );
