@@ -1,37 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import Checkbox from '@mui/material/Checkbox';
-import FormControl from '@mui/material/FormControl';
-import ListItemText from '@mui/material/ListItemText';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+import {
+  Checkbox,
+  FormControl,
+  Paper,
+  Select,
+  MenuItem,
+  OutlinedInput,
+  ListItemText,
+  InputLabel
+} from "@mui/material";
 
-const names = ['Oliver Hansen', 'Van Henry', 'April Tucker'];
+const categoriesList = [
+  "Natureza",
+  "Sociedade",
+  "Família",
+  "Pessoal",
+  "Filosofia",
+  "Tecnologia",
+  "É um Erro",
+];
 
-export default function CheckboxesGroup() {
+export default function MultipleSelectCheckmarks() {
   const [categories, setCategories] = useState([]);
 
-  const handleChangeCheckboxes = (event) => {
-    const {target: { value },} = event;
-    setCategories(event.target.value);
+  const handleCategories = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setCategories(
+      typeof value === 'string' ? value.split(',') : value,
+    );
+    console.log(categories)
   };
+
   return (
-    <>
-      <FormControl sx={{ m: 1, width: 300 }}>
+    <Paper variant="outlined">
+      <FormControl sx={{ m: 3, width: 400 }}>
+        <InputLabel>Categorias</InputLabel>
         <Select
           multiple
+          label="Categorias"
           value={categories}
-          onChange={handleChangeCheckboxes}
+          onChange={handleCategories}
           renderValue={(selected) => selected.join(', ')}
         >
-          {names.map((category) => (
-            <MenuItem key={category} value={category}>
-              <Checkbox checked={categories.indexOf(category) > -1} />
-              <ListItemText primary={category} />
+          {categoriesList.map((cat) => (
+            <MenuItem key={cat} value={cat}>
+              <Checkbox checked={categories.indexOf(cat) > -1} />
+              <ListItemText primary={cat} />
             </MenuItem>
           ))}
         </Select>
       </FormControl>
-    </>
+    </Paper>
   );
 }
+
+
+

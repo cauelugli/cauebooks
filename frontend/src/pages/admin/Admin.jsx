@@ -1,6 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { 
+  // useContext,
+  useState } from "react";
 
-import axios from "axios";
+// import axios from "axios";
 
 import {
   InputLabel,
@@ -10,9 +12,10 @@ import {
 
 // import { Context } from "../../context/Context";
 import AdminCategoriesMenu from "../../components/adminCategoriesMenu/AdminCategoriesMenu";
+import AdminParagraph from "../../components/adminParagraph/AdminParagraph";
 
 export default function Admin() {
-  const [email, setEmail] = useState("");
+  const [title, setTitle] = useState("");
   const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -34,25 +37,21 @@ export default function Admin() {
     <div className="admin">
       <div className="adminWrapper">
         <form className="adminForm" onSubmit={handleSubmit}>
-          <FormControl sx={{ m: 3 }} variant="outlined">
+          <FormControl sx={{ m: 3, width:"50%" }} variant="outlined">
             <InputLabel>Titulo</InputLabel>
             <OutlinedInput
               type={"text"}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               label="Titulo"
             />
           </FormControl>
           <AdminCategoriesMenu />
-          <FormControl sx={{ m: 3 }} variant="outlined">
-            <InputLabel>Email</InputLabel>
-            <OutlinedInput
-              type={"text"}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              label="Email"
-            />
-          </FormControl>
+          <AdminParagraph label="Intro"/>
+          <AdminParagraph label="Tese"/>
+          <AdminParagraph label="Antítese"/>
+          <AdminParagraph label="Síntese"/>
+          <AdminParagraph label="Finish Him"/>
           <button className="adminSubmit" type="submit">
             Dalhe
           </button>
