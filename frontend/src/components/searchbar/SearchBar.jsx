@@ -36,7 +36,7 @@ const SearchBar = () => {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      marginTop={3}
+      margin={3}
       paddingBottom={'2%'}
     >
       <Grid item xs={4} width="60%">
