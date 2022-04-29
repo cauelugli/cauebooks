@@ -1,3 +1,15 @@
+:root {
+  --my-black: #0E1428;
+  --my-green: #92AF9E;
+  --my-light-green: #BDEFD8;
+  --my-white: #f1f1f0e3;
+}
+
+body {
+  background-image: url("gradient.png");
+  font-family: "Josefin Sans", sans-serif;
+}
+
 /* ABOUT */
 .aboutImg {
   width: 25%;
@@ -69,6 +81,44 @@
 }
 
 /* HOME */
+
+/* LOGIN */
+.login {
+  display: flex;
+}
+
+.loginWrapper {
+  flex: 9;
+  padding: 20px;
+  margin: 1%;
+}
+
+.loginTitle {
+  font-size: 30px;
+  margin-left: 8%;
+  color: var(--my-black);
+}
+
+.loginForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.loginSubmit{
+  width: 150px;
+  align-self: center;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  color: #f1f1f1;
+  background-color: teal;
+  padding: 10px;
+  margin-top: 50px;
+  cursor: pointer;
+}
+/* LOGIN */
 
 /* REGISTER */
 .register {
@@ -348,12 +398,10 @@ a {
 
 /* HEADER */
 .header {
-  background-color: white;
-  margin-top: 2%;
+  margin: 3%;
   display: flex;
   align-items: center;
   font-family: "Josefin Sans", sans-serif;
-  z-index: 999;
 }
 
 .headerLeft,
