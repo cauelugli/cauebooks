@@ -45,7 +45,7 @@ export default function Admin() {
     <div className="admin">
       <div className="adminWrapper">
         <form className="adminForm" onSubmit={handleSubmit}>
-          <FormControl sx={{ m: 3, width: "50%" }} variant="outlined">
+          <FormControl sx={{ m: 4, width: "50%" }} variant="outlined">
             <InputLabel>Titulo</InputLabel>
             <OutlinedInput
               type={"text"}

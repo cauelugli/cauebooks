@@ -37,7 +37,7 @@ export default function MultipleSelectCheckmarks() {
 
   return (
     <Paper variant="outlined">
-      <FormControl sx={{ m: 3, width: 400 }}>
+      <FormControl sx={{ m: 4, width: 400 }}>
         <InputLabel>Categorias</InputLabel>
         <Select
           multiple

@@ -3,15 +3,13 @@ import { useContext, useState } from "react";
 import axios from "axios";
 
 import {
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  FormControl,
+  Box,
+  Button,
+  Container,
+  CssBaseline,
+  TextField,
+  Typography,
 } from "@mui/material";
-
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import { Context } from "../../context/Context";
 
@@ -19,13 +17,8 @@ export default function Login() {
   const { dispatch } = useContext(Context);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
 
   const [error, setError] = useState(false);
-
-  function handleShowPassword() {
-    setShowPassword(!showPassword);
-  }
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -48,56 +41,78 @@ export default function Login() {
   };
 
   return (
-    <div className="login">
-      <div className="loginWrapper">
-        <div className="loginTitle">
-          <span className="loginUpdateTitle">Entre em sua Conta!</span>
-        </div>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: "40%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Typography sx={{ m: 3 }} component="h3" variant="h4">
+          Entre em sua Conta
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="Nome de Usuário"
+            label="Nome de Usuário"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Senha"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onMouseDown={handleMouseDownPassword}
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Login
+          </Button>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "flex-around",
+        }}
+      >
+        <Button
+          color="secondary"
+          fullWidth
+          variant="contained"
+          sx={{ m: 2 }}
+        >
+          Esqueceu, né?
+        </Button>
+        <Button
+          color="inherit"
+          fullWidth
+          variant="contained"
+          sx={{ m: 2 }}
+        >
+          Faz a Conta aí!
+        </Button>
+      </Box>
 
-        <form className="loginForm" onSubmit={handleSubmit}>
-          <FormControl sx={{ m: 3 }} variant="outlined">
-            <InputLabel>Nome de Usuário</InputLabel>
-            <OutlinedInput
-              type={"text"}
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              label="Nome de Usuário"
-              endAdornment={
-                <InputAdornment position="end" edge="end">
-                  <Visibility />
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-          <FormControl sx={{ m: 3 }} variant="outlined">
-            <InputLabel>Password</InputLabel>
-            <OutlinedInput
-              type={showPassword ? "text" : "password"}
-              value={password}
-              label="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-
-          <button className="loginSubmit" type="submit">Login</button>
-          <a className="loginSubmit" href="/register">Registre-se</a>
-
-          {error && (<span style={{ color: "red", textAlign: "center", marginTop: "5%" }}>Algo de errado não está certo!</span>)}
-        </form>
-
-      </div>
-    </div>
+      {error && (
+        <span style={{ color: "red", textAlign: "center", marginTop: "5%" }}>
+          Algo de errado não está certo!
+        </span>
+      )}
+    </Container>
   );
 }
