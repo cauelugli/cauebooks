@@ -9,6 +9,7 @@ export default function About() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        margin: "1%",
       }}
     >
       <Box
@@ -21,7 +22,7 @@ export default function About() {
           backgroundColor: "#f1f1f0e3",
           borderColor: "grey.400",
           borderRadius: 3,
-          width: "75%",
+          width: "85%",
         }}
       >
         <CardContent>
@@ -50,7 +51,7 @@ export default function About() {
             />
 
             <div>
-            <Typography
+              <Typography
                 sx={{ ml: "3%", mr: "3%", lineHeight: 1.8, fontSize: "125%" }}
               >
                 Porque a ideia é ser feito por ele. E nessa frase mora todo o
@@ -58,7 +59,13 @@ export default function About() {
               </Typography>
 
               <Typography
-                sx={{ ml: "3%", mr: "3%", mb:"3%", lineHeight: 1.8, fontSize: "125%" }}
+                sx={{
+                  ml: "3%",
+                  mr: "3%",
+                  mb: "3%",
+                  lineHeight: 1.8,
+                  fontSize: "125%",
+                }}
               >
                 Mas afinal, quem é ele, quem é? Alguém sabe quem convidou?
               </Typography>
@@ -71,9 +78,7 @@ export default function About() {
                 quem escolhe...
               </Typography>
 
-              <Typography
-                sx={{ m: "3%", lineHeight: 1.8, fontSize: "125%" }}
-              >
+              <Typography sx={{ m: "3%", lineHeight: 1.8, fontSize: "125%" }}>
                 Eu sou teu espelho. Eu sirvo pra te mostrar um reflexo dos teus
                 próprios pensamentos.
               </Typography>
