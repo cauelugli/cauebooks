@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { IconButton, Menu, MenuItem, Divider } from "@mui/material";
+
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import MeetingRoomOutlinedIcon from "@mui/icons-material/MeetingRoomOutlined";
@@ -27,19 +28,11 @@ export default function BasicMenu() {
 
   return (
     <div>
-      <IconButton
-        sx={{ "&:hover": { backgroundColor: "transparent" } }}
-        onClick={handleClick}
-      >
-        <img
-          className="topImg"
-          src={window.location.origin + "/" + user.avatar + ".png"}
-          alt=""
-        />
+      <IconButton onClick={handleClick}>
+        <img className="topImg" src={window.location.origin + "/" + user.avatar + ".png"} alt=""/>
       </IconButton>
 
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-        
         <MenuItem disabled>
           <strong style={{ margin: "10px 4px 10px 8px"}}>Olá, </strong>
           <strong>{user.username}</strong>
@@ -64,6 +57,7 @@ export default function BasicMenu() {
           <p style={{ marginRight: "5px" }}>Logout</p>
         </MenuItem>
       </Menu>
+      
     </div>
   );
 }
