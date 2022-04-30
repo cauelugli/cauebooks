@@ -11,6 +11,13 @@ import {
   FormControl,
   Select,
   Typography,
+  Button,
+  DialogContent,
+  DialogContentText,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+  Divider,
 } from "@mui/material";
 
 import Visibility from "@mui/icons-material/Visibility";
@@ -27,6 +34,7 @@ export default function Settings() {
   const [password, setPassword] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [success, setSuccess] = useState(false);
 
   function handleAvatarChange(e) {
@@ -41,7 +49,26 @@ export default function Settings() {
     event.preventDefault();
   };
 
-  const handleSubmit = async (e) => {
+  const handleDeleteConfirmation = () => {
+    setOpenDeleteModal(true);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setOpenDeleteModal(false);
+  };
+
+  const handleDelete = async () => {
+    try {
+      const res = await axios.delete("/users/" + user._id);
+      setSuccess(true);
+      console.log('res.data', res.data)
+      dispatch({ type: "LOGOUT" });
+    } catch (err) {
+      console.log(err)
+    }
+  };
+
+  const handleUpdate = async (e) => {
     e.preventDefault();
     dispatch({ type: "UPDATE_START" });
     const updatedUser = {
@@ -63,12 +90,17 @@ export default function Settings() {
     <div className="settings">
       <div className="settingsWrapper">
         <div className="settingsTitle">
-          <Typography variant="h6" sx={{fontSize: "30px", marginLeft: "15%", color:"#0E1428"}}>Atualize seu Perfil</Typography>
+          <Typography
+            variant="h6"
+            sx={{ fontSize: "30px", marginLeft: "15%", color: "#0E1428" }}
+          >
+            Atualize seu Perfil
+          </Typography>
         </div>
-        <form className="settingsForm" onSubmit={handleSubmit}>
+        <form className="settingsForm" onSubmit={handleUpdate}>
           <label>Avatar</label>
           <FormControl sx={{ m: 3 }}>
-            <Select  value={avatar} onChange={handleAvatarChange}>
+            <Select value={avatar} onChange={handleAvatarChange}>
               <MenuItem value={"1"}>
                 <img src={window.location.origin + "/1.png"} alt="avatar1" />
               </MenuItem>
@@ -136,15 +168,37 @@ export default function Settings() {
           <button className="settingsSubmit" type="submit">
             Atualizar
           </button>
-          {success && (
-            <span
-              style={{ color: "green", textAlign: "center", marginTop: "20px" }}
-            >
-              Seu perfil foi atualizado com sucesso!
-            </span>
-          )}
         </form>
-        <span className="settingsDeleteTitle">Deletar Conta</span>
+        <Button
+          variant="default"
+          onClick={handleDeleteConfirmation}
+          sx={{ marginLeft: "65%" }}
+        >
+          Deletar Conta
+        </Button>
+        <Dialog open={openDeleteModal} onClose={handleCloseDeleteModal}>
+          <DialogTitle>Tem certeza, mano?</DialogTitle>
+          <Divider />
+          <DialogContent>
+            <DialogContentText>
+              Algumas coisas na vida não tem volta, e deletar sua conta é uma
+              delas. É isso mesmo que você quer?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button variant="inherit" onClick={handleCloseDeleteModal}>
+              Puts, nem
+            </Button>
+            <Button
+              color="error"
+              variant="contained"
+              onClick={handleDelete}
+              autoFocus
+            >
+              Sim
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     </div>
   );
