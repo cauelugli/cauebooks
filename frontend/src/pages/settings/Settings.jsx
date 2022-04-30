@@ -35,7 +35,6 @@ export default function Settings() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const [success, setSuccess] = useState(false);
 
   function handleAvatarChange(e) {
     setAvatar(e.target.value);
@@ -60,9 +59,7 @@ export default function Settings() {
   const handleDelete = async () => {
     try {
       const res = await axios.delete("/users/" + user._id);
-      setSuccess(true);
-      console.log('res.data', res.data)
-      dispatch({ type: "LOGOUT" });
+      dispatch({ type: "LOGOUT", payload: res.data });
     } catch (err) {
       console.log(err)
     }
@@ -79,7 +76,6 @@ export default function Settings() {
     };
     try {
       const res = await axios.put("/users/" + user._id, updatedUser);
-      setSuccess(true);
       dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
     } catch (err) {
       dispatch({ type: "UPDATE_FAILURE" });
