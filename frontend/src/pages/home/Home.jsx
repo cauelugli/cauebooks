@@ -13,7 +13,6 @@ const cards = [1, 2, 3, 4];
 export default function Home() {
   return (
     <>
-      {/* Hero unit */}
       <Box sx={{ pt: 3, pb: 10 }}>
         <Container>
           <Typography
@@ -33,7 +32,6 @@ export default function Home() {
             Salve salve! Seja sempre bem-vindo!
           </Typography>
           <Stack
-            // sx={{ pt: 4 }}
             direction="row"
             spacing={2}
             justifyContent="center"
@@ -41,7 +39,6 @@ export default function Home() {
         </Container>
       </Box>
       <Container>
-        {/* End hero unit */}
         {/* <LatestPost />
            <LikedstPost />
            <FavoritePost />
@@ -68,18 +65,3 @@ export default function Home() {
     </>
   );
 }
-
-// export default function Home() {
-//   return (
-//     <>
-//       <div className="home">
-//         <img
-//           className="headerImg"
-//           src={window.location.origin + "/logo.png"}
-//           alt=""
-//         />
-
-//       </div>
-//     </>
-//   );
-// }
