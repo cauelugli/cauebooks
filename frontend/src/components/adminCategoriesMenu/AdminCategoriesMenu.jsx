@@ -12,6 +12,7 @@ import {
 
 const categoriesList = [
   "Natureza",
+  "Ser Humano",
   "Sociedade",
   "Família",
   "Pessoal",
