@@ -10,7 +10,7 @@ import FamilyRestroomIcon from '@mui/icons-material/FamilyRestroom';
 import GroupIcon from '@mui/icons-material/Group';
 import NaturePeopleIcon from '@mui/icons-material/NaturePeople';
 import SpaIcon from '@mui/icons-material/Spa';
-import SportsBarIcon from '@mui/icons-material/SportsBar';
+import BathtubIcon from '@mui/icons-material/Bathtub';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 
 const HomeAppBar = () => {
@@ -38,7 +38,7 @@ const HomeAppBar = () => {
 
         <Button color="inherit" startIcon={<ComputerIcon />} sx={{mx:1}}>Tecnologia</Button>
 
-        <Button color="inherit" startIcon={<SportsBarIcon />} sx={{mx:1}}>Brisas Fortes</Button>
+        <Button color="inherit" startIcon={<BathtubIcon />} sx={{mx:1}}>Brisas Fortes</Button>
 
 
       </Toolbar>
