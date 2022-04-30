@@ -44,8 +44,8 @@ const SearchBar = () => {
           <InputBase
             onChange={handleFilter}
             fullWidth
-            sx={{ m: 1, ml:2, fontSize: 20, p: '1%', fontFamily: "Josefin Sans, sans-serif"}}
-            placeholder="BUSQUE O CONHECIMENTO"
+            sx={{ m: 1, ml:2, fontSize: 20, p: '1%', fontFamily: "Varela Round, sans-serif"}}
+            placeholder="BUSQUEM CONHECIMENTO"
           />
         </Paper>
         <div>
