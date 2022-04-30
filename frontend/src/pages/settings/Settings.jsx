@@ -10,6 +10,7 @@ import {
   MenuItem,
   FormControl,
   Select,
+  Typography,
 } from "@mui/material";
 
 import Visibility from "@mui/icons-material/Visibility";
@@ -20,11 +21,13 @@ import { Context } from "../../context/Context";
 
 export default function Settings() {
   const { user, dispatch } = useContext(Context);
+
+  const [avatar, setAvatar] = useState(user.avatar);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [success, setSuccess] = useState(false);
+
   const [showPassword, setShowPassword] = useState(false);
-  const [avatar, setAvatar] = useState(user.avatar);
+  const [success, setSuccess] = useState(false);
 
   function handleAvatarChange(e) {
     setAvatar(e.target.value);
@@ -60,7 +63,7 @@ export default function Settings() {
     <div className="settings">
       <div className="settingsWrapper">
         <div className="settingsTitle">
-          <span className="settingsUpdateTitle">Atualize seu Perfil</span>
+          <Typography variant="h6" sx={{fontSize: "30px", marginLeft: "15%", color:"#0E1428"}}>Atualize seu Perfil</Typography>
         </div>
         <form className="settingsForm" onSubmit={handleSubmit}>
           <label>Avatar</label>
