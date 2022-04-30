@@ -4,13 +4,13 @@ import { AppBar, Button, Toolbar, Typography } from '@mui/material'
 
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import BathtubIcon from '@mui/icons-material/Bathtub';
 import ComputerIcon from '@mui/icons-material/Computer';
 import DangerousIcon from '@mui/icons-material/Dangerous';
 import FamilyRestroomIcon from '@mui/icons-material/FamilyRestroom';
 import GroupIcon from '@mui/icons-material/Group';
 import NaturePeopleIcon from '@mui/icons-material/NaturePeople';
 import SpaIcon from '@mui/icons-material/Spa';
-import BathtubIcon from '@mui/icons-material/Bathtub';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 
 const HomeAppBar = () => {
