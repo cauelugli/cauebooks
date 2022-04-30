@@ -13,7 +13,7 @@ import NaturePeopleIcon from '@mui/icons-material/NaturePeople';
 import SpaIcon from '@mui/icons-material/Spa';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 
-const HomeAppBar = () => {
+const CategoriesBar = () => {
   return (
     <AppBar position="static">
       <Toolbar sx={{color: "#BDEFD8", backgroundColor:"#0E1428"}}>
@@ -46,4 +46,4 @@ const HomeAppBar = () => {
   )
 }
 
-export default HomeAppBar
+export default CategoriesBar

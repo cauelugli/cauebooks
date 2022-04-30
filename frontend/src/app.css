@@ -396,9 +396,9 @@ body {
 }
 
 .headerListItem {
-  margin: 1%;
-  font-size: 18px;
-  font-weight: 300;
+  font-family: "Lora", sans-serif;
+  margin: 2%;
+  font-size: 22px;
   cursor: pointer;
 }
 /* HEADER */
