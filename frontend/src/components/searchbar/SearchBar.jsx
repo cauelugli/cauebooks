@@ -5,8 +5,6 @@ import axios from "axios";
 
 import { Paper, InputBase, Grid, Link } from "@mui/material";
 
-import AndroidIcon from '@mui/icons-material/Android';
-
 const SearchBar = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [posts, setPosts] = useState([]);
@@ -49,8 +47,7 @@ const SearchBar = () => {
             onChange={handleFilter}
             fullWidth
             sx={{ m: 1, ml:2, fontSize: 20, p: '1%', color: "gray", fontFamily: "Roboto, sans-serif"}}
-            placeholder=': "BUSQUEM CONHECIMENTO!"'
-            startAdornment={<AndroidIcon sx={{mr:1, color: "gray"}} />}
+            placeholder='👾: -"BUSQUEM CONHECIMENTO!"'
           />
         </Paper>
         <Paper sx={{zIndex:1, position:"absolute", mt:0.5}}>
