@@ -33,8 +33,7 @@ export default function Home() {
               color="text.secondary"
               paragraph
             >
-              Make it short and sweet, but not too short so folks don&apos;t
-              simply skip over it entirely.
+              Salve salve! Seja sempre bem-vindo!
             </Typography>
             <Stack
               // sx={{ pt: 4 }}
