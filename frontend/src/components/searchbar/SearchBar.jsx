@@ -3,7 +3,7 @@ import { useLocation } from "react-router";
 
 import axios from "axios";
 
-import { Paper, InputBase, Grid } from "@mui/material";
+import { Paper, InputBase, Grid, Link } from "@mui/material";
 
 import AndroidIcon from '@mui/icons-material/Android';
 
@@ -40,27 +40,28 @@ const SearchBar = () => {
       justifyContent="center"
       margin={3}
       paddingBottom={'2%'}
+      
     >
-      <Grid item xs={4} width="60%">
+      <Grid item xs={4} width="60%" sx={{}}>
         <Paper>
           {/* <AndroidIcon /> */}
           <InputBase
             onChange={handleFilter}
             fullWidth
-            sx={{ m: 1, ml:2, fontSize: 20, p: '1%', fontFamily: "Roboto, sans-serif"}}
+            sx={{ m: 1, ml:2, fontSize: 20, p: '1%', color: "gray", fontFamily: "Roboto, sans-serif"}}
             placeholder=': "BUSQUEM CONHECIMENTO!"'
             startAdornment={<AndroidIcon sx={{mr:1, color: "gray"}} />}
           />
         </Paper>
-        <div>
+        <Paper sx={{zIndex:1, position:"absolute", mt:0.5}}>
           {filteredData.map((posts) => {
             return (
-              <a href={`/post/${posts._id}`}>
-                <Paper className="dataResult">{posts.title}</Paper>
-              </a>
+              <Link href={`/post/${posts._id}`} sx={{textDecoration:"none"}}>
+                <Paper sx={{marginTop: "5px", padding:"10px", color: "gray"}}>{posts.title}</Paper>
+              </Link>
             );
           })}
-        </div>
+        </Paper>
       </Grid>
     </Grid>
   );
