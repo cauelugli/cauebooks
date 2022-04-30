@@ -194,16 +194,10 @@ body {
   justify-content: space-between;
 }
 
-.settingsUpdateTitle {
-  font-size: 30px;
-  margin-left: 8%;
-  color: lightcoral;
-}
-
 .settingsDeleteTitle {
-  color: red;
-  font-size: 12px;
-  margin-left: 70%;
+  color: rgba(250, 135, 135, 0.699);
+  font-size: 13px;
+  margin-left: 65%;
   cursor: pointer;
 }
 
