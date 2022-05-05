@@ -2,13 +2,11 @@ import React, { useState } from "react";
 
 import { FormControl, TextField } from "@mui/material";
 
-const AdminParagraph = ({ label }) => {
+const AdminParagraph = () => {
   const [paragraph, setParagraph] = useState("");
-
   return (
-    <FormControl sx={{ margin: 3, width: "70%" }}>
+    <FormControl sx={{ margin: 3, width: "70%", backgroundColor: "#e4e4e4" }}>
       <TextField
-        label={label}
         multiline
         maxRows={4}
         value={paragraph}
