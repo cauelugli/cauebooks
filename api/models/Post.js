@@ -11,9 +11,13 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    category: {
+    categories: {
       type: Array,
       required: true,
+    },
+    likes: {
+      type: Number,
+      default: 0
     },
   },
   { timestamps: true }
