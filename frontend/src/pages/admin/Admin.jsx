@@ -1,7 +1,4 @@
-import React, {
-  // useContext,
-  useState,
-} from "react";
+import React, { useState } from "react";
 
 import axios from "axios";
 
@@ -9,17 +6,12 @@ import {
   InputLabel,
   OutlinedInput,
   FormControl,
-  // Button,
-  // Box,
   Paper,
   Select,
   MenuItem,
   Checkbox,
   ListItemText,
 } from "@mui/material";
-
-// import { Context } from "../../context/Context";
-// import AdminParagraph from "../../components/adminParagraph/AdminParagraph";
 
 const categoriesList = [
   "É um Erro",
