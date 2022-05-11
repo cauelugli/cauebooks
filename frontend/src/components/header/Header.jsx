@@ -8,7 +8,7 @@ export default function Header({ data }) {
   return (
     <>
       <div className="header">
-        {/* This ghost will have something one day  */}
+        {/* This ghost will have the logo one day  */}
         <div id="ghost_div" className="headerLeft"></div>
 
         <div className="headerCenter">

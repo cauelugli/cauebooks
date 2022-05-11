@@ -16,7 +16,7 @@ import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 const CategoriesBar = () => {
   return (
     <AppBar position="static">
-      <Toolbar sx={{color: "#BDEFD8", backgroundColor:"#0E1428"}}>
+      <Toolbar sx={{color: "#BDEFD8", width:"100%", backgroundColor:"#0E1428"}}>
 
         <Typography variant="h6"sx={{mr:4}}>Categorias</Typography>
 
@@ -39,7 +39,6 @@ const CategoriesBar = () => {
         <Button color="inherit" startIcon={<ComputerIcon />} sx={{mx:1}}>Tecnologia</Button>
 
         <Button color="inherit" startIcon={<BathtubIcon />} sx={{mx:1}}>Brisas Fortes</Button>
-
 
       </Toolbar>
     </AppBar>

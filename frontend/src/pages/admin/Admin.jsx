@@ -11,6 +11,7 @@ import {
   MenuItem,
   Checkbox,
   ListItemText,
+  Button,
 } from "@mui/material";
 
 const categoriesList = [
@@ -48,6 +49,7 @@ export default function Admin() {
       });
       res.data && alert("niceru!");
     } catch (err) {
+      alert("Vish, deu não...")
       console.log(err);
     }
   };
@@ -99,7 +101,7 @@ export default function Admin() {
               label="Paragraphs"
             />
           </FormControl>
-          <button className="registerSubmit" type="submit">DALHE!</button>
+          <Button sx={{color: "#BDEFD8", backgroundColor:"#0E1428"}} type="submit">DALHE!</Button>
         </form>
       </div>
     </div>
