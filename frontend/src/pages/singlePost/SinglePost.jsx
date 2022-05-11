@@ -13,13 +13,13 @@ export default function SinglePost() {
   // eslint-disable-next-line
   const { user } = useContext(Context);
   const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
+  const [body, setBody] = useState("");
 
   useEffect(() => {
     const getPost = async () => {
       const res = await axios.get("/posts/" + path);
       setTitle(res.data.title);
-      setDesc(res.data.desc);
+      setBody(res.data.body);
     };
     getPost();
   }, [path]);
@@ -38,7 +38,7 @@ export default function SinglePost() {
         }}>
         <Paper elevation={3}>
           <Typography variant="h3" className="singlePostTitle">{title}</Typography>
-          <p className="singlePostDesc">{desc}</p>
+          <p className="singlePostDesc">{body}</p>
         </Paper>
       </Box>
       

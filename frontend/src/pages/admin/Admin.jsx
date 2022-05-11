@@ -9,18 +9,17 @@ import {
   InputLabel,
   OutlinedInput,
   FormControl,
-  Button,
-  Box,
+  // Button,
+  // Box,
   Paper,
   Select,
   MenuItem,
   Checkbox,
   ListItemText,
-  TextField,
 } from "@mui/material";
 
 // import { Context } from "../../context/Context";
-import AdminParagraph from "../../components/adminParagraph/AdminParagraph";
+// import AdminParagraph from "../../components/adminParagraph/AdminParagraph";
 
 const categoriesList = [
   "É um Erro",
@@ -38,33 +37,24 @@ const categoriesList = [
 export default function Admin() {
   const [title, setTitle] = useState("");
   const [categories, setCategories] = useState([]);
-  const [paragraphList, setParagraphList] = useState([]);
-
-  const [success, setSuccess] = useState(false);
+  const [body, setBody] = useState("");
 
   const handleCategories = (event) => {
     const {
       target: { value },
     } = event;
     setCategories(typeof value === "string" ? value.split(",") : value);
-    console.log(categories);
-    console.log(title);
-  };
-
-  const handleParagraphAdd = () => {
-    setParagraphList(paragraphList.concat(<AdminParagraph />));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/auth/register", {
+      const res = await axios.post("/posts", {
         title,
+        body,
         categories,
-        paragraphList,
       });
-      setSuccess(true);
-      res.data && window.location.replace("/login");
+      res.data && alert("niceru!");
     } catch (err) {
       console.log(err);
     }
@@ -106,35 +96,19 @@ export default function Admin() {
             </FormControl>
           </Paper>
           <FormControl
-            sx={{ margin: 3, width: "70%", backgroundColor: "#e4e4e4" }}
+            sx={{ m: 4, width: "50%", backgroundColor: "#e4e4e4" }}
+            variant="outlined"
           >
-            <TextField
-              multiline
-              maxRows={6}
-              // value={paragraph}
-              // onChange={(e) => setParagraph(e.target.value)}
-              variant="outlined"
+            <InputLabel>Paragraphs</InputLabel>
+            <OutlinedInput
+              type={"text"}
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              label="Paragraphs"
             />
           </FormControl>
-          {paragraphList}
-          {success && (
-            <span
-              style={{ color: "green", textAlign: "center", marginTop: "20px" }}
-            >
-              Boa poka!
-            </span>
-          )}
+          <button className="registerSubmit" type="submit">DALHE!</button>
         </form>
-        <Box textAlign="center">
-          <Button
-            variant="contained"
-            color="success"
-            onClick={handleParagraphAdd}
-            sx={{ alignContent: "center", margin: 3 }}
-          >
-            ADD PARAGRAPH
-          </Button>
-        </Box>
       </div>
     </div>
   );
