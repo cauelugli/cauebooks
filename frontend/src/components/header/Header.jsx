@@ -23,6 +23,11 @@ export default function Header({ data }) {
                 SOBRE
               </Link>
             </li>
+            <li className="headerListItem">
+              <Link className="link" to="/admin">
+                ADMIN
+              </Link>
+            </li>
           </ul>
         </div>
 
