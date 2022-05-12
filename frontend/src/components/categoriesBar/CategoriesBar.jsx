@@ -1,48 +1,107 @@
-import React from 'react'
+import React, { useState } from "react";
 
-import { AppBar, Button, Toolbar, Typography } from '@mui/material'
+import {
+  AppBar,
+  IconButton,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 
-import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import BathtubIcon from '@mui/icons-material/Bathtub';
-import ComputerIcon from '@mui/icons-material/Computer';
-import DangerousIcon from '@mui/icons-material/Dangerous';
-import FamilyRestroomIcon from '@mui/icons-material/FamilyRestroom';
-import GroupIcon from '@mui/icons-material/Group';
-import NaturePeopleIcon from '@mui/icons-material/NaturePeople';
-import SpaIcon from '@mui/icons-material/Spa';
-import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
+import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import BathtubIcon from "@mui/icons-material/Bathtub";
+import ComputerIcon from "@mui/icons-material/Computer";
+import DangerousIcon from "@mui/icons-material/Dangerous";
+import FamilyRestroomIcon from "@mui/icons-material/FamilyRestroom";
+import GroupIcon from "@mui/icons-material/Group";
+import NaturePeopleIcon from "@mui/icons-material/NaturePeople";
+import SpaIcon from "@mui/icons-material/Spa";
+import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 
 const CategoriesBar = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  // axios get list of recent on each category
+
+  const categoriesList = [
+    "É um Erro",
+    "Esportes",
+    "Família",
+    "Filosofia",
+    "Natureza",
+    "Pessoal",
+    "Ser Humano",
+    "Sociedade",
+    "Tecnologia",
+    "Brisas Fortes",
+  ];
+
+  const categoriesIcons = [
+    <DangerousIcon sx={{ mx: 1 }} />,
+    <SportsSoccerIcon sx={{ mx: 1 }}/>,
+    <FamilyRestroomIcon sx={{ mx: 1 }}/>,
+    <AccountBalanceIcon sx={{ mx: 1 }}/>,
+    <SpaIcon sx={{ mx: 1 }}/>,
+    <NaturePeopleIcon sx={{ mx: 1 }}/>,
+    <AccessibilityNewIcon sx={{ mx: 1 }}/>,
+    <GroupIcon sx={{ mx: 1 }}/>,
+    <ComputerIcon sx={{ mx: 1 }}/>,
+    <BathtubIcon sx={{ mx: 1 }}/>,
+  ];
+
+  const newList = [];
+
+  for (let i = 0; i < categoriesList.length; i++) {
+    newList.push(
+      <>
+        <Menu
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleClose}>My account</MenuItem>
+        </Menu>
+
+        <IconButton onClick={handleMenu} color="inherit">
+          {categoriesIcons[i]}
+          {categoriesList[i]}
+        </IconButton>
+        
+      </>
+    );
+  }
+
   return (
     <AppBar position="static">
-      <Toolbar sx={{color: "#BDEFD8", width:"100%", backgroundColor:"#0E1428"}}>
-
-        <Typography variant="h6"sx={{mr:4}}>Categorias</Typography>
-
-        <Button color="inherit" startIcon={<DangerousIcon />} sx={{mx:1}}>É um Erro</Button>
-
-        <Button color="inherit" startIcon={<SportsSoccerIcon />} sx={{mx:1}}>Esportes</Button>
+      <Toolbar sx={{ color: "#BDEFD8", width: "100%", backgroundColor: "#0E1428" }}>
         
-        <Button color="inherit" startIcon={<FamilyRestroomIcon />} sx={{mx:1}}>Família</Button>
+        <Typography variant="h6" sx={{ mr: 4 }}>
+          Categorias
+        </Typography>
 
-        <Button color="inherit" startIcon={<AccountBalanceIcon />} sx={{mx:1}}>Filosofia</Button>
-
-        <Button color="inherit" startIcon={<SpaIcon />} sx={{mx:1}}>Natureza</Button>
-
-        <Button color="inherit" startIcon={<NaturePeopleIcon />} sx={{mx:1}}>Pessoal</Button>
-
-        <Button color="inherit" startIcon={<AccessibilityNewIcon />} sx={{mx:1}}>Ser Humano</Button>
-
-        <Button color="inherit" startIcon={<GroupIcon />} sx={{mx:1}}>Sociedade</Button>
-
-        <Button color="inherit" startIcon={<ComputerIcon />} sx={{mx:1}}>Tecnologia</Button>
-
-        <Button color="inherit" startIcon={<BathtubIcon />} sx={{mx:1}}>Brisas Fortes</Button>
+        {newList}
 
       </Toolbar>
     </AppBar>
-  )
-}
+  );
+};
 
-export default CategoriesBar
+export default CategoriesBar;
