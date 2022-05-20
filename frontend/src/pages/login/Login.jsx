@@ -104,7 +104,7 @@ export default function Login() {
           variant="contained"
           sx={{ m: 2 }}
         >
-          Faz a Conta aí!
+          <a href="/register">Faz a Conta aí!</a>
         </Button>
       </Box>
 
