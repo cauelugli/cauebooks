@@ -5,7 +5,6 @@ const nodemailer = require("nodemailer");
 const { v4: uuidv4 } = require("uuid");
 
 const User = require("../models/User");
-const UserVerification = require("../models/UserVerification");
 
 let transporter = nodemailer.createTransport({
   service: "gmail",
@@ -48,62 +47,22 @@ router.post("/register", async (req, res) => {
 });
 
 const sendVerificationEmail = ({ _id, email }) => {
-  const currentUrl = "http://localhost:3000/";
+  const saltRounds = 10;
   const uniqueString = uuidv4() + _id;
+  bcrypt.hash(uniqueString, saltRounds)
   const mailOptions = {
     from: process.env.AUTH_EMAIL,
     to: email,
     subject: "Verificação de Email",
     html: `
-    <p>Verifique seu Email para Criar sua Conta</p>
-    <p>${currentUrl + "user/verify/" + _id + "/" + uniqueString}</p>
+    <p>Obrigado por registrar-se em cauebooks!</p>
+    <p>Clique no link abaixo para validar sua conta!</p>
+    <p>${"http://localhost:3000/user/verify/" + _id + "/" + uniqueString}</p>
     `,
   };
 
-  const saltRounds = 10;
-  bcrypt
-    .hash(uniqueString, saltRounds)
-    .then((hashedUniqueString) => {
-      const newVerification = new UserVerification({
-        userId: _id,
-        uniqueString: hashedUniqueString,
-      });
-
-      newVerification
-        .save()
-        .then(() => {transporter.sendMail(mailOptions)})
-        .catch((err) => {console.log(err)});
-    })
-
-    .catch((err) => {console.log(err)});
+  transporter.sendMail(mailOptions)
 };
-
-//EMAIL VERIFICATION
-router.get("/verify/:userId/:uniqueString", async (req, res) => {
-  let { userId, uniqueString } = req.params;
-
-  await UserVerification.find({ userId })
-    .then((result) => {
-      if (result.length > 0) {
-        // user exists
-        const hashedUniqueString = result[0].uniqueString;
-        bcrypt.compare(uniqueString, hashedUniqueString).then((result) => {
-          if (result) {
-            User.updateOne({ _id: userId }, { verified: true }).then(() => {
-              UserVerification.deleteOne({ userId }).then(() => {
-                res.redirect("/login");
-              });
-            });
-          }
-        });
-      } else {
-        console.log(result);
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-});
 
 //LOGIN
 router.post("/login", async (req, res) => {

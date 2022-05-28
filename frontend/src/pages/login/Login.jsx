@@ -7,6 +7,8 @@ import {
   Button,
   Container,
   CssBaseline,
+  Grid,
+  Link,
   TextField,
   Typography,
 } from "@mui/material";
@@ -78,36 +80,24 @@ export default function Login() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, backgroundColor: "#0E1428", color: "#e4e4e4" }}
           >
             Login
           </Button>
         </Box>
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "flex-around",
-        }}
-      >
-        <Button
-          color="secondary"
-          fullWidth
-          variant="contained"
-          sx={{ m: 2 }}
-        >
-          Esqueceu, né?
-        </Button>
-        <Button
-          color="inherit"
-          fullWidth
-          variant="contained"
-          sx={{ m: 2 }}
-        >
-          <a href="/register">Faz a Conta aí!</a>
-        </Button>
-      </Box>
-
+      <Grid container sx={{mt:2}}>
+        <Grid item xs>
+        <Link fullWidth href="#" underline="none" sx={{ m: 1, color: '#e4e4e4' }}>
+          Esqueceu, foi?
+        </Link>
+        </Grid>
+        <Grid item>
+        <Link fullWidth href="/register" underline="none" sx={{ m: 1, ml:3, color: '#0E1428' }}>
+          Faz a Conta aí!
+        </Link>
+        </Grid>
+      </Grid>
       {error && (
         <span style={{ color: "red", textAlign: "center", marginTop: "5%" }}>
           Algo de errado não está certo!

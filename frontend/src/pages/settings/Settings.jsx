@@ -20,9 +20,10 @@ import {
   Divider,
 } from "@mui/material";
 
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import PersonIcon from '@mui/icons-material/Person';
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 
 import { Context } from "../../context/Context";
 
@@ -30,7 +31,8 @@ export default function Settings() {
   const { user, dispatch } = useContext(Context);
 
   const [avatar, setAvatar] = useState(user.avatar);
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState(user.username);
+  const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
@@ -71,8 +73,9 @@ export default function Settings() {
     const updatedUser = {
       userId: user._id,
       avatar,
+      username,
       email,
-      password,
+      password
     };
     try {
       const res = await axios.put("/users/" + user._id, updatedUser);
@@ -127,6 +130,20 @@ export default function Settings() {
             </Select>
           </FormControl>
           <FormControl sx={{ m: 3 }} variant="outlined">
+            <InputLabel>Nome de Usuário</InputLabel>
+            <OutlinedInput
+              type={"text"}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              label="Nome de Usuário"
+              endAdornment={
+                <InputAdornment position="end" edge="end">
+                  <PersonIcon />
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+          <FormControl sx={{ m: 3 }} variant="outlined">
             <InputLabel>Email</InputLabel>
             <OutlinedInput
               type={"text"}
@@ -141,11 +158,11 @@ export default function Settings() {
             />
           </FormControl>
           <FormControl sx={{ m: 3 }} variant="outlined">
-            <InputLabel>Password</InputLabel>
+            <InputLabel>Senha</InputLabel>
             <OutlinedInput
               type={showPassword ? "text" : "password"}
               value={password}
-              label="Password"
+              label="Senha"
               onChange={(e) => setPassword(e.target.value)}
               endAdornment={
                 <InputAdornment position="end">

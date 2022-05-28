@@ -12,8 +12,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import About from "./pages/about/About";
 import SinglePost from "./pages/singlePost/SinglePost";
-// import EmailVerification from "./pages/emailVerification/EmailVerification";
-
+import UserVerification from "./pages/userVerification/UserVerification";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 
@@ -26,9 +25,9 @@ function App() {
 
       <Switch>
         <Route exact path="/">{user ? <Home /> : <Login />}</Route>
-        {/* <Route path="/verified"><EmailVerification /></Route> */}
         <Route path="/login"><Login /></Route>
         <Route path="/register"><Register /></Route>
+        <Route path="/user/verify/:userId/:uniqueString" ><UserVerification /></Route>
         <Route path="/settings">{user ? <Settings /> : <Login />}</Route>
         <Route path="/about">{user ? <About /> : <Login />}</Route>
         <Route path="/post/:postId" >{user ? <SinglePost /> : <Login />} </Route>
