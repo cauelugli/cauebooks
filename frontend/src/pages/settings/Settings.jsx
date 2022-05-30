@@ -18,12 +18,13 @@ import {
   DialogTitle,
   DialogActions,
   Divider,
+  CircularProgress,
+  Grid,
+  Container,
+  CssBaseline,
+  Box,
+  TextField,
 } from "@mui/material";
-
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-import PersonIcon from '@mui/icons-material/Person';
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import { Context } from "../../context/Context";
 
@@ -33,22 +34,25 @@ export default function Settings() {
   const [avatar, setAvatar] = useState(user.avatar);
   const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
-  const [password, setPassword] = useState("");
+  // const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const [showPassword, setShowPassword] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openUpdateModal, setOpenUpdateModal] = useState(false);
+  const [openUpdatePassModal, setOpenUpdatePassModal] = useState(false);
 
   function handleAvatarChange(e) {
     setAvatar(e.target.value);
   }
 
-  function handleShowPassword() {
-    setShowPassword(!showPassword);
-  }
+  // function handleShowPassword() {
+  //   setShowPassword(!showPassword);
+  // }
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+  // const handleMouseDownPassword = (event) => {
+  //   event.preventDefault();
+  // };
 
   const handleDeleteConfirmation = () => {
     setOpenDeleteModal(true);
@@ -58,13 +62,39 @@ export default function Settings() {
     setOpenDeleteModal(false);
   };
 
+  const handleUpdateModal = () => {
+    setOpenUpdateModal(true);
+  };
+
+  const handleCloseUpdateModal = () => {
+    setOpenUpdateModal(false);
+  };
+
+  const handleUpdatePassModal = () => {
+    setOpenUpdatePassModal(true);
+  };
+
+  const handleCloseUpdatePassModal = () => {
+    setOpenUpdatePassModal(false);
+  };
+
   const handleDelete = async () => {
     try {
       const res = await axios.delete("/users/" + user._id);
       dispatch({ type: "LOGOUT", payload: res.data });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
+  };
+
+  const handleUpdatePass = async () => {
+    // let the magic happen
+    // try {
+    //   const res = await axios.delete("/users/" + user._id);
+    //   dispatch({ type: "LOGOUT", payload: res.data });
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   const handleUpdate = async (e) => {
@@ -75,144 +105,193 @@ export default function Settings() {
       avatar,
       username,
       email,
-      password
     };
     try {
+      setLoading(true);
       const res = await axios.put("/users/" + user._id, updatedUser);
       dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
+      handleUpdateModal();
+      setLoading(false);
     } catch (err) {
       dispatch({ type: "UPDATE_FAILURE" });
     }
   };
 
   return (
-    <div className="settings">
-      <div className="settingsWrapper">
-        <div className="settingsTitle">
-          <Typography
-            variant="h6"
-            sx={{ fontSize: "30px", marginLeft: "15%", color: "#0E1428" }}
-          >
+    <>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            mt: 2,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography sx={{ p: 5 }} component="h3" variant="h4">
             Atualize seu Perfil
           </Typography>
-        </div>
-        <form className="settingsForm" onSubmit={handleUpdate}>
-          <label>Avatar</label>
-          <FormControl sx={{ m: 3 }}>
-            <Select value={avatar} onChange={handleAvatarChange}>
-              <MenuItem value={"1"}>
-                <img src={window.location.origin + "/1.png"} alt="avatar1" />
-              </MenuItem>
-              <MenuItem value={"2"}>
-                <img src={window.location.origin + "/2.png"} alt="avatar2" />
-              </MenuItem>
-              <MenuItem value={"3"}>
-                <img src={window.location.origin + "/3.png"} alt="avatar3" />
-              </MenuItem>
-              <MenuItem value={"4"}>
-                <img src={window.location.origin + "/4.png"} alt="avatar4" />
-              </MenuItem>
-              <MenuItem value={"5"}>
-                <img src={window.location.origin + "/5.png"} alt="avatar5" />
-              </MenuItem>
-              <MenuItem value={"6"}>
-                <img src={window.location.origin + "/6.png"} alt="avatar6" />
-              </MenuItem>
-              <MenuItem value={"7"}>
-                <img src={window.location.origin + "/7.png"} alt="avatar7" />
-              </MenuItem>
-              <MenuItem value={"8"}>
-                <img src={window.location.origin + "/8.png"} alt="avatar8" />
-              </MenuItem>
-              <MenuItem value={"9"}>
-                <img src={window.location.origin + "/9.png"} alt="avatar9" />
-              </MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl sx={{ m: 3 }} variant="outlined">
-            <InputLabel>Nome de Usuário</InputLabel>
-            <OutlinedInput
-              type={"text"}
+          <Box component="form" onSubmit={handleUpdate} sx={{ mt: 1 }}>
+            <InputLabel>Avatar</InputLabel>
+            <FormControl sx={{
+            my: 3,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}>
+              <Select value={avatar} onChange={handleAvatarChange}>
+                <MenuItem value={"1"}>
+                  <img src={window.location.origin + "/1.png"} alt="avatar1" />
+                </MenuItem>
+                <MenuItem value={"2"}>
+                  <img src={window.location.origin + "/2.png"} alt="avatar2" />
+                </MenuItem>
+                <MenuItem value={"3"}>
+                  <img src={window.location.origin + "/3.png"} alt="avatar3" />
+                </MenuItem>
+                <MenuItem value={"4"}>
+                  <img src={window.location.origin + "/4.png"} alt="avatar4" />
+                </MenuItem>
+                <MenuItem value={"5"}>
+                  <img src={window.location.origin + "/5.png"} alt="avatar5" />
+                </MenuItem>
+                <MenuItem value={"6"}>
+                  <img src={window.location.origin + "/6.png"} alt="avatar6" />
+                </MenuItem>
+                <MenuItem value={"7"}>
+                  <img src={window.location.origin + "/7.png"} alt="avatar7" />
+                </MenuItem>
+                <MenuItem value={"8"}>
+                  <img src={window.location.origin + "/8.png"} alt="avatar8" />
+                </MenuItem>
+                <MenuItem value={"9"}>
+                  <img src={window.location.origin + "/9.png"} alt="avatar9" />
+                </MenuItem>
+              </Select>
+            </FormControl>
+            <InputLabel>Username</InputLabel>
+            <TextField
+              margin="normal"
+              fullWidth
+              id="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              label="Nome de Usuário"
-              endAdornment={
-                <InputAdornment position="end" edge="end">
-                  <PersonIcon />
-                </InputAdornment>
-              }
             />
-          </FormControl>
-          <FormControl sx={{ m: 3 }} variant="outlined">
-            <InputLabel>Email</InputLabel>
-            <OutlinedInput
-              type={"text"}
+            <InputLabel sx={{mt:2}}>Email</InputLabel>
+            <TextField
+              margin="normal"
+              fullWidth
+              type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              label="Email"
-              endAdornment={
-                <InputAdornment position="end" edge="end">
-                  <AlternateEmailIcon />
-                </InputAdornment>
-              }
             />
-          </FormControl>
-          <FormControl sx={{ m: 3 }} variant="outlined">
-            <InputLabel>Senha</InputLabel>
-            <OutlinedInput
-              type={showPassword ? "text" : "password"}
-              value={password}
-              label="Senha"
-              onChange={(e) => setPassword(e.target.value)}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-          <button className="settingsSubmit" type="submit">
-            Atualizar
-          </button>
-        </form>
-        <Button
-          variant="default"
-          onClick={handleDeleteConfirmation}
-          sx={{ marginLeft: "65%" }}
-        >
-          Deletar Conta
-        </Button>
-        <Dialog open={openDeleteModal} onClose={handleCloseDeleteModal}>
-          <DialogTitle>Tem certeza, mano?</DialogTitle>
-          <Divider />
-          <DialogContent>
-            <DialogContentText>
-              Algumas coisas na vida não tem volta, e deletar sua conta é uma
-              delas. É isso mesmo que você quer?
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button variant="inherit" onClick={handleCloseDeleteModal}>
-              Puts, nem
-            </Button>
             <Button
-              color="error"
+              type="submit"
+              fullWidth
               variant="contained"
-              onClick={handleDelete}
-              autoFocus
+              sx={{
+                mt: 3,
+                mb: 2,
+                backgroundColor: "#0E1428",
+                color: "#e4e4e4",
+                "&.MuiButtonBase-root:hover": {
+                  bgcolor: "#0E1428",
+                },
+              }}
             >
-              Sim
+              Atualizar
             </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-    </div>
+          </Box>
+        </Box>
+
+        <Grid container sx={{ mt: 2 }}>
+          <Grid item xs>
+            <Button
+              variant="default"
+              onClick={handleUpdatePassModal}
+              sx={{
+                backgroundColor: "#e4e4e4",
+                color: "#0E1428",
+                "&.MuiButtonBase-root:hover": {
+                  bgcolor: "#e4e4e4",
+                },
+              }}
+            >
+              Alterar Senha
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="default" onClick={handleDeleteConfirmation}>
+              Deletar Conta
+            </Button>
+          </Grid>
+        </Grid>
+      </Container>
+
+      <Dialog open={openDeleteModal} onClose={handleCloseDeleteModal}>
+        <DialogTitle>Tem certeza, mano?</DialogTitle>
+        <Divider />
+        <DialogContent>
+          <DialogContentText>
+            Algumas coisas na vida não tem volta, e deletar sua conta é uma
+            delas. É isso mesmo que você quer?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="inherit" onClick={handleCloseDeleteModal}>
+            Puts, nem
+          </Button>
+          <Button
+            color="error"
+            variant="contained"
+            onClick={handleDelete}
+            autoFocus
+          >
+            Sim
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={openUpdatePassModal} onClose={handleCloseUpdatePassModal}>
+        <DialogTitle>Segurança é um bagulho sério.</DialogTitle>
+        <Divider />
+        <DialogContent>
+          <DialogContentText>
+            Pra mudar sua senha, vou te enviar um código no email <strong>{user.email}</strong>. Certifique-se que ele está acessível.
+            Ao prosseguir, você será deslogado.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="inherit" onClick={handleCloseUpdatePassModal}>
+            Deixa quieto
+          </Button>
+          <Button
+            color="success"
+            variant="contained"
+            onClick={handleUpdatePass}
+            autoFocus
+          >
+            É isso
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={openUpdateModal} onClose={handleCloseUpdateModal}>
+        <DialogTitle>Seu perfil foi atualizado com sucesso!</DialogTitle>
+        <Divider />
+        <DialogActions>
+          <Button
+            color="success"
+            size="small"
+            variant="contained"
+            onClick={handleCloseUpdateModal}
+            autoFocus
+          >
+            Nice
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 }
