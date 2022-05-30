@@ -5,6 +5,7 @@ import { IconButton, Menu, MenuItem, Divider } from "@mui/material";
 
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import MeetingRoomOutlinedIcon from "@mui/icons-material/MeetingRoomOutlined";
 
 import { Context } from "../../context/Context";
@@ -49,6 +50,13 @@ export default function BasicMenu() {
           <MenuItem onClick={handleClose}>
             <AccountCircleOutlinedIcon style={{ marginRight: "10%" }} />
             <p style={{ marginRight: "5px" }}>Conta</p>
+          </MenuItem>
+        </Link>
+
+        <Link className="link" to="/passwordReset">
+          <MenuItem onClick={handleClose}>
+            <LockOutlinedIcon style={{ marginRight: "10%" }} />
+            <p style={{ marginRight: "5px" }}>Alterar Senha</p>
           </MenuItem>
         </Link>
 

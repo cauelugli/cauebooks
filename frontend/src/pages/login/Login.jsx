@@ -80,7 +80,10 @@ export default function Login() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2, backgroundColor: "#0E1428", color: "#e4e4e4" }}
+            sx={{ mt: 3, mb: 2, backgroundColor: "#0E1428", color: "#e4e4e4",
+            "&.MuiButtonBase-root:hover": {
+              bgcolor: "#0E1428",
+            } }}
           >
             Login
           </Button>

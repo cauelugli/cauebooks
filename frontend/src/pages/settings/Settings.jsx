@@ -3,10 +3,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 
 import {
-  IconButton,
-  InputAdornment,
   InputLabel,
-  OutlinedInput,
   MenuItem,
   FormControl,
   Select,
@@ -18,7 +15,6 @@ import {
   DialogTitle,
   DialogActions,
   Divider,
-  CircularProgress,
   Grid,
   Container,
   CssBaseline,
@@ -34,25 +30,13 @@ export default function Settings() {
   const [avatar, setAvatar] = useState(user.avatar);
   const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
-  // const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  // const [showPassword, setShowPassword] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
-  const [openUpdatePassModal, setOpenUpdatePassModal] = useState(false);
 
   function handleAvatarChange(e) {
     setAvatar(e.target.value);
   }
-
-  // function handleShowPassword() {
-  //   setShowPassword(!showPassword);
-  // }
-
-  // const handleMouseDownPassword = (event) => {
-  //   event.preventDefault();
-  // };
 
   const handleDeleteConfirmation = () => {
     setOpenDeleteModal(true);
@@ -70,14 +54,6 @@ export default function Settings() {
     setOpenUpdateModal(false);
   };
 
-  const handleUpdatePassModal = () => {
-    setOpenUpdatePassModal(true);
-  };
-
-  const handleCloseUpdatePassModal = () => {
-    setOpenUpdatePassModal(false);
-  };
-
   const handleDelete = async () => {
     try {
       const res = await axios.delete("/users/" + user._id);
@@ -85,16 +61,6 @@ export default function Settings() {
     } catch (err) {
       console.log(err);
     }
-  };
-
-  const handleUpdatePass = async () => {
-    // let the magic happen
-    // try {
-    //   const res = await axios.delete("/users/" + user._id);
-    //   dispatch({ type: "LOGOUT", payload: res.data });
-    // } catch (err) {
-    //   console.log(err);
-    // }
   };
 
   const handleUpdate = async (e) => {
@@ -107,11 +73,9 @@ export default function Settings() {
       email,
     };
     try {
-      setLoading(true);
       const res = await axios.put("/users/" + user._id, updatedUser);
       dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
       handleUpdateModal();
-      setLoading(false);
     } catch (err) {
       dispatch({ type: "UPDATE_FAILURE" });
     }
@@ -197,7 +161,7 @@ export default function Settings() {
                 color: "#e4e4e4",
                 "&.MuiButtonBase-root:hover": {
                   bgcolor: "#0E1428",
-                },
+                }
               }}
             >
               Atualizar
@@ -206,21 +170,6 @@ export default function Settings() {
         </Box>
 
         <Grid container sx={{ mt: 2 }}>
-          <Grid item xs>
-            <Button
-              variant="default"
-              onClick={handleUpdatePassModal}
-              sx={{
-                backgroundColor: "#e4e4e4",
-                color: "#0E1428",
-                "&.MuiButtonBase-root:hover": {
-                  bgcolor: "#e4e4e4",
-                },
-              }}
-            >
-              Alterar Senha
-            </Button>
-          </Grid>
           <Grid item>
             <Button variant="default" onClick={handleDeleteConfirmation}>
               Deletar Conta
@@ -253,30 +202,6 @@ export default function Settings() {
         </DialogActions>
       </Dialog>
 
-      <Dialog open={openUpdatePassModal} onClose={handleCloseUpdatePassModal}>
-        <DialogTitle>Segurança é um bagulho sério.</DialogTitle>
-        <Divider />
-        <DialogContent>
-          <DialogContentText>
-            Pra mudar sua senha, vou te enviar um código no email <strong>{user.email}</strong>. Certifique-se que ele está acessível.
-            Ao prosseguir, você será deslogado.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button variant="inherit" onClick={handleCloseUpdatePassModal}>
-            Deixa quieto
-          </Button>
-          <Button
-            color="success"
-            variant="contained"
-            onClick={handleUpdatePass}
-            autoFocus
-          >
-            É isso
-          </Button>
-        </DialogActions>
-      </Dialog>
-
       <Dialog open={openUpdateModal} onClose={handleCloseUpdateModal}>
         <DialogTitle>Seu perfil foi atualizado com sucesso!</DialogTitle>
         <Divider />
@@ -292,6 +217,7 @@ export default function Settings() {
           </Button>
         </DialogActions>
       </Dialog>
+
     </>
   );
 }
