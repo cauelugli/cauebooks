@@ -1,52 +1,57 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import axios from "axios";
 
 import {
-  Box,
+  InputLabel,
+  Typography,
   Button,
   Dialog,
   DialogTitle,
   DialogActions,
   Divider,
-  InputLabel,
+  Container,
+  CssBaseline,
+  Box,
   TextField,
-  Typography,
 } from "@mui/material";
 
 import { Context } from "../../context/Context";
 
-import Settings from "../settings/Settings";
+export default function Settings() {
+  const { user, dispatch } = useContext(Context);
 
-export default function PasswordReset() {
-  const { user } = useContext(Context);
-  const [newPassword, setNewPassword] = useState("");
-  const [newPassword2, setNewPassword2] = useState("");
+  const [password, setPassword] = useState("");
 
-  const [modal, setModal] = useState(false);
-  const [done, setDone] = useState(false);
+  const [openUpdateModal, setOpenUpdateModal] = useState(false);
 
-  const handleShowModal = () => setModal(true);
-  const handleCloseModal = () => setModal(false);
+  const handleUpdateModal = () => {
+    setOpenUpdateModal(true);
+  };
 
-  const handleSubmit = () => {
-    if (newPassword !== newPassword2) {
-      return alert("Parça, as senhas não são as mesmas! Põe de novo.");
-    } else {
-      try {
-        axios.put(`/users/${user._id}`, { password: newPassword });
-        handleShowModal();
-        setDone(true);
-      } catch (err) {
-        console.log(err);
-      }
+  const handleCloseUpdateModal = () => {
+    setOpenUpdateModal(false);
+  };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    dispatch({ type: "UPDATE_START" });
+    const updatedUser = {
+      userId: user._id,
+      password
+    };
+    try {
+      await axios.put("/users/" + user._id, updatedUser);
+      handleUpdateModal();
+    } catch (err) {
+      dispatch({ type: "UPDATE_FAILURE" });
     }
   };
-  
 
   return (
     <>
-      {!done && (
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
         <Box
           sx={{
             mt: 2,
@@ -56,26 +61,16 @@ export default function PasswordReset() {
           }}
         >
           <Typography sx={{ p: 5 }} component="h3" variant="h4">
-            Redefina sua senha
+            Atualize sua Senha
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-            <InputLabel>Nova Senha</InputLabel>
+          <Box component="form" onSubmit={handleUpdate} sx={{ mt: 1 }}>
+            <InputLabel sx={{mt:2}}>Nova Senha</InputLabel>
             <TextField
               margin="normal"
               fullWidth
               type="password"
-              id="NewPassword"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-            <InputLabel sx={{ mt: 2 }}>Repeat please</InputLabel>
-            <TextField
-              margin="normal"
-              fullWidth
-              type="password"
-              id="NewPassword2"
-              value={newPassword2}
-              onChange={(e) => setNewPassword2(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <Button
               type="submit"
@@ -88,26 +83,25 @@ export default function PasswordReset() {
                 color: "#e4e4e4",
                 "&.MuiButtonBase-root:hover": {
                   bgcolor: "#0E1428",
-                },
+                }
               }}
             >
-              Redefinir
+              Atualizar
             </Button>
           </Box>
         </Box>
-      )}
+        
+      </Container>
 
-      {done && <Settings />}
-
-      <Dialog open={modal} onClose={handleCloseModal}>
-        <DialogTitle>Boa, mano! Sua senha foi alterada!</DialogTitle>
+      <Dialog open={openUpdateModal} onClose={handleCloseUpdateModal}>
+        <DialogTitle>Sua senha foi atualizada com sucesso!</DialogTitle>
         <Divider />
         <DialogActions>
           <Button
             color="success"
             size="small"
             variant="contained"
-            onClick={handleCloseModal}
+            onClick={handleCloseUpdateModal}
             autoFocus
           >
             Lindo
