@@ -43,4 +43,32 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+//FAVORITE POST
+router.put("/favorite/:id", async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      { $push: { favorites : req.body.favorites } },
+      { new: true }
+    );
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//UNFAVORITE POST
+router.put("/unfavorite/:id", async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      { $pull: { favorites : req.body.favorites } },
+      { new: true }
+    );
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

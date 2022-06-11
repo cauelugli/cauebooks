@@ -4,7 +4,8 @@ import {
   AppBar,
   IconButton,
   Menu,
-  MenuItem,
+  // MenuItem,
+  Paper,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -48,10 +49,10 @@ const CategoriesBar = () => {
 
   const categoriesIcons = [
     <DangerousIcon sx={{ mx: 1 }} />,
-    <SportsSoccerIcon sx={{ mx: 1 }}/>,
-    <FamilyRestroomIcon sx={{ mx: 1 }}/>,
-    <AccountBalanceIcon sx={{ mx: 1 }}/>,
-    <SpaIcon sx={{ mx: 1 }}/>,
+    <SportsSoccerIcon sx={{ mx: 1 }} />,
+    <FamilyRestroomIcon sx={{ mx: 1 }} />,
+    <AccountBalanceIcon sx={{ mx: 1 }} />,
+    <SpaIcon sx={{ mx: 1 }} />,
     <NaturePeopleIcon sx={{ mx: 1 }}/>,
     <AccessibilityNewIcon sx={{ mx: 1 }}/>,
     <GroupIcon sx={{ mx: 1 }}/>,
@@ -77,9 +78,11 @@ const CategoriesBar = () => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}>My account</MenuItem>
+          <Paper sx={{width: '300px', height: '300px'}} onClick={handleClose}>
+            What? {categoriesList[i]}
+          </Paper>
         </Menu>
-
+        
         <IconButton onClick={handleMenu} color="inherit">
           {categoriesIcons[i]}
           {categoriesList[i]}
@@ -87,11 +90,14 @@ const CategoriesBar = () => {
         
       </>
     );
+    // this is very wrong
+    // console.log(newList)
   }
+
 
   return (
     <AppBar position="static">
-      <Toolbar sx={{ color: "#BDEFD8", width: "100%", backgroundColor: "#0E1428" }}>
+      <Toolbar sx={{ color: "#BDEFD8", backgroundColor: "#0E1428" }}>
         
         <Typography variant="h6" sx={{ mr: 4 }}>
           Categorias

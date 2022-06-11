@@ -18,23 +18,40 @@ const Reducer = (state, action) => {
         isFetching: false,
         error: true,
       };
-      case "UPDATE_START":
-        return {
-          ...state,
-          isFetching:true
-        };
-      case "UPDATE_SUCCESS":
-        return {
-          user: action.payload,
-          isFetching: false,
-          error: false,
-        };
-      case "UPDATE_FAILURE":
-        return {
-          user: state.user,
-          isFetching: false,
-          error: true,
-        };
+    case "UPDATE_START":
+      return {
+        ...state,
+        isFetching: true
+      };
+    case "UPDATE_SUCCESS":
+      return {
+        user: action.payload,
+        isFetching: false,
+        error: false,
+      };
+    case "UPDATE_FAILURE":
+      return {
+        user: state.user,
+        isFetching: false,
+        error: true,
+      };
+    case "FAVORITE":
+      state.user.favorites.push(action.payload);
+      return {
+        user: state.user,
+        isFetching: false,
+        error: false,
+      };
+    case "UNFAVORITE":
+      const index = state.user.favorites.indexOf(action.payload);
+      if (index > -1) {
+        state.user.favorites.splice(index, 1);
+      }
+      return {
+        user: state.user,
+        isFetching: false,
+        error: false,
+      };
     case "LOGOUT":
       return {
         user: null,

@@ -11,49 +11,53 @@ import { Context } from "../../context/Context";
 
 export default function SinglePost() {
   const location = useLocation();
-  const path = location.pathname.split("/")[2];
+  const postId = location.pathname.split("/")[2];
   // eslint-disable-next-line
-  const { user } = useContext(Context);
+  const { user, dispatch } = useContext(Context);
   const [title, setTitle] = useState("");
   const [categories, setCategories] = useState("");
   const [body, setBody] = useState("");
-  const [likes, setLikes] = useState(0);
+  const [likes, setLikes] = useState("");
   const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
     const getPost = async () => {
-      const res = await axios.get("/posts/" + path);
+      const res = await axios.get("/posts/" + postId);
       setTitle(res.data.title);
       setCategories(res.data.categories);
       setBody(res.data.body);
       setLikes(res.data.likes);
-      console.log(res.config.url);
+      if (user.favorites.includes(res.data._id)) {
+        setFavorite(true)
+      };
     };
     getPost();
-  }, [path]);
+  }, [postId, user]);
 
-  // const handleUpdate = async () => {
-  //   try {
-  //     await axios.put(`/posts/${id}`, {
-  //       likes: + 1,
-  //     });
-  //     alert("You liked the post!")
-  //   } catch (err) {
-  //     alert("You removed your like!")
-  //   }
-  // };
-
-  const handleFavorite = () => {
+  const handleFavorite = async (e) => {
+    e.preventDefault();
+    // working with context / "session"
     if (!favorite) {
-      // axios.post
-      setFavorite(true);
-      // this is fake
-      setLikes(likes + 1);
+      try {
+        await axios.put("/users/favorite/" + user._id, {favorites: postId});
+        await axios.put("/posts/" + postId, {likes: likes + 1});
+        setFavorite(true);
+        setLikes(likes + 1);
+        dispatch({ type: "FAVORITE", payload: postId });
+        
+      } catch (err) {
+        console.log(err)
+      }
     } else {
-      // axios.post
-      setFavorite(false);
-      // this is fake
-      setLikes(likes - 1);
+      try {
+        await axios.put("/users/unfavorite/" + user._id, {favorites: postId});
+        await axios.put("/posts/" + postId, {likes: likes - 1});
+        setFavorite(false);
+        setLikes(likes - 1);
+        dispatch({ type: "UNFAVORITE", payload: postId });
+      } catch (err) {
+        console.log(err)
+      }
     }
   };
 
