@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router";
+import { render } from 'react-dom';
 
 import axios from "axios";
 
@@ -61,6 +62,11 @@ export default function SinglePost() {
     }
   };
 
+  var parser = new DOMParser();
+  var htmlDoc = parser.parseFromString(body, 'text/html');
+  console.log(htmlDoc.body)
+  // search for how to parse body react
+
   return (
     <div className="singlePost">
       <Box
@@ -81,7 +87,7 @@ export default function SinglePost() {
           <Typography variant="h6" className="singlePostTitle">
             {categories}
           </Typography>
-          <p className="singlePostDesc">{body}</p>
+            <div dangerouslySetInnerHTML={{ __html: body }} />
           <IconButton onClick={handleFavorite} sx={{marginLeft:"92%"}}>
             {!favorite && <FavoriteBorderIcon sx={{marginRight:"8%"}}/>}
             {favorite && <FavoriteIcon sx={{marginRight:"8%"}}/>}
