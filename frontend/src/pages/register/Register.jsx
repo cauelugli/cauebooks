@@ -20,6 +20,8 @@ import {
 
 import { Box } from "@mui/system";
 
+import Login from "../login/Login";
+
 export default function Register() {
   const [username, setUsername] = useState("");
   const [avatar, setAvatar] = useState("1");
@@ -177,6 +179,9 @@ export default function Register() {
         </span>
       )}
     </Container>
+    }
+    {done && 
+    <Login />
     }
     <Modal
       open={modal}
