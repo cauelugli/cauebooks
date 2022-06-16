@@ -42,7 +42,6 @@ const SearchBar = () => {
     >
       <Grid item xs={4} width="60%" sx={{}}>
         <Paper>
-          {/* <AndroidIcon /> */}
           <InputBase
             onChange={handleFilter}
             fullWidth
