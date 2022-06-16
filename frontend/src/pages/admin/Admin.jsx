@@ -105,7 +105,7 @@ export default function Admin() {
             </FormControl>
           </Paper>
           <FormControl
-            sx={{ m: 4, width: "50%", backgroundColor: "#e4e4e4" }}
+            sx={{ m: 4, width: "90%", backgroundColor: "#fff" }}
             variant="outlined"
           >
             <Editor
@@ -114,6 +114,7 @@ export default function Admin() {
               editorClassName="demo-editor"
               onEditorStateChange={handleEditorStateChange}
             />
+            
           </FormControl>
 
           <Button
