@@ -52,6 +52,23 @@ const Reducer = (state, action) => {
         isFetching: false,
         error: false,
       };
+      case "LIKE":
+      state.user.favorites.push(action.payload);
+      return {
+        user: state.user,
+        isFetching: false,
+        error: false,
+      };
+    case "UNLIKE":
+      const index1 = state.user.favorites.indexOf(action.payload);
+      if (index1 > -1) {
+        state.user.favorites.splice(index1, 1);
+      }
+      return {
+        user: state.user,
+        isFetching: false,
+        error: false,
+      };
     case "LOGOUT":
       return {
         user: null,
