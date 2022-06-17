@@ -96,7 +96,7 @@ export default function SinglePost() {
   }
 
   return (
-    <Box sx={{display: "flex", alignItems: "center", justifyContent: "center", margin: "1%"}}>
+    <Box sx={{display: "flex", alignItems: "center", justifyContent: "center", my: "2%"}}>
       <Box
         sx={{
           display: "flex",
@@ -116,17 +116,17 @@ export default function SinglePost() {
             <div>
 
               <Box sx={{display: "flex", alignItems: "center", justifyContent: "center"}}> 
-                <Typography sx={{fontStyle: "italic", fontSize: "40px", color: "grey.800"}}>
+                <Typography sx={{fontStyle: "italic", fontSize: "30px", color: "grey.800"}}>
                   {title}
                 </Typography>
               </Box>
 
 
-              <Typography sx={{fontStyle: "italic", fontSize: "20px", color: "grey.800", mb: "4%", ml:"75%"}}>
+              <Typography sx={{fontStyle: "italic", fontSize: "125%", color: "grey.800", mb: "4%", ml:"75%"}}>
                 {categoriesList}
               </Typography>
 
-              <Typography sx={{fontSize: "20px", color: "grey.800"}}>
+              <Typography sx={{color: "grey.800"}}>
               <div dangerouslySetInnerHTML={{ __html: body }} />
               </Typography>
               
@@ -134,7 +134,7 @@ export default function SinglePost() {
             
           </Box>
 
-          <Grid container justifyContent="flex-end" sx={{ ml: "80%" }}>
+          <Grid container justifyContent="flex-end">
             <IconButton onClick={handleLike}>
                 {!likes && <FavoriteBorderIcon sx={{ mx: "1%" }} />}
                 {likes && <FavoriteIcon sx={{ mx: "1%", color: "#e65940" }} />}
