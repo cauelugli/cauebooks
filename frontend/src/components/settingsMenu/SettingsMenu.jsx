@@ -41,10 +41,12 @@ export default function BasicMenu() {
         </MenuItem>
         <Divider />
 
-        <MenuItem onClick={() => alert("one day")}>
-          <FavoriteBorderOutlinedIcon style={{ marginRight: "10%" }} />
-          <p style={{ marginRight: "5px" }}>Favoritos</p>
-        </MenuItem>
+        <Link className="link" to={`/${user._id}/favorites`}>
+          <MenuItem onClick={handleClose}>
+            <FavoriteBorderOutlinedIcon style={{ marginRight: "10%" }} />
+            <p style={{ marginRight: "5px" }}>Favoritos</p>
+          </MenuItem>
+        </Link>
 
         <Link className="link" to="/settings">
           <MenuItem onClick={handleClose}>

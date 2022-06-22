@@ -28,7 +28,11 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    favorites: {
+    favoritesList: {
+      type: Array,
+      default: [],
+    },
+    likesList: {
       type: Array,
       default: [],
     },
