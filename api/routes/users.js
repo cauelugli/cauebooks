@@ -43,6 +43,17 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+//GET USER FAVORITES
+router.get("/:id/favorites", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const { password, ...others } = user._doc;
+    res.status(200).json(others);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //FAVORITE POST
 router.put("/favorite/:id", async (req, res) => {
   try {

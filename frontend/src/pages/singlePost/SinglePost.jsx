@@ -20,40 +20,61 @@ export default function SinglePost() {
   const [categories, setCategories] = useState("");
   const [body, setBody] = useState("");
   const [likes, setLikes] = useState("");
-  const [favorite, setFavorite] = useState(false);
+  const [likesThisPost, setLikesThisPost] = useState(false);
   const [favorites, setFavorites] = useState("");
+  const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
     const getPost = async () => {
       const res = await axios.get("/posts/" + postId);
+      console.log('user', user);
       setTitle(res.data.title);
       setCategories(res.data.categories);
       setBody(res.data.body);
       setLikes(res.data.likes);
       setFavorites(res.data.favorites);
-      if (user.favorites.includes(res.data._id)) {
+    };
+
+    console.log('getPost', getPost())
+
+    const res1 = () => getPost()
+
+    const getUser = async () => {
+      const realUser = await axios.get("/users/" + user._id);
+      console.log('realUser.data', realUser.data);
+      if (realUser.data.likesList.includes(res1.title)) {
+        setLikesThisPost(true);
+      }
+      if (realUser.data.favoritesList.includes(res1.title)) {
         setFavorite(true);
       }
-    };
+      console.log('realUser.data', realUser.data)
+    }
     getPost();    
+    getUser();    
   }, [postId, user]);
 
   const handleLike = async (e) => {
     e.preventDefault();
-    // working with context / "session"
-    if (!likes) {
+    if (!likesThisPost) {
       try {
+        await axios.put("/users/" + user._id, { likesList: title });
         await axios.put("/posts/" + postId, { likes: likes + 1 });
         setLikes(likes + 1);
-        dispatch({ type: "LIKE", payload: postId });
+        setLikesThisPost(true)
+        dispatch({ type: "LIKE", payload: title });
+        console.log('user LIKE', user)
       } catch (err) {
         console.log(err);
       }
     } else {
       try {
+        await axios.put("/users/" + user._id, { likesList: title });
         await axios.put("/posts/" + postId, { likes: likes - 1 });
         setLikes(likes - 1);
-        dispatch({ type: "UNLIKE", payload: postId });
+        setLikesThisPost(false)
+        dispatch({ type: "UNLIKE", payload: title });
+        console.log('user UNLIKE', user)
       } catch (err) {
         console.log(err);
       }
@@ -64,21 +85,23 @@ export default function SinglePost() {
     e.preventDefault();
     if (!favorite) {
       try {
-        await axios.put("/users/favorite/" + user._id, { favorites: postId });
+        await axios.put("/users/favorite/" + user._id, { favorites: title });
         await axios.put("/posts/" + postId, { favorites: favorites + 1 });
         setFavorites(favorites + 1);
         setFavorite(true);
-        dispatch({ type: "FAVORITE", payload: postId });
+        dispatch({ type: "FAVORITE", payload: title });
+        console.log('user FAVORITE', user)
       } catch (err) {
         console.log(err);
       }
     } else {
       try {
-        await axios.put("/users/unfavorite/" + user._id, { favorites: postId });
+        await axios.put("/users/unfavorite/" + user._id, { favorites: title });
         await axios.put("/posts/" + postId, { favorites: favorites - 1 });
         setFavorites(favorites - 1);
         setFavorite(false);
-        dispatch({ type: "UNFAVORITE", payload: postId });
+        dispatch({ type: "UNFAVORITE", payload: title });
+        console.log('user UNFAVORITE', user)
       } catch (err) {
         console.log(err);
       }
@@ -136,8 +159,8 @@ export default function SinglePost() {
 
           <Grid container justifyContent="flex-end">
             <IconButton onClick={handleLike}>
-                {!likes && <FavoriteBorderIcon sx={{ mx: "1%" }} />}
-                {likes && <FavoriteIcon sx={{ mx: "1%", color: "#e65940" }} />}
+                {likesThisPost && <FavoriteIcon sx={{ mx: "1%", color: "#e65940" }} />}
+                {!likesThisPost && <FavoriteBorderIcon sx={{ mx: "1%" }} />}
                 {likes}
               </IconButton>
 

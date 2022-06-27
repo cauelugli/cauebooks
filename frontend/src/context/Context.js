@@ -23,8 +23,7 @@ export const ContextProvider = ({ children }) => {
     <Context.Provider
       value={{
         user: state.user,
-        isFetching: state.isFetching,
-        favorites: state.favorites,
+        isFetching: state.isFetching,        
         error: state.error,
         dispatch,
       }}

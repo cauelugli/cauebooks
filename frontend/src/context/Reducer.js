@@ -21,7 +21,7 @@ const Reducer = (state, action) => {
     case "UPDATE_START":
       return {
         ...state,
-        isFetching: true
+        isFetching: true,
       };
     case "UPDATE_SUCCESS":
       return {
@@ -36,33 +36,33 @@ const Reducer = (state, action) => {
         error: true,
       };
     case "FAVORITE":
-      state.user.favorites.push(action.payload);
+      state.user.favoritesList.push(action.payload);
       return {
         user: state.user,
         isFetching: false,
         error: false,
       };
     case "UNFAVORITE":
-      const index = state.user.favorites.indexOf(action.payload);
+      const index = state.user.favoritesList.indexOf(action.payload);
       if (index > -1) {
-        state.user.favorites.splice(index, 1);
+        state.user.favoritesList.splice(index, 1);
       }
       return {
         user: state.user,
         isFetching: false,
         error: false,
       };
-      case "LIKE":
-      state.user.favorites.push(action.payload);
+    case "LIKE":
+      state.user.likesList.push(action.payload);
       return {
         user: state.user,
         isFetching: false,
         error: false,
       };
     case "UNLIKE":
-      const index1 = state.user.favorites.indexOf(action.payload);
+      const index1 = state.user.likesList.indexOf(action.payload);
       if (index1 > -1) {
-        state.user.favorites.splice(index1, 1);
+        state.user.likesList.splice(index1, 1);
       }
       return {
         user: state.user,
