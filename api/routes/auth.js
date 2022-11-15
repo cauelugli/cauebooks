@@ -6,24 +6,6 @@ const { v4: uuidv4 } = require("uuid");
 
 const User = require("../models/User");
 
-let transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.AUTH_EMAIL,
-    pass: process.env.AUTH_PASS,
-  },
-});
-
-transporter.verify((error, success) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log("ready for email sending?", success);
-  }
-});
-
 //REGISTERING
 router.post("/register", async (req, res) => {
   try {
@@ -71,14 +53,15 @@ router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
     !user || !user.verified && res.status(400).json();
-
-    const validated = await bcrypt.compare(req.body.password, user.password);
+    
+    const validated = await bcrypt.compare(hashedPass, user.password);
     !validated && res.status(400).json();
 
     const { password, ...others } = user._doc;
     res.status(200).json(others);
   } catch (err) {
     res.status(400);
+    console.log(err)
   }
 });
 
