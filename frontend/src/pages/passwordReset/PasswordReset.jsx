@@ -48,6 +48,41 @@ export default function Settings() {
     }
   };
 
+  // do it on the button, not on this page
+  const randomGreet = () => {
+    const rand = 1 + (Math.random() * (9));
+    const ran = rand.toString()[0];
+    if (ran === '1')  {
+      return "Dahora";
+    }
+    if (ran === '2')  {
+      return "Show";
+    }
+    if (ran === '3')  {
+      return "Massa Véi";
+    }
+    if (ran === '4')  {
+      return "Firmeza";
+    }
+    if (ran === '5')  {
+      return "Classe A";
+    }
+    if (ran === '6')  {
+      return "Pode pa";
+    }
+    if (ran === '7')  {
+      return "É nois";
+    }
+    if (ran === '8')  {
+      return "Fechou";
+    }
+    if (ran === '9')  {
+      return "Valeu";
+    }
+  };
+
+  
+
   return (
     <>
       <Container component="main" maxWidth="xs">
@@ -104,7 +139,7 @@ export default function Settings() {
             onClick={handleCloseUpdateModal}
             autoFocus
           >
-            Lindo
+            {randomGreet()}
           </Button>
         </DialogActions>
       </Dialog>
