@@ -21,32 +21,38 @@ router.post("/register", async (req, res) => {
 
     const user = await newUser.save();
 
-    sendVerificationEmail(user);
-    
+    const sendMail = (to, subject, message) =>{
+      const transporter = nodemailer.createTransport({
+          service : process.env.EMAIL_SERVICE,
+          auth : {
+              user : process.env.EMAIL_USERNAME,
+              pass : process.env.EMAIL_PASSWORD
+          }
+      })
+  
+      const options = {
+          from : process.env.EMAIL_SENDER, 
+          to, 
+          subject, 
+          text: message,
+      }
+  
+      transporter.sendMail(options, (error, info) =>{
+          if(error) console.log(error)
+          else console.log(info)
+      })
+    }
+
+    sendMail(to, subject, 'Is this the real life?');
+
     res.status(200).json(user);
+
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
-const sendVerificationEmail = ({ _id, email }) => {
-  const saltRounds = 10;
-  const uniqueString = uuidv4() + _id;
-  bcrypt.hash(uniqueString, saltRounds)
-  const mailOptions = {
-    from: process.env.AUTH_EMAIL,
-    to: email,
-    subject: "Verificação de Email",
-    html: `
-    <p>Obrigado por registrar-se em cauebooks!</p>
-    <p>Clique no link abaixo para validar sua conta!</p>
-    <p>${"http://localhost:3000/user/verify/" + _id + "/" + uniqueString}</p>
-    `,
-  };
-
-  transporter.sendMail(mailOptions)
-};
 
 //LOGIN
 router.post("/login", async (req, res) => {
