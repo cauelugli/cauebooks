@@ -31,8 +31,8 @@ router.post("/register", async (req, res) => {
       })
   
       const options = {
-          from : process.env.EMAIL_SENDER, 
-          to, 
+          from: process.env.EMAIL_SENDER, 
+          to: req.body.email, 
           subject, 
           text: message,
       }
@@ -43,7 +43,7 @@ router.post("/register", async (req, res) => {
       })
     }
 
-    sendMail(to, subject, 'Is this the real life?');
+    sendMail(req.body.email, 'subject', 'Is this the real life?');
 
     res.status(200).json(user);
 
@@ -59,15 +59,14 @@ router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
     !user || !user.verified && res.status(400).json();
-    
-    const validated = await bcrypt.compare(hashedPass, user.password);
-    !validated && res.status(400).json();
+
+    const validated = await bcrypt.compare(req.body.password, user.password);
+    !validated && res.status(400).json();    
 
     const { password, ...others } = user._doc;
     res.status(200).json(others);
   } catch (err) {
     res.status(400);
-    console.log(err)
   }
 });
 
