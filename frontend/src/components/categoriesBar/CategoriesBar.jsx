@@ -2,10 +2,15 @@ import React, { useState } from "react";
 
 import {
   AppBar,
+  FormControl,
   IconButton,
+  InputLabel,
+  ListSubheader,
   Menu,
+  MenuItem,
   // MenuItem,
   Paper,
+  Select,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -22,17 +27,7 @@ import SpaIcon from "@mui/icons-material/Spa";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 
 const CategoriesBar = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  // axios get list of recent on each category
+// axios get list of recent on each category
 
   const categoriesList = [
     "É um Erro",
@@ -44,7 +39,7 @@ const CategoriesBar = () => {
     "Ser Humano",
     "Sociedade",
     "Tecnologia",
-    "Brisas Fortes",
+    "Brisas",
   ];
 
   const categoriesIcons = [
@@ -53,11 +48,11 @@ const CategoriesBar = () => {
     <FamilyRestroomIcon sx={{ mx: 1 }} />,
     <AccountBalanceIcon sx={{ mx: 1 }} />,
     <SpaIcon sx={{ mx: 1 }} />,
-    <NaturePeopleIcon sx={{ mx: 1 }}/>,
-    <AccessibilityNewIcon sx={{ mx: 1 }}/>,
-    <GroupIcon sx={{ mx: 1 }}/>,
-    <ComputerIcon sx={{ mx: 1 }}/>,
-    <BathtubIcon sx={{ mx: 1 }}/>,
+    <NaturePeopleIcon sx={{ mx: 1 }} />,
+    <AccessibilityNewIcon sx={{ mx: 1 }} />,
+    <GroupIcon sx={{ mx: 1 }} />,
+    <ComputerIcon sx={{ mx: 1 }} />,
+    <BathtubIcon sx={{ mx: 1 }} />,
   ];
 
   const newList = [];
@@ -65,46 +60,48 @@ const CategoriesBar = () => {
   for (let i = 0; i < categoriesList.length; i++) {
     newList.push(
       <>
-        <Menu
-          anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "center",
+        <FormControl
+          variant="filled"
+          sx={{
+            width: 157,
+            color: "#BDEFD8",
+            backgroundColor: "#0E1428",
           }}
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
         >
-          <Paper sx={{width: '300px', height: '300px'}} onClick={handleClose}>
-            What? {categoriesList[i]}
-          </Paper>
-        </Menu>
-        
-        <IconButton onClick={handleMenu} color="inherit">
-          {categoriesIcons[i]}
-          {categoriesList[i]}
-        </IconButton>
-        
+          <InputLabel
+            sx={{ color: "#BDEFD8", backgroundColor: "#0E1428" }}
+            htmlFor="grouped-select"
+          >
+            {categoriesIcons[i]} 
+            {categoriesList[i]}
+          </InputLabel>
+          <Select
+            sx={{ color: "#BDEFD8", backgroundColor: "#0E1428" }}
+            id="grouped-select"
+            label="Grouping"
+          >
+            <ListSubheader sx={{ m: 1 }}>Most Recent</ListSubheader>
+            <MenuItem value={0} sx={{ m: 1 }}>
+              {categoriesList[i]}
+            </MenuItem>
+            <ListSubheader sx={{ m: 1 }}>Most Liked</ListSubheader>
+            <MenuItem value={0} sx={{ m: 1 }}>
+              {categoriesIcons[i]}
+            </MenuItem>
+          </Select>
+        </FormControl>
       </>
     );
-    // this is very wrong
-    // console.log(newList)
   }
-
 
   return (
     <AppBar position="static">
       <Toolbar sx={{ color: "#BDEFD8", backgroundColor: "#0E1428" }}>
-        
-        <Typography variant="h6" sx={{ mr: 4 }}>
+        <Typography variant="h6" sx={{ mr: 1 }}>
           Categorias
         </Typography>
 
         {newList}
-
       </Toolbar>
     </AppBar>
   );
