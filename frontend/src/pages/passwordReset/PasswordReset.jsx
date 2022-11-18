@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 
 import { Context } from "../../context/Context";
+import GreetSentence from "../../components/greetSentence/GreetSentence";
 
 export default function Settings() {
   const { user, dispatch } = useContext(Context);
@@ -139,7 +140,7 @@ export default function Settings() {
             onClick={handleCloseUpdateModal}
             autoFocus
           >
-            {randomGreet()}
+            <GreetSentence />
           </Button>
         </DialogActions>
       </Dialog>
