@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {
   AppBar,
   FormControl,
-  IconButton,
   InputLabel,
   ListSubheader,
-  Menu,
   MenuItem,
-  // MenuItem,
-  Paper,
   Select,
   Toolbar,
   Typography,
@@ -27,7 +23,7 @@ import SpaIcon from "@mui/icons-material/Spa";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 
 const CategoriesBar = () => {
-// axios get list of recent on each category
+  // axios get list of recent on each category
 
   const categoriesList = [
     "É um Erro",
@@ -72,7 +68,7 @@ const CategoriesBar = () => {
             sx={{ color: "#BDEFD8", backgroundColor: "#0E1428" }}
             htmlFor="grouped-select"
           >
-            {categoriesIcons[i]} 
+            {categoriesIcons[i]}
             {categoriesList[i]}
           </InputLabel>
           <Select
