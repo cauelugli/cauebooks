@@ -21,47 +21,51 @@ router.post("/register", async (req, res) => {
 
     const user = await newUser.save();
 
-    const sendMail = (to, subject, message) =>{
+    const sendMail = (to, subject, message) => {
       const transporter = nodemailer.createTransport({
-          service : process.env.EMAIL_SERVICE,
-          auth : {
-              user : process.env.EMAIL_USERNAME,
-              pass : process.env.EMAIL_PASSWORD
-          }
-      })
-  
-      const options = {
-          from: process.env.EMAIL_SENDER, 
-          to: req.body.email, 
-          subject, 
-          text: message,
-      }
-  
-      transporter.sendMail(options, (error, info) =>{
-          if(error) console.log(error)
-          else console.log(info)
-      })
-    }
+        service: process.env.EMAIL_SERVICE,
+        auth: {
+          user: process.env.EMAIL_USERNAME,
+          pass: process.env.EMAIL_PASSWORD,
+        },
+      });
 
-    sendMail(req.body.email, 'subject', 'Is this the real life?');
+      const options = {
+        from: process.env.EMAIL_SENDER,
+        to: req.body.email,
+        subject,
+        text: message,
+      };
+
+      transporter.sendMail(options, (error, info) => {
+        if (error) console.log(error);
+        else console.log(info);
+      });
+    };
+
+    sendMail(req.body.email, "subject", "Is this the real life?");
 
     res.status(200).json(user);
-
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
-
 //LOGIN
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
-    !user || !user.verified && res.status(400).json();
+    if (!user) {
+      res.status(400).json()
+    } else {
+      if (!user.verified) {
+        res.status(409).json()
+      }
+    }
 
     const validated = await bcrypt.compare(req.body.password, user.password);
-    !validated && res.status(400).json();    
+    !validated && res.status(401).json();
 
     const { password, ...others } = user._doc;
     res.status(200).json(others);
