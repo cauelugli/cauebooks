@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 
+import axios from "axios";
+
 import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-
-import axios from "axios";
 import { Editor } from "react-draft-wysiwyg";
+
+import NewCategory from "../../components/newCategory/NewCategory";
 
 import {
   InputLabel,
@@ -17,6 +19,7 @@ import {
   Checkbox,
   ListItemText,
   Button,
+  Menu,
 } from "@mui/material";
 
 const categoriesList = [
@@ -35,7 +38,18 @@ const categoriesList = [
 export default function Admin() {
   const [title, setTitle] = useState("");
   const [categories, setCategories] = useState([]);
-  const [state, setState] = useState({editorState: EditorState.createEmpty()});
+  const [state, setState] = useState({
+    editorState: EditorState.createEmpty(),
+  });
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleCategories = (event) => {
     const {
@@ -67,11 +81,38 @@ export default function Admin() {
 
   const { editorState } = state;
 
-  const parsedState = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+  const parsedState = draftToHtml(
+    convertToRaw(editorState.getCurrentContent())
+  );
 
   return (
     <div className="admin">
       <div className="adminWrapper">
+        <>
+          <Button
+            id="basic-button"
+            aria-controls={open ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
+            sx={{ color: "#0E1428", backgroundColor: "#BDEFD8" }}
+          >
+            Nova Categoria
+          </Button>
+
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <NewCategory />
+          </Menu>
+        </>
+
         <form className="adminForm" onSubmit={handleSubmit}>
           <FormControl
             sx={{ m: 4, width: "50%", backgroundColor: "#e4e4e4" }}
@@ -104,6 +145,7 @@ export default function Admin() {
               </Select>
             </FormControl>
           </Paper>
+
           <FormControl
             sx={{ m: 4, width: "90%", backgroundColor: "#fff" }}
             variant="outlined"
@@ -114,7 +156,6 @@ export default function Admin() {
               editorClassName="demo-editor"
               onEditorStateChange={handleEditorStateChange}
             />
-            
           </FormControl>
 
           <Button
@@ -124,12 +165,6 @@ export default function Admin() {
             DALHE!
           </Button>
         </form>
-        <Button
-          sx={{ color: "#BDEFD8", backgroundColor: "#0E1428" }}
-          onClick={() => console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())))}
-        >
-          SHOW ME THE TEXT!
-        </Button>
       </div>
     </div>
   );
