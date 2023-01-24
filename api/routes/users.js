@@ -59,7 +59,7 @@ router.put("/like/:id", async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-      { $push: { likesList: req.body.likes } },
+      { $push: { likesList: {name: req.body.likes, id: req.body.id} } },
       { new: true }
     );
     res.status(200).json(updatedUser);
@@ -73,7 +73,7 @@ router.put("/unlike/:id", async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-      { $pull: { likesList: req.body.likes } },
+      { $pull: { likesList: {name: req.body.likes, id: req.body.id} } },
       { new: true }
     );
     res.status(200).json(updatedUser);
@@ -87,7 +87,7 @@ router.put("/favorite/:id", async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-      { $push: { favoritesList: req.body.favorites } },
+      { $push: { favoritesList: {name: req.body.favorites, id: req.body.id} } },
       { new: true }
     );
     res.status(200).json(updatedUser);
@@ -101,7 +101,7 @@ router.put("/unfavorite/:id", async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-      { $pull: { favoritesList: req.body.favorites } },
+      { $pull: { favoritesList: {name: req.body.favorites, id: req.body.id} } },
       { new: true }
     );
     res.status(200).json(updatedUser);

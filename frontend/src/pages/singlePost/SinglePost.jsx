@@ -54,7 +54,7 @@ export default function SinglePost() {
     e.preventDefault();
     if (!likesThisPost) {
       try {
-        await axios.put("/users/like/" + user._id, { likes: title });
+        await axios.put("/users/like/" + user._id, { likes: title, id: postId });
         await axios.put("/posts/" + postId, { likes: likes + 1 });
         setLikes(likes + 1);
         setLikesThisPost(true);
@@ -64,7 +64,7 @@ export default function SinglePost() {
       }
     } else {
       try {
-        await axios.put("/users/unlike/" + user._id, { likes: title });
+        await axios.put("/users/unlike/" + user._id, { likes: title, id: postId });
         await axios.put("/posts/" + postId, { likes: likes - 1 });
         setLikes(likes - 1);
         setLikesThisPost(false);
@@ -79,7 +79,7 @@ export default function SinglePost() {
     e.preventDefault();
     if (!favorite) {
       try {
-        await axios.put("/users/favorite/" + user._id, { favorites: title });
+        await axios.put("/users/favorite/" + user._id, { favorites: title, id: postId });
         await axios.put("/posts/" + postId, { favorites: favorites + 1 });
         setFavorites(favorites + 1);
         setFavorite(true);
@@ -88,7 +88,7 @@ export default function SinglePost() {
       }
     } else {
       try {
-        await axios.put("/users/unfavorite/" + user._id, { favorites: title });
+        await axios.put("/users/unfavorite/" + user._id, { favorites: title, id: postId });
         await axios.put("/posts/" + postId, { favorites: favorites - 1 });
         setFavorites(favorites - 1);
         setFavorite(false);

@@ -2,41 +2,60 @@ import { useContext, useEffect, useState } from "react";
 
 import axios from "axios";
 
-import { Box, CardContent, Divider, Typography } from "@mui/material";
+import { Box, CardContent, Link, Typography } from "@mui/material";
 
 import { Context } from "../../context/Context";
 
 export default function Favorites() {
   // eslint-disable-next-line
   const { user, dispatch } = useContext(Context);
-  const [categories, setCategories] = useState("");
-  const [body, setBody] = useState("");
+  const [likesList, setLikesList] = useState("");
+  const [favoritesList, setFavoritesList] = useState("");
 
   useEffect(() => {
     const getFavorites = async () => {
-        console.log(user._id)
-      const res = await axios.get("/" + user._id + "/favorites");
-      setCategories(res.data.categories);
-      setBody(res.data.body);
+      const res = await axios.get("/users/" + user._id);
+      console.log("res.data", res.data);
+      setLikesList(res.data.likesList);
+      setFavoritesList(res.data.favoritesList);
     };
-    getFavorites();    
+    getFavorites();
   }, [user]);
 
-  let categoriesList = "";
-  if (categories) {
-    categories.forEach(myFunction);
+  const finalFavoritesList = [];
+  const finalLikesList = [];
 
-    function myFunction(item) {
-      // try to render the components, maybe will fuck the shit up... but anyway...
-      categoriesList += item + " "; 
-    }
+  for (let i = 0; i < favoritesList.length; i++) {
+    finalFavoritesList.push(
+      <Typography>
+        <Link href={`/post/${favoritesList[i].id}`} underline="none" color="grey.700">
+          {favoritesList[i].name}
+        </Link>
+      </Typography>
+    );
+  }
+
+  for (let i = 0; i < likesList.length; i++) {
+    finalLikesList.push(
+      <Typography>
+        <Link href={`/post/${likesList[i].id}`} underline="none" color="grey.700">
+          {likesList[i].name}
+        </Link>
+      </Typography>
+    );
   }
 
   return (
-    <Box sx={{display: "flex", alignItems: "center", justifyContent: "center", my: "2%"}}>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        my: "2%",
+      }}
+    >
       <Box
         sx={{
-          display: "flex",
           color: "#0E1428",
           border: "3px solid",
           backgroundColor: "#f1f1f0e3",
@@ -45,27 +64,45 @@ export default function Favorites() {
           width: "75%",
         }}
       >
-        
         <CardContent>
-          <Box sx={{display: "flex", margin: "5%"}}>
-            
-              <Typography sx={{color: "grey.800"}}>
-                Favorites: {user.favorites}
-              </Typography>
-              <Divider />
-            
-              <Typography sx={{color: "grey.800"}}>
-                body: {body}
-              </Typography>
-              <Divider />
-            
-              <Typography sx={{color: "grey.800"}}>
-                categoriesList: {categoriesList}
-              </Typography>
-                         
+          <Typography
+            align="center"
+            sx={{ fontSize: "24px", color: "grey.700", m: "2%" }}
+          >
+            Posts Favoritos &#11088;
+          </Typography>
+          <Box
+            sx={{
+              color: "#0E1428",
+              border: "3px solid",
+              backgroundColor: "#f1f1f0e3",
+              borderColor: "grey.300",
+              borderRadius: 3,
+              padding: 2,
+            }}
+          >
+            {finalFavoritesList}
+          </Box>
+
+          <Typography
+            align="center"
+            sx={{ fontSize: "24px", color: "grey.700", m: "2%" }}
+          >
+            Posts Curtidos &#9829;
+          </Typography>
+          <Box
+            sx={{
+              color: "#0E1428",
+              border: "3px solid",
+              backgroundColor: "#f1f1f0e3",
+              borderColor: "grey.300",
+              borderRadius: 3,
+              padding: 2,
+            }}
+          >
+            {finalLikesList}
           </Box>
         </CardContent>
-
       </Box>
     </Box>
   );
