@@ -37,25 +37,24 @@ export default function SinglePost() {
 
     const getUser = async () => {
       const modifiedUser = await axios.get("/users/" + user._id);
-      
-      if (modifiedUser.data.likesList.includes(postId)) {
+
+      if (modifiedUser.data.likesList.includes(title)) {
         setLikesThisPost(true);
       }
-      if (modifiedUser.data.favoritesList.includes(postId)) {
+      if (modifiedUser.data.favoritesList.includes(title)) {
         setFavorite(true);
       }
-
     };
-    
+
     getPost();
     getUser();
-  }, [postId, user]);
+  }, [postId, title, user]);
 
   const handleLike = async (e) => {
     e.preventDefault();
     if (!likesThisPost) {
       try {
-        await axios.put("/users/like/" + user._id, { likes: postId });
+        await axios.put("/users/like/" + user._id, { likes: title });
         await axios.put("/posts/" + postId, { likes: likes + 1 });
         setLikes(likes + 1);
         setLikesThisPost(true);
@@ -65,7 +64,7 @@ export default function SinglePost() {
       }
     } else {
       try {
-        await axios.put("/users/unlike/" + user._id, { likes: postId });
+        await axios.put("/users/unlike/" + user._id, { likes: title });
         await axios.put("/posts/" + postId, { likes: likes - 1 });
         setLikes(likes - 1);
         setLikesThisPost(false);
@@ -80,7 +79,7 @@ export default function SinglePost() {
     e.preventDefault();
     if (!favorite) {
       try {
-        await axios.put("/users/favorite/" + user._id, { favorites: postId });
+        await axios.put("/users/favorite/" + user._id, { favorites: title });
         await axios.put("/posts/" + postId, { favorites: favorites + 1 });
         setFavorites(favorites + 1);
         setFavorite(true);
@@ -89,7 +88,7 @@ export default function SinglePost() {
       }
     } else {
       try {
-        await axios.put("/users/unfavorite/" + user._id, { favorites: postId });
+        await axios.put("/users/unfavorite/" + user._id, { favorites: title });
         await axios.put("/posts/" + postId, { favorites: favorites - 1 });
         setFavorites(favorites - 1);
         setFavorite(false);
