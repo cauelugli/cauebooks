@@ -52,11 +52,11 @@ const CategoriesBar = () => {
             id="grouped-select"
             label="Grouping"
           >
-            <ListSubheader sx={{ m: 1 }}>Most Recent</ListSubheader>
+            <ListSubheader sx={{ m: 1 }}>Mais Recentes</ListSubheader>
             <MenuItem value={0} sx={{ m: 1 }}>
               {categoriesNameList[i]}
             </MenuItem>
-            <ListSubheader sx={{ m: 1 }}>Most Liked</ListSubheader>
+            <ListSubheader sx={{ m: 1 }}>Mais Curtidas</ListSubheader>
           </Select>
         </FormControl>
       </>
