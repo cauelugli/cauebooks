@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 
@@ -22,25 +22,29 @@ import {
   Menu,
 } from "@mui/material";
 
-const categoriesList = [
-  "É um Erro",
-  "Esportes",
-  "Família",
-  "Filosofia",
-  "Natureza",
-  "Pessoal",
-  "Ser Humano",
-  "Sociedade",
-  "Tecnologia",
-  "Brisas Fortes",
-];
+
 
 export default function Admin() {
   const [title, setTitle] = useState("");
+  const [categoriesNameList, setCategoriesNameList] = useState([]);
   const [categories, setCategories] = useState([]);
   const [state, setState] = useState({
     editorState: EditorState.createEmpty(),
   });
+
+  useEffect(() => {
+    const getGategories = async () => {
+      const provNameList = [];
+      const res = await axios.get("/categories");
+
+      for (let i = 0; i < res.data.length; i++) {
+        provNameList.push(res.data[i].name);
+      }
+
+      setCategoriesNameList(provNameList);
+    };
+    getGategories();
+  }, []);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -136,7 +140,7 @@ export default function Admin() {
                 onChange={handleCategories}
                 renderValue={(selected) => selected.join(", ")}
               >
-                {categoriesList.map((cat) => (
+                {categoriesNameList.map((cat) => (
                   <MenuItem key={cat} value={cat}>
                     <Checkbox checked={categories.indexOf(cat) > -1} />
                     <ListItemText primary={cat} />
