@@ -35,18 +35,18 @@ export default function SinglePost() {
       setFavorites(res.data.favorites);
     };
 
-    const res1 = () => getPost();
-
     const getUser = async () => {
-      const realUser = await axios.get("/users/" + user._id);
-
-      if (realUser.data.likesList.includes(res1.title)) {
+      const modifiedUser = await axios.get("/users/" + user._id);
+      
+      if (modifiedUser.data.likesList.includes(postId)) {
         setLikesThisPost(true);
       }
-      if (realUser.data.favoritesList.includes(res1.title)) {
+      if (modifiedUser.data.favoritesList.includes(postId)) {
         setFavorite(true);
       }
+
     };
+    
     getPost();
     getUser();
   }, [postId, user]);
@@ -55,23 +55,21 @@ export default function SinglePost() {
     e.preventDefault();
     if (!likesThisPost) {
       try {
-        await axios.put("/users/" + user._id, { likesList: title });
+        await axios.put("/users/like/" + user._id, { likes: postId });
         await axios.put("/posts/" + postId, { likes: likes + 1 });
         setLikes(likes + 1);
         setLikesThisPost(true);
-        dispatch({ type: "LIKE", payload: title });
-        console.log("user LIKE", user);
+        console.log("user LIKE");
       } catch (err) {
         console.log(err);
       }
     } else {
       try {
-        await axios.put("/users/" + user._id, { likesList: title });
+        await axios.put("/users/unlike/" + user._id, { likes: postId });
         await axios.put("/posts/" + postId, { likes: likes - 1 });
         setLikes(likes - 1);
         setLikesThisPost(false);
-        dispatch({ type: "UNLIKE", payload: title });
-        console.log("user UNLIKE", user);
+        console.log("user UNLIKE");
       } catch (err) {
         console.log(err);
       }
@@ -82,23 +80,19 @@ export default function SinglePost() {
     e.preventDefault();
     if (!favorite) {
       try {
-        await axios.put("/users/favorite/" + user._id, { favorites: title });
+        await axios.put("/users/favorite/" + user._id, { favorites: postId });
         await axios.put("/posts/" + postId, { favorites: favorites + 1 });
         setFavorites(favorites + 1);
         setFavorite(true);
-        dispatch({ type: "FAVORITE", payload: title });
-        console.log("user FAVORITE", user);
       } catch (err) {
         console.log(err);
       }
     } else {
       try {
-        await axios.put("/users/unfavorite/" + user._id, { favorites: title });
+        await axios.put("/users/unfavorite/" + user._id, { favorites: postId });
         await axios.put("/posts/" + postId, { favorites: favorites - 1 });
         setFavorites(favorites - 1);
         setFavorite(false);
-        dispatch({ type: "UNFAVORITE", payload: title });
-        console.log("user UNFAVORITE", user);
       } catch (err) {
         console.log(err);
       }
