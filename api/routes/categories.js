@@ -2,10 +2,10 @@ const router = require("express").Router();
 const Categories = require("../models/Categories");
 
 //GET CATEGORIES
-router.get("/:id", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const post = await Categories.find(req.params.id);
-    res.status(200).json(post);
+    const categories = await Categories.find();
+    res.status(200).json(categories);
   } catch (err) {
     res.status(500).json(err);
   }

@@ -6,14 +6,12 @@ import { InputLabel, OutlinedInput, FormControl, Button } from "@mui/material";
 
 export default function Admin() {
   const [name, setName] = useState("");
-  const [icon, setIcon] = useState([]);
 
   const handleCategorySubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post("/categories", {
-        name,
-        icon,
+        name
       });
       res.data && alert("Nova Categoria adicionada!");
     } catch (err) {
@@ -36,19 +34,6 @@ export default function Admin() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               label="Nome"
-            />
-          </FormControl>
-
-          <FormControl
-            sx={{ m: 4, width: "80%", backgroundColor: "#e4e4e4" }}
-            variant="outlined"
-          >
-            <InputLabel>Icone</InputLabel>
-            <OutlinedInput
-              type={"text"}
-              value={icon}
-              onChange={(e) => setIcon(e.target.value)}
-              label="Icone"
             />
           </FormControl>
 

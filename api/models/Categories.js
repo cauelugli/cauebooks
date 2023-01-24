@@ -5,12 +5,7 @@ const CategoriesSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-  },
-  icon: {
-    type: String,
-    required: true,
-    unique: true,
-  },
+  }
 });
 
 module.exports = mongoose.model("Categories", CategoriesSchema);
