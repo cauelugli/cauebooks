@@ -67,4 +67,60 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+//LIKE POST
+router.put("/like/:id", async (req, res) => {
+  try {
+    const updatedPost = await Post.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { "likes": 1 } },
+      { new: true }
+    );
+    res.status(200).json(updatedPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//UNLIKE POST
+router.put("/unlike/:id", async (req, res) => {
+  try {
+    const updatedPost = await Post.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { "likes": -1 } },
+      { new: true }
+    );
+    res.status(200).json(updatedPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//FAVORITE POST
+router.put("/favorite/:id", async (req, res) => {
+  try {
+    const updatedPost = await Post.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { "favorites": 1 } },
+      { new: true }
+    );
+    res.status(200).json(updatedPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//UNFAVORITE POST
+router.put("/unfavorite/:id", async (req, res) => {
+  try {
+    const updatedPost = await Post.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { "favorites": -1 } },
+      { new: true }
+    );
+    res.status(200).json(updatedPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

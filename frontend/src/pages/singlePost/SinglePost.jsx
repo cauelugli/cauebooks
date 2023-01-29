@@ -1,102 +1,29 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 
 import axios from "axios";
 
-import { Box, CardContent, Grid, IconButton, Typography } from "@mui/material";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
-import StarIcon from "@mui/icons-material/Star";
+import { Box, CardContent, Grid, Typography } from "@mui/material";
 
-import { Context } from "../../context/Context";
+import SinglePostActions from "../../components/singlePostActions/SinglePostActions";
 
 export default function SinglePost() {
   const location = useLocation();
   const postId = location.pathname.split("/")[2];
-  // eslint-disable-next-line
-  const { user, dispatch } = useContext(Context);
   const [title, setTitle] = useState("");
   const [categories, setCategories] = useState("");
   const [body, setBody] = useState("");
-  const [likes, setLikes] = useState("");
-  const [likesThisPost, setLikesThisPost] = useState(false);
-  const [favorites, setFavorites] = useState("");
-  const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
     const getPost = async () => {
       const res = await axios.get("/posts/" + postId);
-
       setTitle(res.data.title);
       setCategories(res.data.categories);
       setBody(res.data.body);
-      setLikes(res.data.likes);
-      setFavorites(res.data.favorites);
-    };
-
-    const getUser = async () => {
-      const modifiedUser = await axios.get("/users/" + user._id);
-
-      if (modifiedUser.data.likesList.includes(title)) {
-        setLikesThisPost(true);
-      }
-      if (modifiedUser.data.favoritesList.includes(title)) {
-        setFavorite(true);
-      }
     };
 
     getPost();
-    getUser();
-  }, [postId, title, user]);
-
-  const handleLike = async (e) => {
-    e.preventDefault();
-    if (!likesThisPost) {
-      try {
-        await axios.put("/users/like/" + user._id, { likes: title, id: postId });
-        await axios.put("/posts/" + postId, { likes: likes + 1 });
-        setLikes(likes + 1);
-        setLikesThisPost(true);
-        console.log("user LIKE");
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      try {
-        await axios.put("/users/unlike/" + user._id, { likes: title, id: postId });
-        await axios.put("/posts/" + postId, { likes: likes - 1 });
-        setLikes(likes - 1);
-        setLikesThisPost(false);
-        console.log("user UNLIKE");
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  };
-
-  const handleFavorite = async (e) => {
-    e.preventDefault();
-    if (!favorite) {
-      try {
-        await axios.put("/users/favorite/" + user._id, { favorites: title, id: postId });
-        await axios.put("/posts/" + postId, { favorites: favorites + 1 });
-        setFavorites(favorites + 1);
-        setFavorite(true);
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      try {
-        await axios.put("/users/unfavorite/" + user._id, { favorites: title, id: postId });
-        await axios.put("/posts/" + postId, { favorites: favorites - 1 });
-        setFavorites(favorites - 1);
-        setFavorite(false);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  };
+  });
 
   let categoriesList = "";
   if (categories) {
@@ -167,19 +94,7 @@ export default function SinglePost() {
           </Box>
 
           <Grid container justifyContent="flex-end">
-            <IconButton onClick={handleLike}>
-              {likesThisPost && (
-                <FavoriteIcon sx={{ mx: "1%", color: "#e65940" }} />
-              )}
-              {!likesThisPost && <FavoriteBorderIcon sx={{ mx: "1%" }} />}
-              {likes}
-            </IconButton>
-
-            <IconButton onClick={handleFavorite}>
-              {!favorite && <StarBorderIcon sx={{ mx: "1%" }} />}
-              {favorite && <StarIcon sx={{ mx: "1%", color: "#f2a933" }} />}
-              {favorites}
-            </IconButton>
+            <SinglePostActions />
           </Grid>
         </CardContent>
       </Box>
