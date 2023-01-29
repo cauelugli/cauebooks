@@ -17,7 +17,6 @@ import {
   Divider,
   Grid,
   Container,
-  CssBaseline,
   Box,
   TextField,
 } from "@mui/material";
@@ -84,7 +83,6 @@ export default function Settings() {
   return (
     <>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <Box
           sx={{
             mt: 2,

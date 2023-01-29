@@ -1,30 +1,26 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import {
-  AppBar,
-  FormControl,
-  InputLabel,
-  ListSubheader,
-  MenuItem,
-  Select,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { AppBar, FormControl, Link, Toolbar, Typography } from "@mui/material";
 
 const CategoriesBar = () => {
   const [categoriesNameList, setCategoriesNameList] = useState([]);
+  const [categoriesIdsList, setCategoriesIdsList] = useState([]);
 
   useEffect(() => {
     const getGategories = async () => {
       const provNameList = [];
+      const ids = [];
       const res = await axios.get("/categories");
+      console.log("res.data", res.data);
 
       for (let i = 0; i < res.data.length; i++) {
         provNameList.push(res.data[i].name);
+        ids.push(res.data[i]._id);
       }
 
       setCategoriesNameList(provNameList);
+      setCategoriesIdsList(ids);
     };
     getGategories();
   }, []);
@@ -36,28 +32,16 @@ const CategoriesBar = () => {
       <>
         <FormControl
           sx={{
-            minWidth: "8%",
+            minWidth: "5%",
             color: "#BDEFD8",
             backgroundColor: "#0E1428",
           }}
         >
-          <InputLabel
-            sx={{ color: "#BDEFD8", backgroundColor: "#0E1428" }}
-            htmlFor="grouped-select"
-          >
-            <div dangerouslySetInnerHTML={{ __html: categoriesNameList[i] }} />
-          </InputLabel>
-          <Select
-            sx={{ color: "#BDEFD8", backgroundColor: "#0E1428" }}
-            id="grouped-select"
-            label="Grouping"
-          >
-            <ListSubheader sx={{ m: 1 }}>Mais Recentes</ListSubheader>
-            <MenuItem value={0} sx={{ m: 1 }}>
-              {categoriesNameList[i]}
-            </MenuItem>
-            <ListSubheader sx={{ m: 1 }}>Mais Curtidas</ListSubheader>
-          </Select>
+          <Link href={`/categories/${categoriesIdsList[i]}`} underline="none" sx={{ color: "#BDEFD8", backgroundColor: "#0E1428", mx:1 }}>
+              <div
+                dangerouslySetInnerHTML={{ __html: categoriesNameList[i] }}
+              />
+          </Link>
         </FormControl>
       </>
     );
@@ -65,7 +49,7 @@ const CategoriesBar = () => {
 
   return (
     <AppBar position="static">
-      <Toolbar sx={{ color: "#BDEFD8", backgroundColor: "#0E1428" }}>
+      <Toolbar sx={{ color: "#BDEFD8", backgroundColor: "#0E1428", fontFamily: "Lora, sans-serif" }}>
         <Typography variant="h6" sx={{ mr: 1 }}>
           Categorias
         </Typography>

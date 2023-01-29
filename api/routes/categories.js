@@ -23,4 +23,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+//GET SINGLE CATEGORY PAGE
+// todo
+
 module.exports = router;
