@@ -14,6 +14,7 @@ import {
   Box,
   TextField,
 } from "@mui/material";
+import CheckIcon from "@mui/icons-material/Check";
 
 import { Context } from "../../context/Context";
 import GreetSentence from "../../components/greetSentence/GreetSentence";
@@ -38,7 +39,7 @@ export default function Settings() {
     dispatch({ type: "UPDATE_START" });
     const updatedUser = {
       userId: user._id,
-      password
+      password,
     };
     try {
       await axios.put("/users/" + user._id, updatedUser);
@@ -53,39 +54,46 @@ export default function Settings() {
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
-            mt: 2,
+            mt: 3,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            color: "#0E1428",
+            border: "3px solid",
+            backgroundColor: "#f1f1f0e3",
+            borderColor: "grey.400",
+            borderRadius: 3,
           }}
         >
-          <Typography sx={{ p: 5 }} component="h3" variant="h4">
+          <Typography sx={{ p: 3, color:"grey.800" }} component="h3" variant="h4">
             Atualize sua Senha
           </Typography>
           <Box component="form" onSubmit={handleUpdate} sx={{ mt: 1 }}>
-            <InputLabel sx={{mt:2}}>Nova Senha</InputLabel>
+            <InputLabel sx={{ mt: 2, color:"grey.800" }}>Nova Senha</InputLabel>
             <TextField
+              required
               margin="normal"
               fullWidth
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{
-                mt: 3,
-                mb: 2,
+                my: 4,
                 backgroundColor: "#0E1428",
-                color: "#e4e4e4",
-                "&.MuiButtonBase-root:hover": {
-                  bgcolor: "#0E1428",
-                }
+                color: "#92AF9E",
+                "&:hover": {
+                  bgcolor: "#92AF9E",
+                  color: "#0E1428",
+                },
               }}
             >
-              Atualizar
+              <CheckIcon />
             </Button>
           </Box>
         </Box>

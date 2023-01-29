@@ -21,6 +21,8 @@ import {
   TextField,
 } from "@mui/material";
 
+import CheckIcon from "@mui/icons-material/Check";
+
 import { Context } from "../../context/Context";
 
 export default function Settings() {
@@ -85,23 +87,34 @@ export default function Settings() {
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
-            mt: 2,
+            mt: 3,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            color: "#0E1428",
+            border: "3px solid",
+            backgroundColor: "#f1f1f0e3",
+            borderColor: "grey.400",
+            borderRadius: 3,
           }}
         >
-          <Typography sx={{ p: 5 }} component="h3" variant="h4">
+          <Typography
+            sx={{ p: 3, color: "grey.800" }}
+            component="h3"
+            variant="h4"
+          >
             Atualize seu Perfil
           </Typography>
           <Box component="form" onSubmit={handleUpdate} sx={{ mt: 1 }}>
-            <InputLabel>Avatar</InputLabel>
-            <FormControl sx={{
-            my: 3,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}>
+            <InputLabel sx={{ color: "grey.800" }}>Avatar</InputLabel>
+            <FormControl
+              sx={{
+                my: 3,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
               <Select value={avatar} onChange={handleAvatarChange}>
                 <MenuItem value={"1"}>
                   <img src={window.location.origin + "/1.png"} alt="avatar1" />
@@ -132,37 +145,39 @@ export default function Settings() {
                 </MenuItem>
               </Select>
             </FormControl>
-            <InputLabel>Username</InputLabel>
+            <InputLabel sx={{ color: "grey.800" }}>Username</InputLabel>
             <TextField
+              sx={{ color: "grey.800" }}
               margin="normal"
               fullWidth
               id="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
-            <InputLabel sx={{mt:2}}>Email</InputLabel>
+            <InputLabel sx={{ mt: 2, color: "grey.800" }}>Email</InputLabel>
             <TextField
               margin="normal"
               fullWidth
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              sx={{ color: "grey.800" }}
             />
             <Button
-              type="submit"
               fullWidth
+              type="submit"
               variant="contained"
               sx={{
-                mt: 3,
-                mb: 2,
+                my: 4,
                 backgroundColor: "#0E1428",
-                color: "#e4e4e4",
-                "&.MuiButtonBase-root:hover": {
-                  bgcolor: "#0E1428",
-                }
+                color: "#92AF9E",
+                "&:hover": {
+                  bgcolor: "#92AF9E",
+                  color: "#0E1428",
+                },
               }}
             >
-              Atualizar
+              <CheckIcon />
             </Button>
           </Box>
         </Box>
@@ -215,7 +230,6 @@ export default function Settings() {
           </Button>
         </DialogActions>
       </Dialog>
-
     </>
   );
 }

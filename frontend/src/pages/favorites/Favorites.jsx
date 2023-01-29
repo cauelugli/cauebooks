@@ -85,7 +85,7 @@ export default function Favorites() {
             aria-controls={`simple-menu-${favoritesList[i].id}`}
             sx={{
               textTransform: "none",
-              color: "grey.700",
+              color: "grey.800",
               "&:hover": { backgroundColor: "grey.300" },
             }}
             aria-haspopup="true"
@@ -136,7 +136,7 @@ export default function Favorites() {
       <MenuItem
         sx={{
           textTransform: "none",
-          color: "grey.700",
+          color: "grey.800",
           "&:hover": { backgroundColor: "grey.300" },
         }}
         component={RouterLink}
@@ -176,7 +176,7 @@ export default function Favorites() {
         >
           <Typography
             align="center"
-            sx={{ fontSize: "24px", color: "grey.700", m: "2%" }}
+            sx={{ fontSize: "24px", color: "grey.800", m: "2%" }}
           >
             Posts Favoritos &#11088;
           </Typography>
@@ -197,7 +197,7 @@ export default function Favorites() {
 
           <Typography
             align="center"
-            sx={{ fontSize: "24px", color: "grey.700", m: "2%" }}
+            sx={{ fontSize: "24px", color: "grey.800", m: "2%" }}
           >
             Posts Curtidos &#9829;
           </Typography>

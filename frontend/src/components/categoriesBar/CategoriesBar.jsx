@@ -33,6 +33,7 @@ const CategoriesBar = () => {
         <FormControl
           sx={{
             minWidth: "5%",
+            px:1,
             color: "#BDEFD8",
             backgroundColor: "#0E1428",
           }}
