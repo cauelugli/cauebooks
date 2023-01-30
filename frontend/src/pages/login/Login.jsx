@@ -6,7 +6,6 @@ import {
   Box,
   Button,
   Container,
-  CssBaseline,
   Dialog,
   DialogActions,
   DialogContent,
@@ -20,6 +19,7 @@ import {
 } from "@mui/material";
 
 import { Context } from "../../context/Context";
+import CheckButton from "../../components/checkButton/CheckButton";
 
 export default function Login() {
   const { dispatch } = useContext(Context);
@@ -65,10 +65,6 @@ export default function Login() {
     window.location.replace("/register");
   };
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
@@ -83,45 +79,62 @@ export default function Login() {
       console.log(err);
       if (err.message === "Request failed with status code 400") {
         setNoUser(true);
+        setUsername("");
+        setPassword("");
         handleNoUserModal(true);
         console.log(err.message);
-        console.log("Errou o user");
       }
       if (err.message === "Request failed with status code 401") {
         setNoPass(true);
+        setPassword("");
         handleNoPassModal(true);
         console.log(err.message);
-        console.log("Errou o pass");
       }
       if (err.message === "Request failed with status code 409") {
         setNoActive(true);
+        setUsername("");
+        setPassword("");
         handleNoActiveModal(true);
         console.log(err.message);
-        console.log("Errou o active");
       }
       dispatch({ type: "LOGIN_FAILURE" });
     }
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
+    <Container component="main" maxWidth="sm">
       <Box
         sx={{
-          marginTop: "40%",
+          color: "grey.700",
+          border: "3px solid",
+          backgroundColor: "#fff",
+          borderColor: "grey.400",
+          borderRadius: 3,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          marginTop: "17%",
         }}
       >
-        <Typography sx={{ m: 3 }} component="h3" variant="h4">
+        <Box sx={{ paddingTop: "4%" }}>
+          <img src={window.location.origin + "/logo.png"} alt="" />
+        </Box>
+        <Typography sx={{ mt: 6 }} component="h3" variant="h6">
           Entre em sua Conta
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{
+            mt: 1,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <TextField
             margin="normal"
             required
-            fullWidth
             id="Nome de Usuário"
             label="Nome de Usuário"
             value={username}
@@ -130,29 +143,12 @@ export default function Login() {
           <TextField
             margin="normal"
             required
-            fullWidth
             label="Senha"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            onMouseDown={handleMouseDownPassword}
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{
-              mt: 3,
-              mb: 2,
-              backgroundColor: "#0E1428",
-              color: "#e4e4e4",
-              "&.MuiButtonBase-root:hover": {
-                bgcolor: "#0E1428",
-              },
-            }}
-          >
-            Login
-          </Button>
+          <CheckButton />
         </Box>
       </Box>
       <Grid container sx={{ mt: 2 }}>
@@ -210,7 +206,9 @@ export default function Login() {
       {no_pass && (
         <Dialog open={openNoPassModal} onClose={handleCloseNoPassModal}>
           <DialogTitle>
-            <Typography align="center" variant="h5">Não é essa senha não...</Typography>
+            <Typography align="center" variant="h5">
+              Beleza, {username}, mas essa não é sua senha...
+            </Typography>
           </DialogTitle>
           <DialogActions>
             <Button
@@ -234,13 +232,13 @@ export default function Login() {
         <Dialog open={openNoActiveModal} onClose={handleCloseNoActiveModal}>
           <DialogTitle>
             <Typography variant="h5" align="center">
-              Falta ativar a conta no e-mail!
+              Então, {username}, falta ativar tua conta no e-mail!
             </Typography>
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
               <Typography align="center">
-                Quer já aproveitar e fazer agora? Qual e-mail tu usa?
+                Aproveita e já ativa agora. Qual e-mail tu usa?
               </Typography>
             </DialogContentText>
           </DialogContent>

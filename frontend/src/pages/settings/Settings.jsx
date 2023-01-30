@@ -21,9 +21,8 @@ import {
   TextField,
 } from "@mui/material";
 
-import CheckIcon from "@mui/icons-material/Check";
-
 import { Context } from "../../context/Context";
+import CheckButton from "../../components/checkButton/CheckButton";
 
 export default function Settings() {
   const { user, dispatch } = useContext(Context);
@@ -99,9 +98,9 @@ export default function Settings() {
           }}
         >
           <Typography
-            sx={{ p: 3, color: "grey.800" }}
+            sx={{ p: 5, color: "grey.800" }}
             component="h3"
-            variant="h4"
+            variant="h5"
           >
             Atualize seu Perfil
           </Typography>
@@ -163,22 +162,7 @@ export default function Settings() {
               onChange={(e) => setEmail(e.target.value)}
               sx={{ color: "grey.800" }}
             />
-            <Button
-              fullWidth
-              type="submit"
-              variant="contained"
-              sx={{
-                my: 4,
-                backgroundColor: "#0E1428",
-                color: "#92AF9E",
-                "&:hover": {
-                  bgcolor: "#92AF9E",
-                  color: "#0E1428",
-                },
-              }}
-            >
-              <CheckIcon />
-            </Button>
+            <CheckButton />
           </Box>
         </Box>
 
@@ -192,17 +176,17 @@ export default function Settings() {
       </Container>
 
       <Dialog open={openDeleteModal} onClose={handleCloseDeleteModal}>
-        <DialogTitle>Tem certeza, mano?</DialogTitle>
+        <DialogTitle>Tem certeza, pessoa?</DialogTitle>
         <Divider />
         <DialogContent>
           <DialogContentText>
-            Algumas coisas na vida não tem volta, e deletar sua conta é uma
-            delas. É isso mesmo que você quer?
+            Algumas coisas na vida não têm volta, e deletar sua conta é uma
+            delas. Mas, sé isso mesmo que você quer...
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button variant="inherit" onClick={handleCloseDeleteModal}>
-            Puts, nem
+            É, pensando melhor...
           </Button>
           <Button
             color="error"
@@ -210,7 +194,7 @@ export default function Settings() {
             onClick={handleDelete}
             autoFocus
           >
-            Sim
+            SIM! "SUDO DELETE -FORCE"
           </Button>
         </DialogActions>
       </Dialog>

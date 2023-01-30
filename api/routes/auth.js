@@ -8,7 +8,20 @@ const User = require("../models/User");
 
 //REGISTERING
 router.post("/register", async (req, res) => {
+  //compare if a username already exists, if true, return error
+  //compare if an email is already in use, if true, return error
+
   try {
+    const existingUsername = await User.findOne({ username: req.body.username });
+    if (existingUsername) {
+      return res.status(403).json();
+    }
+
+    const existingEmail = await User.findOne({ email: req.body.email });
+    if (existingEmail) {
+      return res.status(409).json();
+    }
+
     const salt = await bcrypt.genSalt(10);
     const hashedPass = await bcrypt.hash(req.body.password, salt);
     const newUser = new User({
@@ -43,7 +56,7 @@ router.post("/register", async (req, res) => {
       });
     };
 
-    sendMail(req.body.email, "subject", "Is this the real life?");
+    // sendMail(req.body.email, "subject", "Is this the real life?");
 
     res.status(200).json(user);
   } catch (err) {

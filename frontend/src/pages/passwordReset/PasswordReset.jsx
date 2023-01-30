@@ -14,10 +14,11 @@ import {
   Box,
   TextField,
 } from "@mui/material";
-import CheckIcon from "@mui/icons-material/Check";
 
 import { Context } from "../../context/Context";
+
 import GreetSentence from "../../components/greetSentence/GreetSentence";
+import CheckButton from "../../components/checkButton/CheckButton";
 
 export default function Settings() {
   const { user, dispatch } = useContext(Context);
@@ -65,7 +66,7 @@ export default function Settings() {
             borderRadius: 3,
           }}
         >
-          <Typography sx={{ p: 3, color:"grey.800" }} component="h3" variant="h4">
+          <Typography sx={{ p: 3, color:"grey.800" }} component="h3" variant="h5">
             Atualize sua Senha
           </Typography>
           <Box component="form" onSubmit={handleUpdate} sx={{ mt: 1 }}>
@@ -79,22 +80,7 @@ export default function Settings() {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{
-                my: 4,
-                backgroundColor: "#0E1428",
-                color: "#92AF9E",
-                "&:hover": {
-                  bgcolor: "#92AF9E",
-                  color: "#0E1428",
-                },
-              }}
-            >
-              <CheckIcon />
-            </Button>
+            <CheckButton />
           </Box>
         </Box>
       </Container>
