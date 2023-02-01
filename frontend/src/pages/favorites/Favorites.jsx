@@ -103,17 +103,23 @@ export default function Favorites() {
             onClose={handleClose}
           >
             <MenuItem
+              sx={{
+                color: "grey.800",
+                backgroundColor: "#fff",
+                "&:hover": { color: "#fff ",
+                backgroundColor: "grey.800", },
+              }}
               component={RouterLink}
               to={`/post/${favoritesList[i].id}`}
               onClick={handleClose}
             >
-              <VisibilityIcon />
+              <VisibilityIcon sx={{ mr: 1 }} /> Ver Post
             </MenuItem>
             <MenuItem
               sx={{
-                color: "#fff ",
-                backgroundColor: "red",
-                "&:hover": { backgroundColor: "red" },
+                color: "grey.800",
+                backgroundColor: "#fff",
+                "&:hover": { color: "#fff", backgroundColor: "red" },
               }}
               onClick={() =>
                 handleDeleteConfirmation(
@@ -123,7 +129,7 @@ export default function Favorites() {
               }
               onClose={handleClose}
             >
-              <DeleteIcon />
+              <DeleteIcon sx={{ mr: 1 }} /> Remover
             </MenuItem>
           </Menu>
         </Typography>
