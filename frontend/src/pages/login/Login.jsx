@@ -232,7 +232,7 @@ export default function Login() {
         <Dialog open={openNoActiveModal} onClose={handleCloseNoActiveModal}>
           <DialogTitle>
             <Typography variant="h5" align="center">
-              Então, {username}, falta ativar tua conta no e-mail!
+              Falta ativar tua conta no e-mail!
             </Typography>
           </DialogTitle>
           <DialogContent>
@@ -248,8 +248,14 @@ export default function Login() {
             <Button
               sx={{
                 mx: 2.5,
-                color: "#DB4437",
-                borderColor: "#DB4437",
+                color: "#fff",
+                backgroundColor: "#DB4437",
+                borderColor: "#fff",
+                "&:hover": {
+                  color: "#DB4437",
+                  backgroundColor: "#fff",
+                  borderColor: "#DB4437",
+                },
               }}
               variant="outlined"
               href="https://gmail.com"
@@ -260,8 +266,14 @@ export default function Login() {
             <Button
               sx={{
                 mx: 2.5,
-                color: "#29bbff",
-                borderColor: "#29bbff",
+                color: "#fff",
+                backgroundColor: "#29bbff",
+                borderColor: "#fff",
+                "&:hover": {
+                  color: "#29bbff",
+                  backgroundColor: "#fff",
+                  borderColor: "#29bbff",
+                },
               }}
               variant="outlined"
               href="https://outlook.com"
@@ -272,8 +284,14 @@ export default function Login() {
             <Button
               sx={{
                 mx: 2.5,
-                color: "#430297",
-                borderColor: "#430297",
+                color: "#fff",
+                backgroundColor: "#430297",
+                borderColor: "#fff",
+                "&:hover": {
+                  color: "#430297",
+                  backgroundColor: "#fff",
+                  borderColor: "#430297",
+                },
               }}
               variant="outlined"
               href="https://mail.yahoo.com"
@@ -282,11 +300,21 @@ export default function Login() {
             </Button>
 
             <Button
-              sx={{ ml: 4 }}
-              variant="inherit"
+              sx={{
+                ml: 4,
+                color: "#fff",
+                backgroundColor: "#000",
+                borderColor: "#fff",
+                "&:hover": {
+                  color: "#000",
+                  backgroundColor: "#fff",
+                  borderColor: "#000",
+                },
+              }}
+              variant="outlined"
               onClick={handleCloseNoActiveModal}
             >
-              Puts, nem
+              Depois
             </Button>
           </DialogActions>
         </Dialog>

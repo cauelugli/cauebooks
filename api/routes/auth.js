@@ -8,9 +8,6 @@ const User = require("../models/User");
 
 //REGISTERING
 router.post("/register", async (req, res) => {
-  //compare if a username already exists, if true, return error
-  //compare if an email is already in use, if true, return error
-
   try {
     const existingUsername = await User.findOne({ username: req.body.username });
     if (existingUsername) {

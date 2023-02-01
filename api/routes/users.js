@@ -16,9 +16,17 @@ router.put("/:id", async (req, res) => {
       },
       { new: true }
     );
+
     res.status(200).json(updatedUser);
   } catch (err) {
-    res.status(500).json(err);
+    if (err.keyPattern.username === 1) {
+      return res.status(403).json();
+    }
+    if (err.keyPattern.email === 1) {
+      return res.status(409).json();
+    } else {
+      res.status(500).json(err);
+    }
   }
 });
 
@@ -59,7 +67,7 @@ router.put("/like/:id", async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-      { $push: { likesList: {name: req.body.likes, id: req.body.id} } },
+      { $push: { likesList: { name: req.body.likes, id: req.body.id } } },
       { new: true }
     );
     res.status(200).json(updatedUser);
@@ -73,7 +81,7 @@ router.put("/unlike/:id", async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-      { $pull: { likesList: {name: req.body.likes, id: req.body.id} } },
+      { $pull: { likesList: { name: req.body.likes, id: req.body.id } } },
       { new: true }
     );
     res.status(200).json(updatedUser);
@@ -87,7 +95,9 @@ router.put("/favorite/:id", async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-      { $push: { favoritesList: {name: req.body.favorites, id: req.body.id} } },
+      {
+        $push: { favoritesList: { name: req.body.favorites, id: req.body.id } },
+      },
       { new: true }
     );
     res.status(200).json(updatedUser);
@@ -101,7 +111,9 @@ router.put("/unfavorite/:id", async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-      { $pull: { favoritesList: {name: req.body.favorites, id: req.body.id} } },
+      {
+        $pull: { favoritesList: { name: req.body.favorites, id: req.body.id } },
+      },
       { new: true }
     );
     res.status(200).json(updatedUser);

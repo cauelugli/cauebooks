@@ -12,7 +12,6 @@ const CategoriesBar = () => {
       const provNameList = [];
       const ids = [];
       const res = await axios.get("/categories");
-      console.log("res.data", res.data);
 
       for (let i = 0; i < res.data.length; i++) {
         provNameList.push(res.data[i].name);

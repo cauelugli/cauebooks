@@ -21,7 +21,7 @@ import GreetSentence from "../../components/greetSentence/GreetSentence";
 import CheckButton from "../../components/checkButton/CheckButton";
 
 export default function Settings() {
-  const { user, dispatch } = useContext(Context);
+  const { user } = useContext(Context);
 
   const [password, setPassword] = useState("");
 
@@ -37,7 +37,6 @@ export default function Settings() {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    dispatch({ type: "UPDATE_START" });
     const updatedUser = {
       userId: user._id,
       password,
@@ -45,8 +44,9 @@ export default function Settings() {
     try {
       await axios.put("/users/" + user._id, updatedUser);
       handleUpdateModal();
+      setPassword("")
     } catch (err) {
-      dispatch({ type: "UPDATE_FAILURE" });
+      console.log('err', err)
     }
   };
 
@@ -54,6 +54,8 @@ export default function Settings() {
     <>
       <Container component="main" maxWidth="xs">
         <Box
+          component="form"
+          onSubmit={handleUpdate}
           sx={{
             mt: 3,
             display: "flex",
@@ -66,11 +68,17 @@ export default function Settings() {
             borderRadius: 3,
           }}
         >
-          <Typography sx={{ p: 3, color:"grey.800" }} component="h3" variant="h5">
+          <Typography
+            sx={{ p: 3, color: "grey.800" }}
+            component="h3"
+            variant="h5"
+          >
             Atualize sua Senha
           </Typography>
-          <Box component="form" onSubmit={handleUpdate} sx={{ mt: 1 }}>
-            <InputLabel sx={{ mt: 2, color:"grey.800" }}>Nova Senha</InputLabel>
+          <Box sx={{ mt: 1 }}>
+            <InputLabel sx={{ mt: 2, color: "grey.800" }}>
+              Nova Senha
+            </InputLabel>
             <TextField
               required
               margin="normal"
@@ -79,9 +87,8 @@ export default function Settings() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-
-            <CheckButton />
           </Box>
+          <CheckButton />
         </Box>
       </Container>
 

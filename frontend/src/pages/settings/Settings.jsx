@@ -31,12 +31,34 @@ export default function Settings() {
   const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
 
+  const [existingUser, setExistingUser] = useState(false);
+  const [existingEmail, setExistingEmail] = useState(false);
+
+  const [openExistingUserModal, setExistingUserModal] = useState(false);
+  const [openExistingEmailModal, setExistingEmailModal] = useState(false);
+
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
 
   function handleAvatarChange(e) {
     setAvatar(e.target.value);
   }
+
+  const handleExistingUserModal = () => {
+    setExistingUserModal(true);
+  };
+
+  const handleCloseExistingUserModal = () => {
+    setExistingUserModal(false);
+  };
+
+  const handleExistingEmailModal = () => {
+    setExistingEmailModal(true);
+  };
+
+  const handleCloseExistingEmailModal = () => {
+    setExistingEmailModal(false);
+  };
 
   const handleDeleteConfirmation = () => {
     setOpenDeleteModal(true);
@@ -77,6 +99,17 @@ export default function Settings() {
       dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
       handleUpdateModal();
     } catch (err) {
+      if (err.message === "Request failed with status code 403") {
+        setExistingUser(true);
+        handleExistingUserModal(true);
+        console.log(err.message);
+      }
+      if (err.message === "Request failed with status code 409") {
+        setExistingEmail(true);
+        handleExistingEmailModal(true);
+        console.log(err.message);
+      }
+      console.log(err);
       dispatch({ type: "UPDATE_FAILURE" });
     }
   };
@@ -85,6 +118,8 @@ export default function Settings() {
     <>
       <Container component="main" maxWidth="xs">
         <Box
+          component="form"
+          onSubmit={handleUpdate}
           sx={{
             mt: 3,
             display: "flex",
@@ -104,7 +139,7 @@ export default function Settings() {
           >
             Atualize seu Perfil
           </Typography>
-          <Box component="form" onSubmit={handleUpdate} sx={{ mt: 1 }}>
+          <Box sx={{ mt: 1 }}>
             <InputLabel sx={{ color: "grey.800" }}>Avatar</InputLabel>
             <FormControl
               sx={{
@@ -162,8 +197,73 @@ export default function Settings() {
               onChange={(e) => setEmail(e.target.value)}
               sx={{ color: "grey.800" }}
             />
-            <CheckButton />
           </Box>
+          <CheckButton />
+
+          {existingUser && (
+            <Dialog
+              open={openExistingUserModal}
+              onClose={handleCloseExistingUserModal}
+            >
+              <DialogTitle>
+                <Typography align="center" variant="h6">
+                  Dahora, mas <strong>"{username}"</strong> já está em uso por
+                  um outro alguém.
+                </Typography>
+              </DialogTitle>
+              <DialogActions>
+                <Button
+                  sx={{
+                    color: "#000",
+                    backgroundColor: "#fff",
+                    borderColor: "#000",
+                    "&:hover": {
+                      color: "#fff",
+                      backgroundColor: "#000",
+                      borderColor: "#fff",
+                    },
+                  }}
+                  variant="outlined"
+                  onClick={handleCloseExistingUserModal}
+                >
+                  Tá bom, né...
+                </Button>
+              </DialogActions>
+            </Dialog>
+          )}
+
+          {existingEmail && (
+            <Dialog
+              open={openExistingEmailModal}
+              onClose={handleCloseExistingEmailModal}
+            >
+              <DialogTitle>
+                <Typography variant="h6" align="center">
+                  Probleminha: O e-mail <strong>{email}</strong> já está em uso.
+                </Typography>
+              </DialogTitle>
+
+              <Divider />
+              <DialogActions>
+                <Button
+                  sx={{
+                    color: "#000",
+                    backgroundColor: "#fff",
+                    borderColor: "#000",
+                    "&:hover": {
+                      color: "#fff",
+                      backgroundColor: "#000",
+                      borderColor: "#fff",
+                    },
+                  }}
+                  variant="outlined"
+                  onClick={handleCloseExistingEmailModal}
+                >
+                  ¯\_(ツ)_/¯
+                </Button>
+              </DialogActions>
+            </Dialog>
+          )}
         </Box>
 
         <Grid container sx={{ mt: 2 }}>
