@@ -22,8 +22,6 @@ import {
   Menu,
 } from "@mui/material";
 
-
-
 export default function Admin() {
   const [title, setTitle] = useState("");
   const [categoriesNameList, setCategoriesNameList] = useState([]);
@@ -90,8 +88,8 @@ export default function Admin() {
   );
 
   return (
-    <div className="admin">
-      <div className="adminWrapper">
+    <div>
+      <div>
         <>
           <Button
             id="basic-button"
@@ -117,9 +115,9 @@ export default function Admin() {
           </Menu>
         </>
 
-        <form className="adminForm" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <FormControl
-            sx={{ m: 4, width: "50%", backgroundColor: "#e4e4e4" }}
+            sx={{ m: 4, backgroundColor: "#e4e4e4" }}
             variant="outlined"
           >
             <InputLabel>Título</InputLabel>

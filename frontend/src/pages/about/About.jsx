@@ -45,7 +45,7 @@ export default function About() {
             }}
           >
             <img
-              className="aboutImg"
+              style={{width: "25%"}}
               src={window.location.origin + "/adventurer.png"}
               alt="adventurer"
             />
