@@ -2,12 +2,12 @@ import React, { useState } from "react";
 
 import axios from "axios";
 
-import { Box, Button, CircularProgress, Container, CssBaseline, Divider, Modal, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Container, Divider, Modal, Typography } from "@mui/material";
 
 import Login from '../login/Login';
 
 
-const reqParams = window.location.pathname.replace('/user/verify/','');
+const reqParams = window.location.pathname.replace('/users/activate/','');
 let userId = "";
 
 function setParams() {
@@ -16,12 +16,10 @@ function setParams() {
   }
 }
 
-setParams()
+setParams();
 
 export default function UserVerification() {
   const [loading, setLoading] = useState(false);
-
-  const [error, setError] = useState(false);
 
   const [modal, setModal] = useState(false);
   const [done, setDone] = useState(false);
@@ -30,16 +28,14 @@ export default function UserVerification() {
   const handleCloseModal = () => setModal(false);
 
   const handleSubmit = () => {
-    setError(false);
     setLoading(true);
     try {
-      axios.put(`/users/${userId}`, { verified: true });
+      axios.get("/users/activate/" + userId);
       handleShowModal();
       setLoading(false);
       setDone(true);
     } catch (err) {
       setLoading(false);
-      setError(true);
     }
   };
 
@@ -47,7 +43,6 @@ export default function UserVerification() {
     <>
     {!done && 
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <Typography sx={{ mt: "30%" }} variant="h5">
         Clique no botão para finalizar!
       </Typography>
@@ -70,7 +65,6 @@ export default function UserVerification() {
           >
           {loading ? <CircularProgress /> : "VALIDAR"}
           </Button>
-        {error && (<span style={{ color: "red", textAlign: "center", marginTop: "20px" }}>Algo de errado não está certo!</span>)}
       </form>
     </Container>
     } 
@@ -95,12 +89,10 @@ export default function UserVerification() {
         }}
       >
         <Typography id="modal-modal-title" variant="h5">
-          Boa, mano!
+          E, C, lente!
         </Typography>
         <Divider />
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-        {error ? (<span style={{ color: "red", textAlign: "center", marginTop: "20px" }}>Algo de errado não está certo!</span>) : 'Agora é só fazer login, e ser feliz.'}
-          
         </Typography>
       </Box>
     </Modal>

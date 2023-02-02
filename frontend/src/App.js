@@ -29,7 +29,7 @@ function App() {
         <Route exact path="/">{user ? <Home /> : <Login />}</Route>
         <Route path="/login"><Login /></Route>
         <Route path="/register"><Register /></Route>
-        <Route path="/user/verify/:userId/:uniqueString" ><UserVerification /></Route>
+        <Route path="/users/activate/:id"><UserVerification /></Route>
         <Route path="/about">{user ? <About /> : <Login />}</Route>
         <Route path="/:userId/favorites">{user ? <Favorites /> : <Login />}</Route>
         <Route path="/passwordReset">{user ? <PasswordReset /> : <Login />}</Route>

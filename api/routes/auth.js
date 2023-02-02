@@ -1,7 +1,6 @@
 require("dotenv").config();
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
-const nodemailer = require("nodemailer");
 const { v4: uuidv4 } = require("uuid");
 
 const User = require("../models/User");
@@ -9,7 +8,9 @@ const User = require("../models/User");
 //REGISTERING
 router.post("/register", async (req, res) => {
   try {
-    const existingUsername = await User.findOne({ username: req.body.username });
+    const existingUsername = await User.findOne({
+      username: req.body.username,
+    });
     if (existingUsername) {
       return res.status(403).json();
     }
@@ -31,30 +32,6 @@ router.post("/register", async (req, res) => {
 
     const user = await newUser.save();
 
-    const sendMail = (to, subject, message) => {
-      const transporter = nodemailer.createTransport({
-        service: process.env.EMAIL_SERVICE,
-        auth: {
-          user: process.env.EMAIL_USERNAME,
-          pass: process.env.EMAIL_PASSWORD,
-        },
-      });
-
-      const options = {
-        from: process.env.EMAIL_SENDER,
-        to: req.body.email,
-        subject,
-        text: message,
-      };
-
-      transporter.sendMail(options, (error, info) => {
-        if (error) console.log(error);
-        else console.log(info);
-      });
-    };
-
-    // sendMail(req.body.email, "subject", "Is this the real life?");
-
     res.status(200).json(user);
   } catch (err) {
     console.log(err);
@@ -67,10 +44,10 @@ router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
     if (!user) {
-      res.status(400).json()
+      res.status(400).json();
     } else {
       if (!user.verified) {
-        res.status(409).json()
+        res.status(409).json();
       }
     }
 

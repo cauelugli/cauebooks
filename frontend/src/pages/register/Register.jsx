@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 import axios from "axios";
 
@@ -68,12 +69,22 @@ export default function Register() {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("/auth/register", {
+      const res = await axios.post("/auth/register", {
         avatar,
         username,
         email,
         password,
       });
+      emailjs.send(
+        "contato",
+        "activation",
+        {
+          to_name: username,
+          to_email: email,
+          link: `http://localhost:3000/users/activate/${res.data._id}`,
+        },
+        "fVnxtfZFIiPcu8UvO"
+      );
       setLoading(false);
       handleShowModal();
       setDone(true);
@@ -159,7 +170,10 @@ export default function Register() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Box>
-              <Divider sx={{ height: "auto", my:4, mr:3 }} orientation="vertical" />
+              <Divider
+                sx={{ height: "auto", my: 4, mr: 3 }}
+                orientation="vertical"
+              />
 
               <Box
                 sx={{
@@ -252,7 +266,10 @@ export default function Register() {
           </Grid>
 
           {existingUser && (
-            <Dialog open={openExistingUserModal} onClose={handleCloseExistingUserModal}>
+            <Dialog
+              open={openExistingUserModal}
+              onClose={handleCloseExistingUserModal}
+            >
               <DialogTitle>
                 <Typography align="center" variant="h5">
                   Então, esse usuário "{username}" já existe oh, mó fita...
@@ -269,13 +286,15 @@ export default function Register() {
                 >
                   Tá, vou pensar em outro nome
                 </Button>
-                
               </DialogActions>
             </Dialog>
           )}
 
           {existingEmail && (
-            <Dialog open={openExistingEmailModal} onClose={handleCloseExistingEmailModal}>
+            <Dialog
+              open={openExistingEmailModal}
+              onClose={handleCloseExistingEmailModal}
+            >
               <DialogTitle>
                 <Typography variant="h5" align="center">
                   Então... o e-mail "{email}" já tá em uso, não é teu?
@@ -291,16 +310,15 @@ export default function Register() {
                     borderColor: "#0E1428",
                     "&:hover": {
                       backgroundColor: "#0E1428",
-                    color: "#e4e4e4",
-                    borderColor: "#e4e4e4",
-                    }
+                      color: "#e4e4e4",
+                      borderColor: "#e4e4e4",
+                    },
                   }}
                   variant="outlined"
                   onClick={handleCloseExistingEmailModal}
                 >
                   ¯\_(ツ)_/¯
                 </Button>
-                
               </DialogActions>
             </Dialog>
           )}
