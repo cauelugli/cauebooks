@@ -37,7 +37,6 @@ const SearchBar = () => {
       alignItems="center"
       justifyContent="center"
       margin={3}
-      paddingBottom={"2%"}
       onMouseLeave={() => setFilteredData([])}
     >
       <Grid item xs={4} width="60%" sx={{}} >

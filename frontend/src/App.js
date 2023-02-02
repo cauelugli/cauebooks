@@ -38,7 +38,7 @@ function App() {
         <Route exact path="/admin">{user?.isAdmin ? <Admin /> : <Login />}</Route>
       </Switch>
      
-     <Footer />
+    <Footer />
     </Router>
     </>
   );

@@ -120,9 +120,6 @@ export default function Register() {
             <Box
               sx={{
                 display: "inline-flex",
-                border: "3px solid",
-                borderColor: "grey.300",
-                borderRadius: 3,
               }}
             >
               <Box
@@ -162,6 +159,7 @@ export default function Register() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Box>
+              <Divider sx={{ height: "auto", my:4, mr:3 }} orientation="vertical" />
 
               <Box
                 sx={{
