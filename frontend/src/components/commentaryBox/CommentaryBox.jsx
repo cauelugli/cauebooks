@@ -1,12 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router";
+
 import axios from "axios";
 
 import {
   Box,
   Button,
   CardContent,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  Divider,
   Grid,
+  MenuItem,
   TextField,
   Typography,
 } from "@mui/material";
@@ -16,6 +22,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import InsertCommentIcon from "@mui/icons-material/InsertComment";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import { Context } from "../../context/Context";
 import CheckButton from "../../components/checkButton/CheckButton";
@@ -24,6 +31,12 @@ const CommentaryBox = () => {
   const location = useLocation();
   const postId = location.pathname.split("/")[2];
   const { user } = useContext(Context);
+  const crypto = require("crypto");
+  function generateRandomString(length) {
+    return crypto.randomBytes(length).toString("hex");
+  }
+
+  const randomString = generateRandomString(10);
 
   const [displayCommentaries, setDisplayCommentaries] = useState(false);
   const [displayAddComment, setDisplayAddCommentary] = useState(false);
@@ -31,15 +44,20 @@ const CommentaryBox = () => {
   const [commentaries, setCommentaries] = useState([]);
   const [posted, setPosted] = useState("");
   const [comment, setComment] = useState("");
+  const [selectedToDelete, setSelectedToDelete] = useState("");
+  const [openDeleteCommentaryModal, setOpenDeleteCommentaryModal] =
+    useState(false);
 
   useEffect(() => {
     const getPost = async () => {
       const res = await axios.get("/posts/" + postId);
       setCommentaries(res.data.commentaries);
-      setPosted(new Date(res.data.createdAt).toLocaleDateString("pt-BR", {
-        day: "2-digit",
-        month: "short"
-      }));
+      setPosted(
+        new Date(res.data.createdAt).toLocaleDateString("pt-BR", {
+          day: "2-digit",
+          month: "short",
+        })
+      );
     };
     getPost();
   }, [postId]);
@@ -48,23 +66,47 @@ const CommentaryBox = () => {
     e.preventDefault();
     try {
       await axios.put("/posts/comment/" + postId, {
-        user: { username: user.username, avatar: user.avatar },
+        user: {
+          username: user.username,
+          avatar: user.avatar,
+          user_id: user._id,
+        },
         comment,
-        date: posted
+        date: posted,
+        commentary_id: randomString,
       });
       setComment("");
-      setDisplayAddCommentary(false)
+      setDisplayAddCommentary(false);
       setCommentaries([
         ...commentaries,
         {
           username: user.username,
+          user_id: user._id,
           avatar: user.avatar,
+          commentary_id: randomString,
           comment,
-          date: posted
+          date: posted,
         },
       ]);
     } catch (err) {
       alert("Vish, não rolou o comentário não...");
+      console.log(err);
+    }
+  };
+
+  const handleDeleteCommentary = async () => {
+    const commentIndex = commentaries.findIndex(c => c.commentary_id === selectedToDelete);
+    if (commentIndex !== -1) {
+      commentaries.splice(commentIndex, 1)}
+
+    try {
+      await axios.put("/posts/delcomment/" + postId, {
+        commentary_id: selectedToDelete,
+      });
+      setOpenDeleteCommentaryModal(false);
+      setCommentaries([...commentaries]);
+    } catch (err) {
+      setOpenDeleteCommentaryModal(false);
       console.log(err);
     }
   };
@@ -86,11 +128,20 @@ const CommentaryBox = () => {
     setDisplayAddCommentary(false);
   };
 
+  const handleDeleteCommentaryConfirmation = () => {
+    setOpenDeleteCommentaryModal(true);
+  };
+
+  const handleCloseDeleteCommentaryModal = () => {
+    setOpenDeleteCommentaryModal(false);
+  };
+
   const commentariesList = [];
 
   for (let i = 0; i < commentaries.length; i++) {
     commentariesList.push(
       <Box
+        onClick={() => {setSelectedToDelete(commentaries[i].commentary_id)}}
         sx={{
           display: "flex",
           alignItems: "center",
@@ -121,6 +172,7 @@ const CommentaryBox = () => {
           <h5>{commentaries[i].username}</h5>
           <h6>{commentaries[i].date}</h6>
         </Box>
+
         <Box
           sx={{
             display: "flex",
@@ -134,6 +186,21 @@ const CommentaryBox = () => {
         >
           <Typography>{commentaries[i].comment}</Typography>
         </Box>
+
+        {commentaries[i].user_id === user._id && (
+          <Grid justifyContent="flex-end" sx={{ marginLeft: "auto" }}>
+            <MenuItem
+              sx={{
+                color: "grey.800",
+                "&:hover": { color: "grey.800", backgroundColor: "transparent" },
+              }}
+              onClick={() => handleDeleteCommentaryConfirmation("params")}
+              onClose={handleCloseDeleteCommentaryModal}
+            >
+              <DeleteIcon sx={{ mr: 1 }} />
+            </MenuItem>
+          </Grid>
+        )}
       </Box>
     );
   }
@@ -236,6 +303,30 @@ const CommentaryBox = () => {
           )}
         </Grid>
       )}
+
+      <Dialog
+        open={openDeleteCommentaryModal}
+        onClose={handleCloseDeleteCommentaryModal}
+      >
+        <DialogTitle>
+          Das duas, uma: Ou gigitou errado, ou falou besteira... Ainda bem
+          que dá pra apagar né :)
+        </DialogTitle>
+        <Divider />
+        <DialogActions>
+          <Button variant="inherit" onClick={handleCloseDeleteCommentaryModal}>
+            Mas eu não quero apagar...
+          </Button>
+          <Button
+            color="error"
+            variant="contained"
+            onClick={handleDeleteCommentary}
+            autoFocus
+          >
+            Ainda bem né, apaga isso aí kkk
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
