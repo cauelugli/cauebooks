@@ -72,7 +72,7 @@ router.put("/like/:id", async (req, res) => {
   try {
     const updatedPost = await Post.findByIdAndUpdate(
       req.params.id,
-      { $inc: { "likes": 1 } },
+      { $inc: { likes: 1 } },
       { new: true }
     );
     res.status(200).json(updatedPost);
@@ -86,7 +86,7 @@ router.put("/unlike/:id", async (req, res) => {
   try {
     const updatedPost = await Post.findByIdAndUpdate(
       req.params.id,
-      { $inc: { "likes": -1 } },
+      { $inc: { likes: -1 } },
       { new: true }
     );
     res.status(200).json(updatedPost);
@@ -100,7 +100,7 @@ router.put("/favorite/:id", async (req, res) => {
   try {
     const updatedPost = await Post.findByIdAndUpdate(
       req.params.id,
-      { $inc: { "favorites": 1 } },
+      { $inc: { favorites: 1 } },
       { new: true }
     );
     res.status(200).json(updatedPost);
@@ -114,7 +114,44 @@ router.put("/unfavorite/:id", async (req, res) => {
   try {
     const updatedPost = await Post.findByIdAndUpdate(
       req.params.id,
-      { $inc: { "favorites": -1 } },
+      { $inc: { favorites: -1 } },
+      { new: true }
+    );
+    res.status(200).json(updatedPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//COMMENT POST
+router.put("/comment/:id", async (req, res) => {
+  try {
+    const updatedPost = await Post.findByIdAndUpdate(
+      req.params.id,
+      {
+        $push: {
+          commentaries: {
+            username: req.body.user.username,
+            avatar: req.body.user.avatar,
+            comment: req.body.comment,
+            date: req.body.date
+          },
+        },
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//DELETE POST COMMENTARY
+router.put("/delcomment/:id", async (req, res) => {
+  try {
+    const updatedPost = await Post.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
       { new: true }
     );
     res.status(200).json(updatedPost);
