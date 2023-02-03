@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Post = require("../models/Post");
+const HomePage = require("../models/HomePage");
 
 //GET POST
 router.get("/:id", async (req, res) => {
@@ -28,7 +29,8 @@ router.get("/", async (req, res) => {
     } else {
       posts = await Post.find();
     }
-    res.status(200).json(posts);
+    const homepage = await HomePage.find();
+    res.status(200).json({posts, homepage});
   } catch (err) {
     res.status(500).json(err);
   }

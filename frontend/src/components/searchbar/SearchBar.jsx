@@ -20,7 +20,7 @@ const SearchBar = () => {
 
   const handleFilter = (event) => {
     const searchWord = event.target.value;
-    const newFilter = posts.filter((value) => {
+    const newFilter = posts.posts.filter((value) => {
       return value.title.toLowerCase().includes(searchWord.toLowerCase());
     });
     if (searchWord === "") {
@@ -55,7 +55,7 @@ const SearchBar = () => {
             placeholder='👾: -"BUSQUEM CONHECIMENTO!"'
           />
         </Paper>
-        <Paper sx={{ zIndex: 1, position: "absolute", mt: 0.5 }}>
+        <Paper sx={{ zIndex: 1, position: "absolute", mt: 0.3, minWidth:"300px" }}>
           {filteredData.map((posts) => {
             return (
               <Link href={`/post/${posts._id}`} sx={{ textDecoration: "none" }}>

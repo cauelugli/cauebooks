@@ -1,67 +1,186 @@
-import React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-const cards = [1, 2, 3, 4];
+import { Typography, Box, Grid } from "@mui/material";
 
 export default function Home() {
+  const [recentLikedTitle, setRecentLikedTitle] = useState("");
+  //const [recentLikedCategories, setRecentLikedCategories] = useState([]);
+  const [recentCommented, setRecentCommented] = useState("");
+  //const [posted, setPosted] = useState([]);
+
+  useEffect(() => {
+    const getHomePage = async () => {
+      const res = await axios.get("/posts");
+      setRecentLikedTitle(res.data.homepage[0].recentLiked[0].title);
+      //setRecentLikedCategories(res.data.homepage[0].recentLiked[0].categories);
+      setRecentCommented(res.data.homepage[0].recentCommented[0].title);
+      //setPosted(
+        //new Date(res.data.createdAt).toLocaleDateString("pt-BR", {
+          //day: "2-digit",
+          //month: "short",
+        //})
+      //);
+    };
+    getHomePage();
+  }, []);
+
   return (
-    <>
-      <Box sx={{ pt: 3, pb: 10 }}>
-        <Container>
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            sx={{ m: 3, my: 6 }}
+    <Grid container justifyContent="center">
+      <Box
+        sx={{
+          display: "inline-flex",
+          justifyContent: "space-between",
+          width: "100%",
+          pb: "15%",
+        }}
+      >
+        {/* Left Side Box */}
+        <Box
+          sx={{
+            m: "2%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Box
+            sx={{
+              p: 3,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              color: "#0E1428",
+              border: "3px solid",
+              backgroundColor: "#f1f1f0e3",
+              borderColor: "grey.400",
+              borderRadius: 3,
+              width: "auto",
+            }}
           >
+            <Typography sx={{ color: "grey.800" }} variant="h6">
+              Feed de Atividades Recentes
+            </Typography>
+            <Typography sx={{p:1}}>
+              Likes Recentes
+            </Typography>
+              {recentLikedTitle}
+            <Typography sx={{p:1}}>
+              Comentários Recentes
+            </Typography>
+            {recentCommented}
+          </Box>
+        </Box>
+
+        {/* Middle Box */}
+        <Box
+          sx={{
+            mt: "1%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "auto",
+          }}
+        >
+          <Typography variant="h3" align="center" sx={{ my: "4%" }}>
             cauebooks
           </Typography>
-          <Typography
-            variant="h5"
-            align="center"
-            color="text.secondary"
-            paragraph
-          >
+          <Typography variant="h5" align="center" color="text.secondary">
             Salve salve! Seja sempre bem-vindo!
           </Typography>
-          <Stack
-            direction="row"
-            spacing={2}
-            justifyContent="center"
-          ></Stack>
-        </Container>
+          <Box
+            sx={{
+              p: 3,
+              px: 10,
+              mt: "3%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              color: "#0E1428",
+              border: "3px solid",
+              backgroundColor: "#f1f1f0e3",
+              borderColor: "grey.400",
+              borderRadius: 3,
+              width: "100%",
+            }}
+          >
+            <Typography sx={{ color: "grey.800" }} variant="h6">
+              Box 2 - Texts - Alta Performance enquanto Dá
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              p: 3,
+              px: 10,
+              mt: "3%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              color: "#0E1428",
+              border: "3px solid",
+              backgroundColor: "#f1f1f0e3",
+              borderColor: "grey.400",
+              borderRadius: 3,
+              width: "100%",
+            }}
+          >
+            <Typography sx={{ color: "grey.800" }} variant="h6">
+              Box 2 - Texts - Alta Performance enquanto Dá
+            </Typography>
+          </Box>
+        </Box>
+
+        {/* Right Side Box */}
+        <Box
+          sx={{
+            m: "2%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "auto",
+          }}
+        >
+          <Box
+            component="form"
+            sx={{
+              p: 3,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              color: "#0E1428",
+              border: "3px solid",
+              backgroundColor: "#f1f1f0e3",
+              borderColor: "grey.400",
+              borderRadius: 3,
+              width: "100%",
+            }}
+          >
+            <Typography sx={{ color: "grey.800" }} variant="h6">
+              New Features
+            </Typography>
+          </Box>
+          <Box
+            component="form"
+            sx={{
+              marginTop: "3%",
+              p: 3,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              color: "#0E1428",
+              border: "3px solid",
+              backgroundColor: "#f1f1f0e3",
+              borderColor: "grey.400",
+              borderRadius: 3,
+              width: "100%",
+            }}
+          >
+            <Typography sx={{ color: "grey.800" }} variant="h6">
+              Contato
+            </Typography>
+          </Box>
+        </Box>
       </Box>
-      <Container>
-        {/* <LatestPost />
-           <LikedstPost />
-           <FavoritePost />
-           <ComentedstPost /> */}
-        <Grid container spacing={3}>
-          {cards.map((card) => (
-            <Grid item key={card} xs={12} md={3}>
-              <Card sx={{ display: "flex", flexDirection: "column" }}>
-                <CardMedia component="img" />
-                <img src={window.location.origin + "/1.png"} alt="" />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Post Title
-                  </Typography>
-                  <Typography>
-                    This is a content part. Very fucking nice.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </>
+    </Grid>
   );
 }

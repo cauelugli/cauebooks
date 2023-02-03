@@ -135,8 +135,6 @@ export default function Register() {
             </Grid>
 
             <Grid container justifyContent="center">
-
-            
             <Box
               sx={{
                 display: "inline-flex",
