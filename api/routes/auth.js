@@ -68,8 +68,6 @@ router.post("/forgotPassword", async (req, res) => {
     if (!user) {
       res.status(404).json();
     } else {
-      console.log("let's go");
-
       function generateRandomString(length) {
         let result = "";
         let characters =
