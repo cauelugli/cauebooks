@@ -29,13 +29,9 @@ export default function Settings() {
 
   const [avatar, setAvatar] = useState(user.avatar);
   const [username, setUsername] = useState(user.username);
-  const [email, setEmail] = useState(user.email);
 
   const [existingUser, setExistingUser] = useState(false);
-  const [existingEmail, setExistingEmail] = useState(false);
-
   const [openExistingUserModal, setExistingUserModal] = useState(false);
-  const [openExistingEmailModal, setExistingEmailModal] = useState(false);
 
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
@@ -50,14 +46,6 @@ export default function Settings() {
 
   const handleCloseExistingUserModal = () => {
     setExistingUserModal(false);
-  };
-
-  const handleExistingEmailModal = () => {
-    setExistingEmailModal(true);
-  };
-
-  const handleCloseExistingEmailModal = () => {
-    setExistingEmailModal(false);
   };
 
   const handleDeleteConfirmation = () => {
@@ -92,7 +80,6 @@ export default function Settings() {
       userId: user._id,
       avatar,
       username,
-      email,
     };
     try {
       const res = await axios.put("/users/" + user._id, updatedUser);
@@ -102,11 +89,6 @@ export default function Settings() {
       if (err.message === "Request failed with status code 403") {
         setExistingUser(true);
         handleExistingUserModal(true);
-        console.log(err.message);
-      }
-      if (err.message === "Request failed with status code 409") {
-        setExistingEmail(true);
-        handleExistingEmailModal(true);
         console.log(err.message);
       }
       console.log(err);
@@ -179,6 +161,8 @@ export default function Settings() {
                 </MenuItem>
               </Select>
             </FormControl>
+            <InputLabel sx={{ mt: 2, color: "grey.800" }}>Email</InputLabel>
+            <Typography sx={{py: 2, color: "grey.500"}}>{user.email}</Typography>
             <InputLabel sx={{ color: "grey.800" }}>Username</InputLabel>
             <TextField
               sx={{ color: "grey.800" }}
@@ -187,15 +171,6 @@ export default function Settings() {
               id="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-            />
-            <InputLabel sx={{ mt: 2, color: "grey.800" }}>Email</InputLabel>
-            <TextField
-              margin="normal"
-              fullWidth
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              sx={{ color: "grey.800" }}
             />
           </Box>
           <CheckButton />
@@ -226,40 +201,7 @@ export default function Settings() {
                   variant="outlined"
                   onClick={handleCloseExistingUserModal}
                 >
-                  Tá bom, né...
-                </Button>
-              </DialogActions>
-            </Dialog>
-          )}
-
-          {existingEmail && (
-            <Dialog
-              open={openExistingEmailModal}
-              onClose={handleCloseExistingEmailModal}
-            >
-              <DialogTitle>
-                <Typography variant="h6" align="center">
-                  Probleminha: O e-mail <strong>{email}</strong> já está em uso.
-                </Typography>
-              </DialogTitle>
-
-              <Divider />
-              <DialogActions>
-                <Button
-                  sx={{
-                    color: "#000",
-                    backgroundColor: "#fff",
-                    borderColor: "#000",
-                    "&:hover": {
-                      color: "#fff",
-                      backgroundColor: "#000",
-                      borderColor: "#fff",
-                    },
-                  }}
-                  variant="outlined"
-                  onClick={handleCloseExistingEmailModal}
-                >
-                  ¯\_(ツ)_/¯
+                  Tá bom, né... ¯\_(ツ)_/¯
                 </Button>
               </DialogActions>
             </Dialog>

@@ -112,16 +112,18 @@ export default function Login() {
           borderRadius: 3,
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
           marginTop: "17%",
         }}
       >
-        <Box sx={{ paddingTop: "4%" }}>
+        <Grid sx={{ paddingTop: "4%" }} container justifyContent="center">
           <img src={window.location.origin + "/logo.png"} alt="" />
-        </Box>
-        <Typography sx={{ mt: 6 }} component="h3" variant="h6">
-          Entre em sua Conta
-        </Typography>
+        </Grid>
+        <Divider sx={{ my: 1, mx: 4 }} />
+        <Grid container justifyContent="center">
+          <Typography sx={{ mt: 3 }} variant="h5">
+            Entre em sua Conta
+          </Typography>
+        </Grid>
         <Box
           component="form"
           onSubmit={handleSubmit}
@@ -155,7 +157,7 @@ export default function Login() {
         <Grid item xs>
           <Link
             fullWidth
-            href="#"
+            href="/forgotPassword"
             underline="none"
             sx={{ m: 1, color: "#e4e4e4" }}
           >
@@ -210,6 +212,7 @@ export default function Login() {
               Beleza, {username}, mas essa não é sua senha...
             </Typography>
           </DialogTitle>
+          <Divider sx={{ mb: 2, mx: 3 }} />
           <DialogActions>
             <Button
               style={{
@@ -222,7 +225,14 @@ export default function Login() {
               Nossa! Que vacilo...
             </Button>
             <Button color="error" variant="contained" onClick={handleResetPass}>
-              Puts, não lembro a senha...
+              <Link
+                fullWidth
+                href="/forgotPassword"
+                underline="none"
+                sx={{ color: "#fff" }}
+              >
+                Puts, não lembro a senha...
+              </Link>
             </Button>
           </DialogActions>
         </Dialog>

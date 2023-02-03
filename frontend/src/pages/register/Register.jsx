@@ -114,20 +114,29 @@ export default function Register() {
               marginTop: "4%",
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
               border: "3px solid",
               borderColor: "grey.400",
               backgroundColor: "#fff",
               borderRadius: 3,
             }}
           >
+            <Grid container justifyContent="center">
+
             <Box sx={{ paddingTop: "2%" }}>
               <img src={window.location.origin + "/logo.png"} alt="" />
             </Box>
-            <Typography sx={{ color: "grey.700", my: 3 }} variant="h5">
+            </Grid>
+            <Divider sx={{ mb: 2, mx: 9 }} />
+            <Grid container justifyContent="center">
+
+            <Typography sx={{ color: "grey.700", my: 2 }} variant="h5">
               Crie sua Conta
             </Typography>
+            </Grid>
 
+            <Grid container justifyContent="center">
+
+            
             <Box
               sx={{
                 display: "inline-flex",
@@ -251,6 +260,7 @@ export default function Register() {
             ) : (
               <CheckButton type="submit" />
             )}
+            </Grid>
           </Box>
 
           <Grid container sx={{ mt: 2 }}>
@@ -260,7 +270,7 @@ export default function Register() {
                 underline="none"
                 sx={{ m: 1, color: "#e4e4e4" }}
               >
-                Já tem conta, é?
+                Ah, tu já tem conta?
               </Link>
             </Grid>
           </Grid>
@@ -332,12 +342,13 @@ export default function Register() {
         aria-describedby="modal-modal-description"
       >
         <Box
+          onClick={handleCloseModal}
           sx={{
             position: "absolute",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 400,
+            width: "28%",
             bgcolor: "#e4e4e4",
             border: "2px solid #000",
             boxShadow: 24,
@@ -351,6 +362,9 @@ export default function Register() {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Verifique sua caixa de email para ativar sua conta.
           </Typography>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <CheckButton />
+          </div>
         </Box>
       </Modal>
     </>

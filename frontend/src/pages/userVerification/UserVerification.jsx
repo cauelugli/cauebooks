@@ -2,12 +2,12 @@ import React, { useState } from "react";
 
 import axios from "axios";
 
-import { Box, Button, CircularProgress, Container, Divider, Modal, Typography } from "@mui/material";
+import { Box, Container, Divider, Modal, Typography } from "@mui/material";
 
-import Login from '../login/Login';
+import Login from "../login/Login";
+import CheckButton from "../../components/checkButton/CheckButton";
 
-
-const reqParams = window.location.pathname.replace('/users/activate/','');
+const reqParams = window.location.pathname.replace("/users/activate/", "");
 let userId = "";
 
 function setParams() {
@@ -19,8 +19,6 @@ function setParams() {
 setParams();
 
 export default function UserVerification() {
-  const [loading, setLoading] = useState(false);
-
   const [modal, setModal] = useState(false);
   const [done, setDone] = useState(false);
 
@@ -28,74 +26,85 @@ export default function UserVerification() {
   const handleCloseModal = () => setModal(false);
 
   const handleSubmit = () => {
-    setLoading(true);
     try {
       axios.get("/users/activate/" + userId);
       handleShowModal();
-      setLoading(false);
       setDone(true);
     } catch (err) {
-      setLoading(false);
+      console.log(err);
     }
   };
 
   return (
     <>
-    {!done && 
-    <Container component="main" maxWidth="xs">
-      <Typography sx={{ mt: "30%" }} variant="h5">
-        Clique no botão para finalizar!
-      </Typography>
-      <form className="registerForm" onSubmit={handleSubmit}>
-        <Button
-            type="submit"
-            fullWidth
-            disableElevation
-            disableRipple
-            variant="contained"
+      {!done && (
+        <Container component="main" maxWidth="sm">
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
             sx={{
-              mt: 3,
-              mb: 2,
-              backgroundColor: "#0E1428",
-              color: "#e4e4e4",
-              "&.MuiButtonBase-root:hover": {
-                bgcolor: "#0E1428",
-              },
+              mt: "10%",
+              marginBottom: "55%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              color: "#0E1428",
+              border: "3px solid",
+              backgroundColor: "#f1f1f0e3",
+              borderColor: "grey.400",
+              borderRadius: 3,
             }}
           >
-          {loading ? <CircularProgress /> : "VALIDAR"}
-          </Button>
-      </form>
-    </Container>
-    } 
-    {done && <Login />}
-    <Modal
-      open={modal}
-      onClose={handleCloseModal}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: 600,
-          bgcolor: "#e4e4e4",
-          border: "2px solid #000",
-          boxShadow: 24,
-          p: 4,
-        }}
+            <Typography sx={{ p: 3, color: "grey.800" }} variant="h4">
+              Ativação de Conta - cauebooks
+            </Typography>
+            <Typography sx={{ p: 3, color: "grey.600" }} variant="h6">
+              Manda ver, meu nobre!
+            </Typography>
+            <CheckButton sx={{ py: "300px" }} />
+          </Box>
+        </Container>
+      )}
+      {done && <Login />}
+      <Modal
+        open={modal}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
       >
-        <Typography id="modal-modal-title" variant="h5">
-          E, C, lente!
-        </Typography>
-        <Divider />
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-        </Typography>
-      </Box>
-    </Modal>
+        <Box
+        onClick={handleCloseModal}
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "25%",
+            bgcolor: "#e4e4e4",
+            border: "2px solid #000",
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Typography id="modal-modal-title" variant="h5">
+            E, C, lente!
+          </Typography>
+          <Divider />
+
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Agora é só ser feliz :D
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <CheckButton />
+          </Box>
+        </Box>
+      </Modal>
     </>
   );
 }
