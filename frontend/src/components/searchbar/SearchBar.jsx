@@ -36,11 +36,11 @@ const SearchBar = () => {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      margin={3}
+      sx={{my:2}}
       onMouseLeave={() => setFilteredData([])}
     >
-      <Grid item xs={4} width="60%" sx={{}} >
-        <Paper>
+      <Grid width="50%">
+        <Paper sx={{borderRadius: 3}}>
           <InputBase
             onChange={handleFilter}
             fullWidth
@@ -51,11 +51,12 @@ const SearchBar = () => {
               p: "1%",
               color: "gray",
               fontFamily: "Roboto, sans-serif",
+              
             }}
             placeholder='👾: -"BUSQUEM CONHECIMENTO!"'
           />
         </Paper>
-        <Paper sx={{ zIndex: 1, position: "absolute", mt: 0.3, minWidth:"300px" }}>
+        <Paper sx={{ zIndex: 1, position: "absolute", mt: 0.1, minWidth:"300px" }}>
           {filteredData.map((posts) => {
             return (
               <Link href={`/post/${posts._id}`} sx={{ textDecoration: "none" }}>
