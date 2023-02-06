@@ -13,7 +13,8 @@ export default function SinglePost() {
   const postId = location.pathname.split("/")[2];
 
   const [title, setTitle] = useState("");
-  const [categories, setCategories] = useState("");
+  const [categories, setCategories] = useState([]);
+  const categoriesList = [];
   const [body, setBody] = useState("");
   const [posted, setPosted] = useState("");
 
@@ -32,11 +33,8 @@ export default function SinglePost() {
     getPost();
   }, [postId]);
 
-  let categoriesList = "";
-  if (categories) {
-    categories.forEach((item) => {
-      categoriesList += item + " ";
-    });
+  for (let i = 0; i < categories.length; i++) {
+    categoriesList.push("&#" + categories[i].icon + "; " + categories[i].name)
   }
 
   return (
@@ -59,7 +57,7 @@ export default function SinglePost() {
             backgroundColor: "#fff",
             borderColor: "grey.400",
             borderRadius: 3,
-            width: "85%",
+            width: "80%",
           }}
         >
           <CardContent>
@@ -93,6 +91,7 @@ export default function SinglePost() {
                     my: 4,
                   }}
                 >
+                  
                   <div dangerouslySetInnerHTML={{ __html: categoriesList }} />
                   <Typography sx={{pt:1}}>
 

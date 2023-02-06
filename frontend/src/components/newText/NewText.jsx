@@ -12,9 +12,6 @@ import {
   Paper,
   Select,
   MenuItem,
-  Checkbox,
-  ListItemText,
-  Button,
   Typography,
   Grid,
 } from "@mui/material";
@@ -25,6 +22,7 @@ const NewText = () => {
   const [title, setTitle] = useState("");
   const [categoriesNameList, setCategoriesNameList] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [selectedValue, setSelectedValue] = useState([]);
   const [state, setState] = useState({
     editorState: EditorState.createEmpty(),
   });
@@ -33,6 +31,7 @@ const NewText = () => {
     const getGategories = async () => {
       const provNameList = [];
       const res = await axios.get("/categories");
+      setCategories(res.data)
 
       for (let i = 0; i < res.data.length; i++) {
         provNameList.push(res.data[i].name);
@@ -43,11 +42,8 @@ const NewText = () => {
     getGategories();
   }, []);
 
-  const handleCategories = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setCategories(typeof value === "string" ? value.split(",") : value);
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
   };
 
   const handleEditorStateChange = (editorState) => {
@@ -68,7 +64,7 @@ const NewText = () => {
       const res = await axios.post("/posts", {
         title,
         body: parsedState,
-        categories,
+        categories: selectedValue,
       });
       res.data && alert("niceru!");
     } catch (err) {
@@ -95,7 +91,7 @@ const NewText = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             label="Titulo"
-            sx={{width:500}}
+            sx={{ width: 500 }}
           />
         </FormControl>
         <Paper sx={{ backgroundColor: "#e4e4e4" }}>
@@ -103,15 +99,14 @@ const NewText = () => {
             <InputLabel>Categorias</InputLabel>
             <Select
               multiple
-              label="Categorias"
-              value={categories}
-              onChange={handleCategories}
-              renderValue={(selected) => selected.join(", ")}
+              labelId="select-label"
+              id="select"
+              value={selectedValue}
+              onChange={handleChange}
             >
-              {categoriesNameList.map((cat) => (
-                <MenuItem key={cat} value={cat}>
-                  <Checkbox checked={categories.indexOf(cat) > -1} />
-                  <ListItemText primary={cat} />
+              {categories.map((object) => (
+                <MenuItem key={object.name} value={object}>
+                  {object.name}
                 </MenuItem>
               ))}
             </Select>
