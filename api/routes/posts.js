@@ -2,6 +2,8 @@ const router = require("express").Router();
 const Post = require("../models/Post");
 const HomePage = require("../models/HomePage");
 
+const homePageId = "63dd8463e8f02d2338a225aa";
+
 //GET POST
 router.get("/:id", async (req, res) => {
   try {
@@ -30,7 +32,7 @@ router.get("/", async (req, res) => {
       posts = await Post.find();
     }
     const homepage = await HomePage.find();
-    res.status(200).json({posts, homepage});
+    res.status(200).json({ posts, homepage });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -60,6 +62,7 @@ router.put("/:id", async (req, res) => {
         },
         { new: true }
       );
+
       res.status(200).json(updatedPost);
     } catch (err) {
       res.status(500).json(err);
@@ -77,7 +80,19 @@ router.put("/like/:id", async (req, res) => {
       { $inc: { likes: 1 } },
       { new: true }
     );
-    res.status(200).json(updatedPost);
+    const updatedHomePage = await HomePage.findByIdAndUpdate(
+      homePageId,
+      {
+        $set: {
+          recentLiked: {
+            title: updatedPost.title,
+            categories: updatedPost.categories,
+          },
+        },
+      },
+      { new: true }
+    );
+    res.status(200).json({ updatedPost, updatedHomePage });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -144,7 +159,19 @@ router.put("/comment/:id", async (req, res) => {
       },
       { new: true }
     );
-    res.status(200).json(updatedPost);
+    const updatedHomePage = await HomePage.findByIdAndUpdate(
+      homePageId,
+      {
+        $set: {
+          recentCommented: {
+            title: updatedPost.title,
+            categories: updatedPost.categories,
+          },
+        },
+      },
+      { new: true }
+    );
+    res.status(200).json({updatedPost, updatedHomePage});
   } catch (err) {
     res.status(500).json(err);
   }
@@ -154,7 +181,9 @@ router.put("/comment/:id", async (req, res) => {
 router.put("/delcomment/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    const commentIndex = post.commentaries.findIndex(c => c.commentary_id === req.body.commentary_id);
+    const commentIndex = post.commentaries.findIndex(
+      (c) => c.commentary_id === req.body.commentary_id
+    );
     if (commentIndex !== -1) {
       post.commentaries.splice(commentIndex, 1);
       await post.save();
@@ -163,7 +192,6 @@ router.put("/delcomment/:id", async (req, res) => {
       res.status(404).json();
     }
   } catch (err) {
-    console.log('err\n', err)
     res.status(500).json(err);
   }
 });

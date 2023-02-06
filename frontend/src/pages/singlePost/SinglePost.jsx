@@ -56,7 +56,7 @@ export default function SinglePost() {
             justifyContent: "center",
             color: "#0E1428",
             border: "3px solid",
-            backgroundColor: "#f1f1f0e3",
+            backgroundColor: "#fff",
             borderColor: "grey.400",
             borderRadius: 3,
             width: "85%",
