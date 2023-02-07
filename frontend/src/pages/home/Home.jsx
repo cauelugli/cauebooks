@@ -132,6 +132,10 @@ export default function Home() {
             minWidth: "550px",
           }}
         >
+          <Grid container justifyContent="center">
+            <Typography variant="h5">Novos Textos</Typography>
+          </Grid>
+          <Divider sx={{ my: 2 }} />
           {recentAddedList}
         </Box>
 
