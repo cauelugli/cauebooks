@@ -8,6 +8,15 @@ const HomePageSchema = new mongoose.Schema(
     recentCommented: {
       type: Array,
     },
+    recentAdded: {
+      type: Array,
+    },
+    lastUpdate: {
+      type: Array,
+    },
+    nextUpdate: {
+      type: Array,
+    },
   },
   { timestamps: true }
 );

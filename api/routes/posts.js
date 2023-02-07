@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Post = require("../models/Post");
 const HomePage = require("../models/HomePage");
 
-const homePageId = "63dd8463e8f02d2338a225aa";
+const homePageId = "63e15e26fcfcb8bf1d89ff6c";
 
 //GET POST
 router.get("/:id", async (req, res) => {
@@ -43,7 +43,20 @@ router.post("/", async (req, res) => {
   const newPost = new Post(req.body);
   try {
     const savedPost = await newPost.save();
-    res.status(200).json(savedPost);
+    const updatedHomePage = await HomePage.findByIdAndUpdate(
+      homePageId,
+      {
+        $push: {
+          recentAdded: {
+            title: savedPost.title,
+            postId: savedPost._id,
+            categories: savedPost.categories,
+          },
+        },
+      },
+      { new: true }
+    );
+    res.status(200).json({savedPost, updatedHomePage});
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -171,7 +184,7 @@ router.put("/comment/:id", async (req, res) => {
       },
       { new: true }
     );
-    res.status(200).json({updatedPost, updatedHomePage});
+    res.status(200).json({ updatedPost, updatedHomePage });
   } catch (err) {
     res.status(500).json(err);
   }
