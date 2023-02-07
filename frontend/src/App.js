@@ -12,6 +12,7 @@ import Admin from "./pages/admin/Admin";
 import Favorites from "./pages/favorites/Favorites";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
+import Contact from "./pages/contact/Contact";
 import PasswordReset from "./pages/passwordReset/PasswordReset";
 import Register from "./pages/register/Register";
 import Settings from "./pages/settings/Settings";
@@ -44,6 +45,7 @@ function App() {
             <UserVerification />
           </Route>
           <Route path="/about">{user ? <About /> : <Login />}</Route>
+          <Route path="/contact">{user ? <Contact /> : <Login />}</Route>
           <Route path="/:userId/favorites">
             {user ? <Favorites /> : <Login />}
           </Route>

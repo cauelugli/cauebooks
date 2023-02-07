@@ -11,10 +11,9 @@ export default function Header({ data }) {
     <>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Avatar
-        
           alt="logo"
           src={window.location.origin + "/logo_notext.png"}
-          sx={{ width: 56, height: 56, borderRadius:3 }}
+          sx={{ width: 56, height: 56, borderRadius: 3 }}
         />
 
         <List
@@ -57,7 +56,7 @@ export default function Header({ data }) {
                 fontSize: "1.25em",
                 fontFamily: "Varela Round, sans-serif",
               }}
-              to="/"
+              to="/contact"
             >
               CONTATO
             </Link>

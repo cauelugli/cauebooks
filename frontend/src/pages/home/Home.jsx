@@ -159,7 +159,7 @@ export default function Home() {
 
             <Grid container justifyContent="center">
               <Typography sx={{ fontStyle: "oblique", color: "#5f5f5f" }}>
-                "Algo renderizado do backend"
+                "Alguma coisa muito dahora!"
               </Typography>
             </Grid>
           </Grid>
