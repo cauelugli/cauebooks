@@ -5,7 +5,7 @@ import { IconButton, Menu, MenuItem, Divider } from "@mui/material";
 
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import MeetingRoomOutlinedIcon from "@mui/icons-material/MeetingRoomOutlined";
 
 import { Context } from "../../context/Context";
@@ -30,12 +30,12 @@ export default function BasicMenu() {
   return (
     <div>
       <IconButton onClick={handleClick}>
-        <img className="topImg" src={window.location.origin + "/" + user.avatar + ".png"} alt=""/>
+        <img src={window.location.origin + "/" + user.avatar + ".png"} alt="" />
       </IconButton>
 
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         <MenuItem disabled>
-          <strong style={{ margin: "10px 4px 10px 8px"}}>Olá, </strong>
+          <strong style={{ margin: "10px 4px 10px 8px" }}>Olá, </strong>
           <strong>{user.username}</strong>
           <strong style={{ margin: "10px 8px 10px 14px" }}>(: </strong>
         </MenuItem>
@@ -67,7 +67,6 @@ export default function BasicMenu() {
           <p style={{ marginRight: "5px" }}>Logout</p>
         </MenuItem>
       </Menu>
-      
     </div>
   );
 }

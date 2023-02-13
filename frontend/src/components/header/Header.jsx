@@ -1,75 +1,44 @@
-import { Link } from "react-router-dom";
-
-import { Avatar, IconButton, List, ListItem, Toolbar } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 
 import CategoriesBar from "../categoriesBar/CategoriesBar";
+import CategoriesButton from "../categoriesButton/CategoriesButton";
+import LargeScreenHeader from "./LargeScreenHeader";
+import SmallScreenHeader from "./SmallScreenHeader";
 import SearchBar from "../searchbar/SearchBar";
-import SettingsMenu from "../settingsMenu/SettingsMenu";
+import SearchBarSmallScreen from "../searchbar/SearchBarSmallScreen";
 
 export default function Header({ data }) {
+  const isSmallScreen = useMediaQuery(
+    "(min-width:100px) and (max-width:720px)"
+  );
+  const isMediumScreen = useMediaQuery(
+    "(min-width:721px) and (max-width:1086px)"
+  );
+  const isLargeScreen = useMediaQuery("(min-width:1087px)");
+
   return (
     <>
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Avatar
-          alt="logo"
-          src={window.location.origin + "/logo_notext.png"}
-          sx={{ width: 56, height: 56, borderRadius: 3 }}
-        />
-
-        <List
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <ListItem>
-            <Link
-              style={{
-                textDecoration: "none",
-                color: "#0f0f0f",
-                fontSize: "1.25em",
-                fontFamily: "Varela Round, sans-serif",
-              }}
-              to="/"
-            >
-              HOME
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link
-              style={{
-                textDecoration: "none",
-                color: "#0f0f0f",
-                fontSize: "1.25em",
-                fontFamily: "Varela Round, sans-serif",
-              }}
-              to="/about"
-            >
-              SOBRE
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link
-              style={{
-                textDecoration: "none",
-                color: "#0f0f0f",
-                fontSize: "1.25em",
-                fontFamily: "Varela Round, sans-serif",
-              }}
-              to="/contact"
-            >
-              CONTATO
-            </Link>
-          </ListItem>
-        </List>
-
-        <IconButton>
-          <SettingsMenu />
-        </IconButton>
-      </Toolbar>
-
-      <SearchBar data={data} />
-      <CategoriesBar />
+      {isSmallScreen && (
+        <>
+          <SmallScreenHeader />
+          <SearchBarSmallScreen data={data} />
+          <CategoriesButton />
+        </>
+      )}
+      {isMediumScreen && (
+        <>
+          <LargeScreenHeader />
+          <SearchBar data={data} />
+          <CategoriesButton />
+        </>
+      )}
+      {isLargeScreen && (
+        <>
+          <LargeScreenHeader />
+          <SearchBar data={data} />
+          <CategoriesBar />
+        </>
+      )}
     </>
   );
 }

@@ -5,7 +5,7 @@ import axios from "axios";
 
 import { Paper, InputBase, Grid, Link } from "@mui/material";
 
-const SearchBar = () => {
+const SearchBarSmallScreen = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [posts, setPosts] = useState([]);
   const { search } = useLocation();
@@ -36,10 +36,10 @@ const SearchBar = () => {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      sx={{ my: 4 }}
+      sx={{ m: 3 }}
       onMouseLeave={() => setFilteredData([])}
     >
-      <Grid width="50%">
+      <Grid width="100%">
         <Paper sx={{ borderRadius: 3 }}>
           <InputBase
             onChange={handleFilter}
@@ -47,7 +47,7 @@ const SearchBar = () => {
             sx={{
               m: 1,
               ml: 2,
-              fontSize: 20,
+              fontSize: 18,
               p: "1%",
               color: "gray",
               fontFamily: "Roboto, sans-serif",
@@ -75,4 +75,4 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default SearchBarSmallScreen;
