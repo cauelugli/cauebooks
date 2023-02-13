@@ -10,7 +10,6 @@ import {
   DialogTitle,
   DialogActions,
   Divider,
-  Grid,
   Container,
   Box,
   TextField,
@@ -43,7 +42,7 @@ export default function Contact() {
       body,
     };
     try {
-      const res = await axios.post("/auth/contact", contactFormData);
+      await axios.post("/auth/contact", contactFormData);
       setTitle("");
       setBody("");
       handleModal();

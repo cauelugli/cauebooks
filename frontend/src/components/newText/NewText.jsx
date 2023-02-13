@@ -20,6 +20,7 @@ import CheckButton from "../checkButton/CheckButton";
 
 const NewText = () => {
   const [title, setTitle] = useState("");
+  // eslint-disable-next-line
   const [categoriesNameList, setCategoriesNameList] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedValue, setSelectedValue] = useState([]);
@@ -31,7 +32,7 @@ const NewText = () => {
     const getGategories = async () => {
       const provNameList = [];
       const res = await axios.get("/categories");
-      setCategories(res.data)
+      setCategories(res.data);
 
       for (let i = 0; i < res.data.length; i++) {
         provNameList.push(res.data[i].name);

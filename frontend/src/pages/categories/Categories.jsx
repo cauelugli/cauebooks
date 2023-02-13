@@ -16,7 +16,6 @@ const Categories = () => {
     const getPosts = async () => {
       const { data } = await axios.get("/posts");
       const data2 = await axios.get("/categories");
-      console.log("data2", data.posts[0].createdAt);
 
       const foundObject = data2.data.find(
         (object) => object._id === categoryId
@@ -33,8 +32,7 @@ const Categories = () => {
       );
     };
     getPosts();
-    console.log("categoryIcon", categoryIcon);
-  }, []);
+  }, [categoryId]);
 
   return (
     <Grid
