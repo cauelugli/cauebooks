@@ -28,18 +28,6 @@ const SmallScreenHeader = () => {
                 color: "#0f0f0f",
                 fontFamily: "Varela Round, sans-serif",
               }}
-              to="/"
-            >
-              HOME
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link
-              style={{
-                textDecoration: "none",
-                color: "#0f0f0f",
-                fontFamily: "Varela Round, sans-serif",
-              }}
               to="/about"
             >
               SOBRE
