@@ -106,7 +106,10 @@ export default function Register() {
   return (
     <>
       {!done && (
-        <Container component="main" maxWidth="md">
+        <Container
+          component="main"
+          maxWidth="md"
+        >
           <Box
             component="form"
             onSubmit={handleSubmit}
@@ -121,143 +124,141 @@ export default function Register() {
             }}
           >
             <Grid container justifyContent="center">
-
-            <Box sx={{ paddingTop: "2%" }}>
-              <img src={window.location.origin + "/logo.png"} alt="" />
-            </Box>
+              <Box sx={{ paddingTop: "2%" }}>
+                <img src={window.location.origin + "/logo.png"} alt="" />
+              </Box>
             </Grid>
             <Divider sx={{ mb: 2, mx: 9 }} />
             <Grid container justifyContent="center">
-
-            <Typography sx={{ color: "grey.700", my: 2 }} variant="h5">
-              Crie sua Conta
-            </Typography>
+              <Typography sx={{ color: "grey.700", my: 2 }} variant="h5">
+                Crie sua Conta
+              </Typography>
             </Grid>
 
             <Grid container justifyContent="center">
-            <Box
-              sx={{
-                display: "inline-flex",
-              }}
-            >
               <Box
                 sx={{
-                  m: 2,
-                  mr: 9,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
+                  display: "inline-flex",
                 }}
               >
-                <Typography sx={{ color: "grey.600" }} variant="h6">
-                  Preencha os Dados &#128203;
-                </Typography>
-                <TextField
-                  margin="normal"
-                  required
-                  id="Nome de Usuário"
-                  label="Nome de Usuário"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                <Box
+                  sx={{
+                    m: 2,
+                    mr: 9,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography sx={{ color: "grey.600" }} variant="h6">
+                    Preencha os Dados &#128203;
+                  </Typography>
+                  <TextField
+                    margin="normal"
+                    required
+                    id="Nome de Usuário"
+                    label="Nome de Usuário"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                  <TextField
+                    margin="normal"
+                    required
+                    id="Email"
+                    label="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <TextField
+                    margin="normal"
+                    required
+                    label="Senha"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </Box>
+                <Divider
+                  sx={{ height: "auto", my: 4, mr: 3 }}
+                  orientation="vertical"
                 />
-                <TextField
-                  margin="normal"
-                  required
-                  id="Email"
-                  label="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  label="Senha"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </Box>
-              <Divider
-                sx={{ height: "auto", my: 4, mr: 3 }}
-                orientation="vertical"
-              />
 
-              <Box
-                sx={{
-                  m: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <Typography sx={{ color: "grey.600", mb: 6 }} variant="h6">
-                  Escolha um Avatar &#128008;
-                </Typography>
-                <FormControl>
-                  <Select value={avatar} onChange={handleAvatarChange}>
-                    <MenuItem value={"1"}>
-                      <img
-                        src={window.location.origin + "/1.png"}
-                        alt="avatar1"
-                      />
-                    </MenuItem>
-                    <MenuItem value={"2"}>
-                      <img
-                        src={window.location.origin + "/2.png"}
-                        alt="avatar2"
-                      />
-                    </MenuItem>
-                    <MenuItem value={"3"}>
-                      <img
-                        src={window.location.origin + "/3.png"}
-                        alt="avatar3"
-                      />
-                    </MenuItem>
-                    <MenuItem value={"4"}>
-                      <img
-                        src={window.location.origin + "/4.png"}
-                        alt="avatar4"
-                      />
-                    </MenuItem>
-                    <MenuItem value={"5"}>
-                      <img
-                        src={window.location.origin + "/5.png"}
-                        alt="avatar5"
-                      />
-                    </MenuItem>
-                    <MenuItem value={"6"}>
-                      <img
-                        src={window.location.origin + "/6.png"}
-                        alt="avatar6"
-                      />
-                    </MenuItem>
-                    <MenuItem value={"7"}>
-                      <img
-                        src={window.location.origin + "/7.png"}
-                        alt="avatar7"
-                      />
-                    </MenuItem>
-                    <MenuItem value={"8"}>
-                      <img
-                        src={window.location.origin + "/8.png"}
-                        alt="avatar8"
-                      />
-                    </MenuItem>
-                    <MenuItem value={"9"}>
-                      <img
-                        src={window.location.origin + "/9.png"}
-                        alt="avatar9"
-                      />
-                    </MenuItem>
-                  </Select>
-                </FormControl>
+                <Box
+                  sx={{
+                    m: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography sx={{ color: "grey.600", mb: 6 }} variant="h6">
+                    Escolha um Avatar &#128008;
+                  </Typography>
+                  <FormControl>
+                    <Select value={avatar} onChange={handleAvatarChange}>
+                      <MenuItem value={"1"}>
+                        <img
+                          src={window.location.origin + "/1.png"}
+                          alt="avatar1"
+                        />
+                      </MenuItem>
+                      <MenuItem value={"2"}>
+                        <img
+                          src={window.location.origin + "/2.png"}
+                          alt="avatar2"
+                        />
+                      </MenuItem>
+                      <MenuItem value={"3"}>
+                        <img
+                          src={window.location.origin + "/3.png"}
+                          alt="avatar3"
+                        />
+                      </MenuItem>
+                      <MenuItem value={"4"}>
+                        <img
+                          src={window.location.origin + "/4.png"}
+                          alt="avatar4"
+                        />
+                      </MenuItem>
+                      <MenuItem value={"5"}>
+                        <img
+                          src={window.location.origin + "/5.png"}
+                          alt="avatar5"
+                        />
+                      </MenuItem>
+                      <MenuItem value={"6"}>
+                        <img
+                          src={window.location.origin + "/6.png"}
+                          alt="avatar6"
+                        />
+                      </MenuItem>
+                      <MenuItem value={"7"}>
+                        <img
+                          src={window.location.origin + "/7.png"}
+                          alt="avatar7"
+                        />
+                      </MenuItem>
+                      <MenuItem value={"8"}>
+                        <img
+                          src={window.location.origin + "/8.png"}
+                          alt="avatar8"
+                        />
+                      </MenuItem>
+                      <MenuItem value={"9"}>
+                        <img
+                          src={window.location.origin + "/9.png"}
+                          alt="avatar9"
+                        />
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
               </Box>
-            </Box>
-            {loading ? (
-              <CircularProgress variant="outlined" />
-            ) : (
-              <CheckButton type="submit" />
-            )}
+              {loading ? (
+                <CircularProgress variant="outlined" />
+              ) : (
+                <CheckButton type="submit" />
+              )}
             </Grid>
           </Box>
 
@@ -346,7 +347,7 @@ export default function Register() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: "28%",
+            width: "50%",
             bgcolor: "#e4e4e4",
             border: "2px solid #000",
             boxShadow: 24,

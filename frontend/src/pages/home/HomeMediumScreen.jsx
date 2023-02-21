@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import { Typography, Grid, Link } from "@mui/material";
+import { Typography, Grid, Link, Divider } from "@mui/material";
 
 export default function HomeMediumScreen() {
   const [recentAddedList, setRecentAddedList] = useState([]);
@@ -25,7 +25,7 @@ export default function HomeMediumScreen() {
               backgroundColor: "#f1f1f0e3",
               borderColor: "grey.400",
               borderRadius: 3,
-              width: "50%",
+              width: "85%",
             }}
           >
             <Link
@@ -33,7 +33,7 @@ export default function HomeMediumScreen() {
               underline="none"
             >
               <Typography
-                sx={{ fontStyle: "oblique", color: "grey.800" }}
+                sx={{ fontStyle: "oblique", color: "grey.700" }}
                 variant="h6"
               >
                 {data.homepage[0].recentAdded[i].title}
@@ -54,8 +54,7 @@ export default function HomeMediumScreen() {
       sx={{
         p: 2,
         mt: "5%",
-        mx: "10%",
-        mb: "50%",
+        mx: "7%",
         color: "#0E1428",
         border: "3px solid",
         backgroundColor: "#f1f1f0e3",
@@ -66,6 +65,7 @@ export default function HomeMediumScreen() {
       <Grid container justifyContent="center" sx={{ p: 1 }}>
         <Typography variant="h5">Novos Textos</Typography>
       </Grid>
+      <Divider sx={{ m: 2, mx: 7 }} />
       <Grid container justifyContent="center" sx={{ p: 1 }}>
         {recentAddedList}
       </Grid>

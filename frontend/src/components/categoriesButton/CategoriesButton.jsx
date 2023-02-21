@@ -75,12 +75,20 @@ const CategoriesButton = () => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         size="large"
-        sx={{ color: "#BDEFD8", backgroundColor: "#0E1428" }}
+        sx={{ color: "#BDEFD8", backgroundColor: "#0E1428", borderRadius: "0 10px 0 10px", }}
       >
         CATEGORIAS
       </Button>
       <Menu
         id="basic-menu"
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}

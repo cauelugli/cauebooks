@@ -76,13 +76,16 @@ export default function Contact() {
           <InputLabel sx={{ color: "grey.800" }}>Título</InputLabel>
           <TextField
             sx={{ color: "grey.800" }}
+            placeholder='"Salve mano poka!"'
             margin="normal"
+            required
             fullWidth
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <InputLabel sx={{ mt: 3, color: "grey.800" }}>Mensagem</InputLabel>
           <Textarea
+            required
             sx={{ width: 500 }}
             placeholder='"Miau, miau, miau..."'
             value={body}
@@ -90,7 +93,9 @@ export default function Contact() {
             minRows={4}
             endDecorator={
               <Typography level="body3" sx={{ ml: "auto" }}>
-                {body.length} caracteres
+                {body.length <= 99
+                  ? `${body.length} caracteres`
+                  : `${body.length} caracteres carai... escreveu dignamente! dahora :)`}
               </Typography>
             }
           />

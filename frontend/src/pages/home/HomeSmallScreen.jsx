@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import { Typography, Grid, Link } from "@mui/material";
+import { Typography, Grid, Link, Divider } from "@mui/material";
 
 export default function HomeSmallScreen() {
   const [recentAddedList, setRecentAddedList] = useState([]);
+  const [recentLikedTitle, setRecentLikedTitle] = useState("");
+  const [recentCommented, setRecentCommented] = useState("");
 
   useEffect(() => {
     const getHomePage = async () => {
       const { data } = await axios.get("/posts");
+      setRecentLikedTitle(data.homepage[0].recentLiked[0].title);
+      setRecentCommented(data.homepage[0].recentCommented[0].title);
       const provList = [];
       const provIconList = [];
 
@@ -25,7 +29,6 @@ export default function HomeSmallScreen() {
               backgroundColor: "#f1f1f0e3",
               borderColor: "grey.400",
               borderRadius: 3,
-              width: "50%",
             }}
           >
             <Link
@@ -49,26 +52,65 @@ export default function HomeSmallScreen() {
   }, []);
 
   return (
-    <Grid
-      justifyContent="center"
-      sx={{
-        p: 2,
-        mt: "5%",
-        mx: "10%",
-        mb: "50%",
-        color: "#0E1428",
-        border: "3px solid",
-        backgroundColor: "#f1f1f0e3",
-        borderColor: "grey.400",
-        borderRadius: 3,
-      }}
-    >
-      <Grid container justifyContent="center" sx={{ p: 1 }}>
-        <Typography variant="h5">Novos Textos</Typography>
+    <>
+      <Grid
+        justifyContent="center"
+        sx={{
+          p: 2,
+          mt: "5%",
+          mx: "7%",
+          color: "#0E1428",
+          backgroundColor: "#f1f1f0e3",
+          border: "3px solid",
+          borderColor: "grey.400",
+          borderRadius: 3,
+        }}
+      >
+        <Grid container justifyContent="center" sx={{ p: 1 }}>
+          <Typography variant="h5">Novos Textos</Typography>
+        </Grid>
+        <Divider sx={{ m: 1, mx: 2 }} />
+        <Grid container justifyContent="center" sx={{ p: 1 }}>
+          {recentAddedList}
+        </Grid>
       </Grid>
-      <Grid container justifyContent="center" sx={{ p: 1 }}>
-        {recentAddedList}
+      <Grid
+        justifyContent="center"
+        sx={{
+          p: 2,
+          mt: "5%",
+          mx: "7%",
+          color: "#0E1428",
+          backgroundColor: "#f1f1f0e3",
+          border: "3px solid",
+          borderColor: "grey.400",
+          borderRadius: 3,
+        }}
+      >
+        <Grid container justifyContent="center">
+          <Typography variant="h5">Atividade Recente</Typography>
+        </Grid>
+        <Divider sx={{ mb: 1, mt: 2 }} />
+        <Grid container justifyContent="center">
+          <Typography variant="h6">Novo Like &#128077;</Typography>
+
+          <Grid container justifyContent="center">
+            <Typography sx={{ fontStyle: "oblique", color: "#5f5f5f" }}>
+              "{recentLikedTitle}"
+            </Typography>
+          </Grid>
+        </Grid>
+        <Divider sx={{ my: 1 }} />
+        <Grid container justifyContent="center">
+          <Typography variant="h6">Novo Comentário &#128172;</Typography>
+        </Grid>
+        <Grid container justifyContent="center">
+          <Typography sx={{ fontStyle: "oblique", color: "#5f5f5f" }}>
+            "{recentCommented}"
+          </Typography>
+        </Grid>
+        <Divider sx={{ mt: 2 }} />
       </Grid>
-    </Grid>
+    </>
   );
 }

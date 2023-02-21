@@ -61,16 +61,14 @@ export default function HomeLargeScreen() {
       justifyContent="space-between"
       alignItems="flex-start"
       sx={{
-        pb: "25%",
         mt: "3%",
       }}
     >
       {/*Left Box - Atividade */}
       <Box
         sx={{
-          py: 2,
-          px: 4,
-          ml: "2%",
+          p: 1,
+          ml: "1%",
           color: "#0E1428",
           border: "3px solid",
           backgroundColor: "#f1f1f0e3",
@@ -108,9 +106,9 @@ export default function HomeLargeScreen() {
       {/*Middle Box - Recent Texts */}
       <Box
         sx={{
-          py: 2,
-          px: 4,
-          ml: "2%",
+          p: 1,
+          px: 2,
+          mx: "1%",
           color: "#0E1428",
           border: "3px solid",
           backgroundColor: "#f1f1f0e3",
@@ -131,9 +129,8 @@ export default function HomeLargeScreen() {
       {/*Right Box - New Features */}
       <Box
         sx={{
-          py: 2,
-          px: 4,
-          mr: "2%",
+          p: 1,
+          mr: "1%",
           color: "#0E1428",
           border: "3px solid",
           backgroundColor: "#f1f1f0e3",

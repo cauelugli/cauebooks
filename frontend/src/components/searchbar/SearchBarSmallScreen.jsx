@@ -33,10 +33,7 @@ const SearchBarSmallScreen = () => {
   return (
     <Grid
       container
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      sx={{ m: 3 }}
+      sx={{ py: 2, px: 5 }}
       onMouseLeave={() => setFilteredData([])}
     >
       <Grid width="100%">
@@ -47,7 +44,7 @@ const SearchBarSmallScreen = () => {
             sx={{
               m: 1,
               ml: 2,
-              fontSize: 18,
+              fontSize: 16,
               p: "1%",
               color: "gray",
               fontFamily: "Roboto, sans-serif",

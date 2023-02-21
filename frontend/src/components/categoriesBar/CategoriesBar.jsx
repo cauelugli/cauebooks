@@ -36,7 +36,6 @@ const CategoriesBar = () => {
         <FormControl
           sx={{
             minWidth: "5%",
-            px: 1,
             color: "#BDEFD8",
             backgroundColor: "#0E1428",
           }}
@@ -44,7 +43,7 @@ const CategoriesBar = () => {
           <Link
             href={`/categories/${categoriesIdsList[i]}`}
             underline="none"
-            sx={{ color: "#BDEFD8", backgroundColor: "#0E1428", mx: 1 }}
+            sx={{ fontSize:"95%", color: "#BDEFD8", backgroundColor: "#0E1428", mx: 1 }}
           >
             <div
               dangerouslySetInnerHTML={{
