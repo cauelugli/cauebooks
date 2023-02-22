@@ -11,7 +11,7 @@ export default function Footer() {
         alignItems: "center",
         marginTop: "10%",
         marginBottom: "1%",
-        pt:"30%"
+        pt:"50%"
       }}
     >
       <hr
