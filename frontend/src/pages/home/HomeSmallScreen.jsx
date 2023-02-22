@@ -36,8 +36,7 @@ export default function HomeSmallScreen() {
               underline="none"
             >
               <Typography
-                sx={{ fontStyle: "oblique", color: "grey.800" }}
-                variant="h6"
+                sx={{ fontStyle: "oblique", color: "grey.800", fontSize: 18 }}
               >
                 {data.homepage[0].recentAdded[i].title}
               </Typography>

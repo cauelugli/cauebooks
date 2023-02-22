@@ -67,7 +67,7 @@ const CategoriesButton = () => {
   }
 
   return (
-    <Grid container justifyContent="center">
+    <Grid container justifyContent="center" sx={{my:1}}>
       <Button
         id="basic-button"
         aria-controls={open ? "basic-menu" : undefined}

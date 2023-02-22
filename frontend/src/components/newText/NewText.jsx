@@ -113,7 +113,7 @@ const NewText = () => {
             </Select>
           </FormControl>
         </Paper>
-        <Typography sx={{ color: "#fff" }}>Georgia, 24</Typography>
+        <Typography sx={{ color: "#fff" }}>Georgia, 18</Typography>
 
         <FormControl
           sx={{ m: 4, width: "90%", backgroundColor: "#fff" }}

@@ -226,7 +226,7 @@ const CommentaryBox = () => {
                 pt: 5,
               }}
             >
-              Visualizar Comentários
+              Comentários
             </Typography>
           </Grid>
           <Button
@@ -260,7 +260,7 @@ const CommentaryBox = () => {
                 pt: 5,
               }}
             >
-              Ocultar Comentários
+              Ocultar
             </Typography>
           </Grid>
           <Button
