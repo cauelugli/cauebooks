@@ -95,9 +95,12 @@ const CommentaryBox = () => {
   };
 
   const handleDeleteCommentary = async () => {
-    const commentIndex = commentaries.findIndex(c => c.commentary_id === selectedToDelete);
+    const commentIndex = commentaries.findIndex(
+      (c) => c.commentary_id === selectedToDelete
+    );
     if (commentIndex !== -1) {
-      commentaries.splice(commentIndex, 1)}
+      commentaries.splice(commentIndex, 1);
+    }
 
     try {
       await axios.put("/posts/delcomment/" + postId, {
@@ -141,7 +144,9 @@ const CommentaryBox = () => {
   for (let i = 0; i < commentaries.length; i++) {
     commentariesList.push(
       <Box
-        onClick={() => {setSelectedToDelete(commentaries[i].commentary_id)}}
+        onClick={() => {
+          setSelectedToDelete(commentaries[i].commentary_id);
+        }}
         sx={{
           display: "flex",
           alignItems: "center",
@@ -192,7 +197,10 @@ const CommentaryBox = () => {
             <MenuItem
               sx={{
                 color: "grey.800",
-                "&:hover": { color: "grey.800", backgroundColor: "transparent" },
+                "&:hover": {
+                  color: "grey.800",
+                  backgroundColor: "transparent",
+                },
               }}
               onClick={() => handleDeleteCommentaryConfirmation("params")}
               onClose={handleCloseDeleteCommentaryModal}
@@ -209,6 +217,18 @@ const CommentaryBox = () => {
     <>
       {!displayCommentaries ? (
         <Grid container justifyContent="center">
+          <Grid container justifyContent="center">
+            <Typography
+              sx={{
+                fontSize: 12,
+                fontStyle: "oblique",
+                color: "grey.700",
+                pt: 5,
+              }}
+            >
+              Visualizar Comentários
+            </Typography>
+          </Grid>
           <Button
             disableRipple
             disableRippleFocus
@@ -231,6 +251,18 @@ const CommentaryBox = () => {
         </Grid>
       ) : (
         <Grid container justifyContent="center">
+          <Grid container justifyContent="center">
+            <Typography
+              sx={{
+                fontSize: 12,
+                fontStyle: "oblique",
+                color: "grey.700",
+                pt: 5,
+              }}
+            >
+              Ocultar Comentários
+            </Typography>
+          </Grid>
           <Button
             disableRipple
             disableRippleFocus
@@ -309,8 +341,8 @@ const CommentaryBox = () => {
         onClose={handleCloseDeleteCommentaryModal}
       >
         <DialogTitle>
-          Das duas, uma: Ou gigitou errado, ou falou besteira... Ainda bem
-          que dá pra apagar né :)
+          Das duas, uma: Ou gigitou errado, ou falou besteira... Ainda bem que
+          dá pra apagar né :)
         </DialogTitle>
         <Divider />
         <DialogActions>
