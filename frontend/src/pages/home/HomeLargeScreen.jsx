@@ -119,7 +119,7 @@ export default function HomeLargeScreen() {
         }}
       >
         <Grid container justifyContent="center">
-          <Typography variant="h5">Novos Textos</Typography>
+          <Typography variant="h5">Novos Textos ⭐</Typography>
         </Grid>
         <Divider sx={{ m: 1, my: 3 }} />
         {recentAddedList}
@@ -141,11 +141,11 @@ export default function HomeLargeScreen() {
         }}
       >
         <Grid container justifyContent="center">
-          <Typography variant="h5">Atualizações</Typography>
+          <Typography variant="h5">Notícias 📰</Typography>
         </Grid>
         <Divider sx={{ m: 1, my: 3 }} />
         <Grid container justifyContent="center">
-          <Typography variant="h6">Próximas &#128640;</Typography>
+          <Typography variant="h6">Atualizações &#128640;</Typography>
 
           <Grid container justifyContent="center">
             <Typography sx={{ fontStyle: "oblique", color: "#5f5f5f" }}>

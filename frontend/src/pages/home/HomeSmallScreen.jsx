@@ -66,7 +66,7 @@ export default function HomeSmallScreen() {
         }}
       >
         <Grid container justifyContent="center" sx={{ p: 1 }}>
-          <Typography variant="h5">Novos Textos</Typography>
+          <Typography variant="h5">Novos Textos ⭐</Typography>
         </Grid>
         <Divider sx={{ m: 1, mx: 2 }} />
         <Grid container justifyContent="center" sx={{ p: 1 }}>

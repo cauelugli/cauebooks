@@ -1,8 +1,10 @@
-import * as React from "react";
+import React from "react";
 
-import { CardContent, Box, Typography } from "@mui/material";
+import { CardContent, Box, Typography, useMediaQuery } from "@mui/material";
 
 export default function About() {
+  const isLargeScreen = useMediaQuery("(min-width:1087px)");
+
   return (
     <Box
       sx={{
@@ -40,75 +42,27 @@ export default function About() {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-around",
-              textAlign: "justify",
               margin: "3%",
             }}
           >
-            <img
-              style={{width: "25%"}}
-              src={window.location.origin + "/adventurer.png"}
-              alt="adventurer"
-            />
-
-            <div>
-              <Typography
-                sx={{ ml: "3%", mr: "3%", lineHeight: 1.8, fontSize: "125%" }}
-              >
-                Porque a ideia é ser feito por ele. E nessa frase mora todo o
-                propósito disto aqui.
-              </Typography>
-
-              <Typography
-                sx={{
-                  ml: "3%",
-                  mr: "3%",
-                  mb: "3%",
-                  lineHeight: 1.8,
-                  fontSize: "125%",
-                }}
-              >
-                Mas afinal, quem é ele, quem é? Alguém sabe quem convidou?
-              </Typography>
-
-              <Typography
-                sx={{ ml: "3%", mr: "3%", lineHeight: 1.8, fontSize: "125%" }}
-              >
-                <strong> Caue Lugli dos Milagres,</strong> ou simplesmente{" "}
-                <strong>Caue, pokamassa, c4aum, Cau, Picuruta,</strong> você
-                quem escolhe...
-              </Typography>
-
-              <Typography sx={{ m: "3%", lineHeight: 1.8, fontSize: "125%" }}>
-                Eu sou teu espelho. Eu sirvo pra te mostrar um reflexo dos teus
-                próprios pensamentos.
-              </Typography>
-
-              <Typography
-                sx={{ margin: "3%", lineHeight: 1.8, fontSize: "125%" }}
-              >
-                Pois assim tu me ensinas a enxergar a vida. E eu te retribuo,
-                meu parceiro.
-              </Typography>
-
-              <Typography
-                sx={{ margin: "3%", lineHeight: 1.8, fontSize: "125%" }}
-              >
-                Muitas coisas farão sentido, <strong>mas nem todas</strong> :)
-              </Typography>
-
-              <Typography
-                sx={{ margin: "3%", lineHeight: 1.8, fontSize: "125%" }}
-              >
-                O importante é que estaremos juntos no final de tudo, e rindo do
-                que aconteceu.
-              </Typography>
-
-              <Typography
-                sx={{ margin: "3%", lineHeight: 1.8, fontSize: "125%" }}
-              >
-                Muita energia!
-              </Typography>
-            </div>
+            {isLargeScreen && (
+              <img
+                style={{ width: "25%" }}
+                src={window.location.origin + "/adventurer.png"}
+                alt="adventurer"
+              />
+            )}
+            <Typography
+              sx={{ ml: "3%", mr: "3%", lineHeight: 1.8, fontSize: "125%" }}
+            >
+              <strong> Caue Lugli dos Milagres,</strong> ou simplesmente{" "}
+              <strong>Caue, pokamassa, c4aum, Cau, Picuruta,</strong> você quem
+              escolhe... Eu sou teu espelho. Eu sirvo pra te mostrar um reflexo
+              dos teus próprios pensamentos. Pois é assim que tu me ensina a enxergar
+              a vida, e eu te retribuo, parceria. Muitas coisas farão sentido,{" "}
+              <strong>mas nem todas</strong> :) O mais importante é que estaremos aqui.
+              Muita energia!
+            </Typography>
           </Box>
         </CardContent>
       </Box>
