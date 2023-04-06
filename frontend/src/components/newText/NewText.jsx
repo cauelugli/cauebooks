@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import { EditorState, convertToRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
@@ -15,8 +16,11 @@ import {
   Typography,
   Grid,
 } from "@mui/material";
-import axios from "axios";
 import CheckButton from "../checkButton/CheckButton";
+
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
 
 const NewText = () => {
   const [title, setTitle] = useState("");
@@ -31,7 +35,7 @@ const NewText = () => {
   useEffect(() => {
     const getGategories = async () => {
       const provNameList = [];
-      const res = await axios.get("/categories");
+      const res = await api.get("/categories");
       setCategories(res.data);
 
       for (let i = 0; i < res.data.length; i++) {
@@ -62,7 +66,7 @@ const NewText = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/posts", {
+      const res = await api.post("/posts", {
         title,
         body: parsedState,
         categories: selectedValue,

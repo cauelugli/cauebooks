@@ -20,6 +20,10 @@ import { Context } from "../../context/Context";
 import GreetSentence from "../../components/greetSentence/GreetSentence";
 import CheckButton from "../../components/checkButton/CheckButton";
 
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
+
 export default function Settings() {
   const { user } = useContext(Context);
 
@@ -42,7 +46,7 @@ export default function Settings() {
       password,
     };
     try {
-      await axios.put("/users/" + user._id, updatedUser);
+      await api.put("/users/" + user._id, updatedUser);
       handleUpdateModal();
       setPassword("")
     } catch (err) {

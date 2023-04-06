@@ -10,6 +10,10 @@ import {
 
 import CheckButton from "../../components/checkButton/CheckButton";
 
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
+
 export default function Admin() {
   const [name, setName] = useState("");
   const [icon, setIcon] = useState("");
@@ -17,7 +21,7 @@ export default function Admin() {
   const handleCategorySubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/categories", {
+      const res = await api.post("/categories", {
         name,
         icon,
       });

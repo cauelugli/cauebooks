@@ -21,6 +21,10 @@ import {
 import { Context } from "../../context/Context";
 import CheckButton from "../../components/checkButton/CheckButton";
 
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
+
 export default function Login() {
   const { dispatch } = useContext(Context);
   const [username, setUsername] = useState("");
@@ -69,7 +73,7 @@ export default function Login() {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("/auth/login", {
+      const res = await api.post("/auth/login", {
         username,
         password,
       });

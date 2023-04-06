@@ -24,6 +24,10 @@ import {
 import { Context } from "../../context/Context";
 import CheckButton from "../../components/checkButton/CheckButton";
 
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
+
 export default function Settings() {
   const { user, dispatch } = useContext(Context);
 
@@ -66,7 +70,7 @@ export default function Settings() {
 
   const handleDelete = async () => {
     try {
-      const res = await axios.delete("/users/" + user._id);
+      const res = await api.delete("/users/" + user._id);
       dispatch({ type: "LOGOUT", payload: res.data });
     } catch (err) {
       console.log(err);
@@ -82,7 +86,7 @@ export default function Settings() {
       username,
     };
     try {
-      const res = await axios.put("/users/" + user._id, updatedUser);
+      const res = await api.put("/users/" + user._id, updatedUser);
       dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
       handleUpdateModal();
     } catch (err) {

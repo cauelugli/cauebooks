@@ -7,6 +7,10 @@ import { Box, Container, Divider, Modal, Typography } from "@mui/material";
 import Login from "../login/Login";
 import CheckButton from "../../components/checkButton/CheckButton";
 
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
+
 const reqParams = window.location.pathname.replace("/users/activate/", "");
 let userId = "";
 
@@ -27,7 +31,7 @@ export default function UserVerification() {
 
   const handleSubmit = () => {
     try {
-      axios.get("/users/activate/" + userId);
+      api.get("/users/activate/" + userId);
       handleShowModal();
       setDone(true);
     } catch (err) {

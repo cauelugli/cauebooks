@@ -5,6 +5,10 @@ import axios from "axios";
 
 import { Box, Grid, Typography } from "@mui/material";
 
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
+
 const CategoriesSmallScreen = () => {
   const location = useLocation();
   const categoryId = location.pathname.split("/")[2];
@@ -14,8 +18,8 @@ const CategoriesSmallScreen = () => {
 
   useEffect(() => {
     const getPosts = async () => {
-      const { data } = await axios.get("/posts");
-      const data2 = await axios.get("/categories");
+      const { data } = await api.get("/posts");
+      const data2 = await api.get("/categories");
 
       const foundObject = data2.data.find(
         (object) => object._id === categoryId

@@ -5,6 +5,10 @@ import axios from "axios";
 
 import { Paper, InputBase, Grid, Link } from "@mui/material";
 
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
+
 const SearchBar = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [posts, setPosts] = useState([]);
@@ -12,7 +16,7 @@ const SearchBar = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get("/posts" + search);
+      const res = await api.get("/posts" + search);
       setPosts(res.data);
     };
     fetchPosts();

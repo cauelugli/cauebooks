@@ -3,12 +3,16 @@ import axios from "axios";
 
 import { Typography, Grid, Link, Divider } from "@mui/material";
 
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
+
 export default function HomeMediumScreen() {
   const [recentAddedList, setRecentAddedList] = useState([]);
 
   useEffect(() => {
     const getHomePage = async () => {
-      const { data } = await axios.get("/posts");
+      const { data } = await api.get("/posts");
       const provList = [];
       const provIconList = [];
 

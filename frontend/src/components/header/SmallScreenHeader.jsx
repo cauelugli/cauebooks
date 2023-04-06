@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Avatar, List, ListItem, Toolbar } from "@mui/material";
+import { Avatar, Toolbar } from "@mui/material";
 
 import SettingsMenu from "../settingsMenu/SettingsMenu";
 import HomeSmallScreenHeaderButton from "../homeSmallScreenHeaderButton/HomeSmallScreenHeaderButton";

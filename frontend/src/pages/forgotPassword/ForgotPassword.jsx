@@ -21,6 +21,10 @@ import {
 import CheckButton from "../../components/checkButton/CheckButton";
 import Login from "../login/Login";
 
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
+
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
 
@@ -49,7 +53,7 @@ export default function ForgotPassword() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("/auth/forgotPassword", {
+      const res = await api.post("/auth/forgotPassword", {
         email: email,
       });
       emailjs.send(

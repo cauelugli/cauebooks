@@ -10,7 +10,6 @@ import {
   DialogTitle,
   DialogActions,
   Divider,
-  Container,
   Box,
   TextField,
   Button,
@@ -18,6 +17,10 @@ import {
 
 import { Context } from "../../context/Context";
 import CheckButton from "../../components/checkButton/CheckButton";
+
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
 
 export default function Contact() {
   const { user } = useContext(Context);
@@ -42,7 +45,7 @@ export default function Contact() {
       body,
     };
     try {
-      await axios.post("/auth/contact", contactFormData);
+      await api.post("/auth/contact", contactFormData);
       setTitle("");
       setBody("");
       handleModal();

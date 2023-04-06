@@ -26,6 +26,10 @@ import { Box } from "@mui/material";
 import Login from "../login/Login";
 import CheckButton from "../../components/checkButton/CheckButton";
 
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
+
 export default function Register() {
   const [username, setUsername] = useState("");
   const [avatar, setAvatar] = useState("1");
@@ -69,7 +73,7 @@ export default function Register() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post("/auth/register", {
+      const res = await api.post("/auth/register", {
         avatar,
         username,
         email,

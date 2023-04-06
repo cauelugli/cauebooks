@@ -8,6 +8,10 @@ import { Box, CardContent, Grid, Typography } from "@mui/material";
 import SinglePostActions from "../../components/singlePostActions/SinglePostActions";
 import CommentaryBox from "../../components/commentaryBox/CommentaryBox";
 
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
+
 export default function SinglePostSmallScreen() {
   const location = useLocation();
   const postId = location.pathname.split("/")[2];
@@ -20,7 +24,7 @@ export default function SinglePostSmallScreen() {
 
   useEffect(() => {
     const getPost = async () => {
-      const res = await axios.get("/posts/" + postId);
+      const res = await api.get("/posts/" + postId);
       setTitle(res.data.title);
       setCategories(res.data.categories);
       setBody(res.data.body);

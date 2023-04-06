@@ -20,6 +20,10 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 
 import { Context } from "../../context/Context";
 
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
+
 export default function Favorites() {
   // eslint-disable-next-line
   const { user } = useContext(Context);
@@ -33,7 +37,7 @@ export default function Favorites() {
 
   useEffect(() => {
     const getFavorites = async () => {
-      const res = await axios.get("/users/" + user._id);
+      const res = await api.get("/users/" + user._id);
       setLikesList(res.data.likesList);
       setFavoritesList(res.data.favoritesList);
     };
@@ -62,11 +66,11 @@ export default function Favorites() {
 
   const handleDelete = async () => {
     try {
-      await axios.put("/users/unfavorite/" + user._id, {
+      await api.put("/users/unfavorite/" + user._id, {
         favorites: selectedNameToDelete,
         id: selectedIdToDelete,
       });
-      await axios.put("/posts/unfavorite/" + selectedIdToDelete);
+      await api.put("/posts/unfavorite/" + selectedIdToDelete);
       setOpenDeleteModal(false);
     } catch (err) {
       setOpenDeleteModal(false);

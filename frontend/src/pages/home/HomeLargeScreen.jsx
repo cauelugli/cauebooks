@@ -3,6 +3,10 @@ import axios from "axios";
 
 import { Typography, Box, Grid, Divider, Link } from "@mui/material";
 
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
+
 export default function HomeLargeScreen() {
   const [recentLikedTitle, setRecentLikedTitle] = useState("");
   const [recentCommented, setRecentCommented] = useState("");
@@ -10,7 +14,7 @@ export default function HomeLargeScreen() {
 
   useEffect(() => {
     const getHomePage = async () => {
-      const { data } = await axios.get("/posts");
+      const { data } = await api.get("/posts");
       setRecentLikedTitle(data.homepage[0].recentLiked[0].title);
       setRecentCommented(data.homepage[0].recentCommented[0].title);
 

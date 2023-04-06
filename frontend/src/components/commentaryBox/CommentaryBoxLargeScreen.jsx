@@ -26,6 +26,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import { Context } from "../../context/Context";
 import CheckButton from "../checkButton/CheckButton";
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
 
 const CommentaryBoxLargeScreen = () => {
   const location = useLocation();
@@ -50,7 +53,7 @@ const CommentaryBoxLargeScreen = () => {
 
   useEffect(() => {
     const getPost = async () => {
-      const res = await axios.get("/posts/" + postId);
+      const res = await api.get("/posts/" + postId);
       setCommentaries(res.data.commentaries);
       setPosted(
         new Date(res.data.createdAt).toLocaleDateString("pt-BR", {
@@ -65,7 +68,7 @@ const CommentaryBoxLargeScreen = () => {
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put("/posts/comment/" + postId, {
+      await api.put("/posts/comment/" + postId, {
         user: {
           username: user.username,
           avatar: user.avatar,
@@ -103,7 +106,7 @@ const CommentaryBoxLargeScreen = () => {
     }
 
     try {
-      await axios.put("/posts/delcomment/" + postId, {
+      await api.put("/posts/delcomment/" + postId, {
         commentary_id: selectedToDelete,
       });
       setOpenDeleteCommentaryModal(false);

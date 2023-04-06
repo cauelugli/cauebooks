@@ -11,6 +11,10 @@ import StarIcon from "@mui/icons-material/Star";
 
 import { Context } from "../../context/Context";
 
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
+
 export default function SinglePostActions() {
   const location = useLocation();
   const postId = location.pathname.split("/")[2];
@@ -23,7 +27,7 @@ export default function SinglePostActions() {
 
   useEffect(() => {
     const getPost = async () => {
-      const res = await axios.get("/posts/" + postId);
+      const res = await api.get("/posts/" + postId);
       setTitle(res.data.title);
       setLikes(res.data.likes);
       setFavorites(res.data.favorites);
@@ -33,7 +37,7 @@ export default function SinglePostActions() {
 
   useEffect(() => {
     const getUser = async () => {
-      const modifiedUser = await axios.get("/users/" + user._id);
+      const modifiedUser = await api.get("/users/" + user._id);
 
       for (let i = 0; i < modifiedUser.data.likesList.length; i++) {
         if (Object.values(modifiedUser.data.likesList[i]).includes(title)) {
@@ -56,16 +60,16 @@ export default function SinglePostActions() {
     e.preventDefault();
     if (!likesThisPost) {
       try {
-          await axios.put("/users/like/" + user._id, { likes: title, id: postId });
-          await axios.put("/posts/like/" + postId);
+          await api.put("/users/like/" + user._id, { likes: title, id: postId });
+          await api.put("/posts/like/" + postId);
         setLikesThisPost(true);
       } catch (err) {
         console.log(err);
       }
     } else {
       try {
-        await axios.put("/users/unlike/" + user._id, { likes: title, id: postId });
-        await axios.put("/posts/unlike/" + postId);
+        await api.put("/users/unlike/" + user._id, { likes: title, id: postId });
+        await api.put("/posts/unlike/" + postId);
         setLikesThisPost(false);
       } catch (err) {
         console.log(err);
@@ -77,16 +81,16 @@ export default function SinglePostActions() {
     e.preventDefault();
     if (!favorite) {
       try {
-        await axios.put("/users/favorite/" + user._id, { favorites: title, id: postId });
-        await axios.put("/posts/favorite/" + postId);
+        await api.put("/users/favorite/" + user._id, { favorites: title, id: postId });
+        await api.put("/posts/favorite/" + postId);
         setFavorite(true);
       } catch (err) {
         console.log(err);
       }
     } else {
       try {
-        await axios.put("/users/unfavorite/" + user._id, { favorites: title, id: postId });
-        await axios.put("/posts/unfavorite/" + postId);
+        await api.put("/users/unfavorite/" + user._id, { favorites: title, id: postId });
+        await api.put("/posts/unfavorite/" + postId);
         setFavorite(false);
       } catch (err) {
         console.log(err);

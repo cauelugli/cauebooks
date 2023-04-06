@@ -3,6 +3,10 @@ import axios from "axios";
 
 import { AppBar, FormControl, Link, Toolbar, Typography } from "@mui/material";
 
+const api = axios.create({
+  baseURL: process.env.DEV_API_URL,
+});
+
 const CategoriesBar = () => {
   const [categoriesNamesList, setCategoriesNamesList] = useState([]);
   const [categoriesIdsList, setCategoriesIdsList] = useState([]);
@@ -13,7 +17,7 @@ const CategoriesBar = () => {
       const provNameList = [];
       const ids = [];
       const icons = [];
-      const res = await axios.get("/categories");
+      const res = await api.get("/categories");
 
       for (let i = 0; i < res.data.length; i++) {
         provNameList.push(res.data[i].name);
