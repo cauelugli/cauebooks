@@ -21,7 +21,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Context } from "../../context/Context";
 
 const api = axios.create({
-  baseURL: process.env.DEV_API_URL,
+  baseURL: (process.env.DEV_API_URL || "http://api.cauebooks.com.br/api"),
 });
 
 export default function Favorites() {

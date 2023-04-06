@@ -4,7 +4,7 @@ import axios from "axios";
 import { Typography, Grid, Link, Divider } from "@mui/material";
 
 const api = axios.create({
-  baseURL: process.env.DEV_API_URL,
+  baseURL: (process.env.DEV_API_URL || "http://api.cauebooks.com.br/api"),
 });
 
 export default function HomeMediumScreen() {

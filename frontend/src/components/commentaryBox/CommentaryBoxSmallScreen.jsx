@@ -28,7 +28,7 @@ import { Context } from "../../context/Context";
 import CheckButton from "../checkButton/CheckButton";
 
 const api = axios.create({
-  baseURL: process.env.DEV_API_URL,
+  baseURL: (process.env.DEV_API_URL || "http://api.cauebooks.com.br/api"),
 });
 
 const CommentaryBoxSmallScreen = () => {
