@@ -85,7 +85,7 @@ export default function Register() {
         {
           to_name: username,
           to_email: email,
-          link: `http://localhost:3000/users/activate/${res.data._id}`,
+          link: `https://cauebooks.com.br/users/activate/${res.data._id}`,
         },
         "fVnxtfZFIiPcu8UvO"
       );
