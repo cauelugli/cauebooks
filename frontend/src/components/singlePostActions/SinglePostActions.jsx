@@ -12,7 +12,7 @@ import StarIcon from "@mui/icons-material/Star";
 import { Context } from "../../context/Context";
 
 const api = axios.create({
-  baseURL: (process.env.DEV_API_URL || "http://api.cauebooks.com.br/api"),
+  baseURL: (process.env.DEV_API_URL || "https://api.cauebooks.com.br/api"),
 });
 
 export default function SinglePostActions() {

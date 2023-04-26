@@ -21,7 +21,7 @@ import GreetSentence from "../../components/greetSentence/GreetSentence";
 import CheckButton from "../../components/checkButton/CheckButton";
 
 const api = axios.create({
-  baseURL: (process.env.DEV_API_URL || "http://api.cauebooks.com.br/api"),
+  baseURL: (process.env.DEV_API_URL || "https://api.cauebooks.com.br/api"),
 });
 
 export default function Settings() {
