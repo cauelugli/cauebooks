@@ -39,6 +39,7 @@ const CategoriesButton = () => {
       setCategoriesIconsList(icons);
     };
     getGategories();
+    // eslint-disable-next-line
   }, []);
 
   const categoriesList = [];
