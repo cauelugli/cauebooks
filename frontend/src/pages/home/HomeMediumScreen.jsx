@@ -1,52 +1,38 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import { Typography, Grid, Link, Divider } from "@mui/material";
+import {
+  Typography,
+  Grid,
+  Link,
+  Divider,
+  Box,
+  Pagination,
+} from "@mui/material";
 
 const api = axios.create({
-  baseURL: (process.env.DEV_API_URL || "https://api.cauebooks.com.br/api"),
+  baseURL: process.env.DEV_API_URL || "https://api.cauebooks.com.br/api",
 });
 
 export default function HomeMediumScreen() {
   const [recentAddedList, setRecentAddedList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const textsPerPage = 5;
+  const indexOfLastText = currentPage * textsPerPage;
+  const indexOfFirstText = indexOfLastText - textsPerPage;
+  const currentTexts = recentAddedList.slice(indexOfFirstText, indexOfLastText);
+
+  const handlePageChange = (event, page) => {
+    setCurrentPage(page);
+  };
 
   useEffect(() => {
     const getHomePage = async () => {
       const { data } = await api.get("/posts");
-      const provList = [];
-      const provIconList = [];
-
-      for (let i = 0; i < data.homepage[0].recentAdded.length; i++) {
-        provList.push(
-          <Grid
-            container
-            direction="row"
-            sx={{
-              p: 1,
-              m: 1,
-              color: "#0E1428",
-              border: "3px solid",
-              backgroundColor: "#f1f1f0e3",
-              borderColor: "grey.400",
-              borderRadius: 3,
-              width: "85%",
-            }}
-          >
-            <Link
-              href={`/post/${data.homepage[0].recentAdded[i].postId}`}
-              underline="none"
-            >
-              <Typography
-                sx={{ fontStyle: "oblique", color: "grey.700" }}
-                variant="h6"
-              >
-                {data.homepage[0].recentAdded[i].title}
-              </Typography>
-              <div dangerouslySetInnerHTML={{ __html: provIconList }} />
-            </Link>
-          </Grid>
-        );
-      }
+      const provList = data.homepage[0].recentAdded.map((item) => ({
+        title: item.title,
+        postId: item.postId,
+      }));
       setRecentAddedList(provList);
     };
     getHomePage();
@@ -71,7 +57,39 @@ export default function HomeMediumScreen() {
       </Grid>
       <Divider sx={{ m: 2, mx: 7 }} />
       <Grid container justifyContent="center" sx={{ p: 1 }}>
-        {recentAddedList}
+        {currentTexts.map((item, index) => (
+          <Box
+            key={index}
+            sx={{
+              p: 2,
+              my: 1,
+              color: "#0E1428",
+              border: "3px solid",
+              backgroundColor: "#f1f1f0e3",
+              borderColor: "grey.400",
+              borderRadius: 3,
+              width: "auto",
+              minWidth: "550px",
+            }}
+          >
+            <Grid container direction="row" justifyContent="space-between">
+              <Link href={`/post/${item.postId}`} underline="none">
+                <Typography
+                  sx={{ fontStyle: "oblique", color: "grey.800" }}
+                  variant="h6"
+                >
+                  {item.title}
+                </Typography>
+              </Link>
+            </Grid>
+          </Box>
+        ))}
+        <Pagination
+          sx={{ mt: 2 }}
+          count={Math.ceil(recentAddedList.length / textsPerPage)}
+          page={currentPage}
+          onChange={handlePageChange}
+        />
       </Grid>
     </Grid>
   );
