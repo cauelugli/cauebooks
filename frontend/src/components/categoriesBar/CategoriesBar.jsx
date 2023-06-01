@@ -13,7 +13,7 @@ const CategoriesBar = () => {
   const [categoriesIconsList, setCategoriesIconsList] = useState([]);
 
   useEffect(() => {
-    const getGategories = async () => {
+    const getCategories = async () => {
       const provNameList = [];
       const ids = [];
       const icons = [];
@@ -29,35 +29,35 @@ const CategoriesBar = () => {
       setCategoriesIdsList(ids);
       setCategoriesIconsList(icons);
     };
-    getGategories();
+    getCategories();
   }, []);
 
   const categoriesList = [];
 
   for (let i = 0; i < categoriesNamesList.length; i++) {
+    const widthPercent = 90 / categoriesNamesList.length;
+
     categoriesList.push(
-      <>
-        <FormControl
-          sx={{
-            minWidth: "5%",
-            color: "#BDEFD8",
-            backgroundColor: "#0E1428",
-          }}
+      <FormControl
+        key={categoriesIdsList[i]}
+        sx={{
+          flex: `0 0 ${widthPercent}%`,
+          color: "#BDEFD8",
+          backgroundColor: "#0E1428",
+        }}
+      >
+        <Link
+          href={`/categories/${categoriesIdsList[i]}`}
+          underline="none"
+          sx={{ fontSize: "95%", color: "#BDEFD8", backgroundColor: "#0E1428", mx: 1 }}
         >
-          <Link
-            href={`/categories/${categoriesIdsList[i]}`}
-            underline="none"
-            sx={{ fontSize:"95%", color: "#BDEFD8", backgroundColor: "#0E1428", mx: 1 }}
-          >
-            <div
-              dangerouslySetInnerHTML={{
-                __html:
-                  "&#" + categoriesIconsList[i] + "; " + categoriesNamesList[i],
-              }}
-            />
-          </Link>
-        </FormControl>
-      </>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: `&#${categoriesIconsList[i]}; ${categoriesNamesList[i]}`,
+            }}
+          />
+        </Link>
+      </FormControl>
     );
   }
 

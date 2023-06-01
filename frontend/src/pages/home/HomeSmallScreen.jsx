@@ -66,7 +66,7 @@ export default function HomeSmallScreen() {
             <Box
               key={index}
               sx={{
-                p: 2,
+                p: 1,
                 my: 1,
                 color: "#0E1428",
                 border: "3px solid",
@@ -74,7 +74,7 @@ export default function HomeSmallScreen() {
                 borderColor: "grey.400",
                 borderRadius: 3,
                 width: "auto",
-                minWidth: "300px",
+                minWidth: "290px",
               }}
             >
               <Grid container direction="row" justifyContent="space-between">
