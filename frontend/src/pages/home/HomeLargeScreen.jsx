@@ -180,10 +180,9 @@ export default function HomeLargeScreen() {
         <Divider sx={{ m: 1, my: 3 }} />
         <Grid container justifyContent="center">
           <Typography variant="h6">Atualizações &#128640;</Typography>
-
           <Grid container justifyContent="center">
             <Typography sx={{ fontStyle: "oblique", color: "#5f5f5f" }}>
-              "Alguma coisa muito dahora!"
+              "Teremos uma seção de Diálogo, ao invés de um chato Contato"
             </Typography>
           </Grid>
         </Grid>
