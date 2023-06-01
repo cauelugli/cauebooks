@@ -23,7 +23,7 @@ export default function HomeLargeScreen() {
   const textsPerPage = 5;
   const indexOfLastText = currentPage * textsPerPage;
   const indexOfFirstText = indexOfLastText - textsPerPage;
-  const currentTexts = recentAddedList.slice(indexOfFirstText, indexOfLastText);
+  const provList = recentAddedList.slice(indexOfFirstText, indexOfLastText);
 
   const handlePageChange = (event, page) => {
     setCurrentPage(page);
@@ -34,9 +34,12 @@ export default function HomeLargeScreen() {
       const { data } = await api.get("/posts");
       setRecentLikedTitle(data.homepage[0].recentLiked[0].title);
       setRecentCommented(data.homepage[0].recentCommented[0].title);
-      const provList = data.homepage[0].recentAdded.map((item) => ({
+      const provList = data.posts.map((item) => ({
         title: item.title,
-        postId: item.postId,
+        _id: item._id,
+        number: item.number,
+        likes: item.likes,
+        comentariesCount: item.commentaries.length,
       }));
       setRecentAddedList(provList);
     };
@@ -108,35 +111,46 @@ export default function HomeLargeScreen() {
         }}
       >
         <Grid container justifyContent="center">
-          <Typography variant="h5">Novos Textos ⭐</Typography>
+          <Typography variant="h4">Novos Textos ⭐</Typography>
         </Grid>
         <Divider sx={{ m: 1, my: 3 }} />
-        {currentTexts.map((item, index) => (
-          <Box
-            key={index}
-            sx={{
-              p: 2,
-              my: 2,
-              color: "#0E1428",
-              border: "3px solid",
-              backgroundColor: "#f1f1f0e3",
-              borderColor: "grey.400",
-              borderRadius: 3,
-              width: "auto",
-              minWidth: "550px",
-            }}
-          >
-            <Grid container direction="row" justifyContent="space-between">
-              <Link href={`/post/${item.postId}`} underline="none">
+
+        {provList.map((item, index) => (
+          <Link href={`/post/${item._id}`} underline="none">
+            <Box
+              key={index}
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                p: 2,
+                my: 2,
+                color: "#0E1428",
+                border: "3px solid",
+                borderColor: "grey.400",
+                borderRadius: 3,
+                backgroundColor: "#fff",
+                width: "auto",
+                minWidth: "550px",
+              }}
+            >
+              <Box sx={{ p: 1 }}>
+                {item.number < 10 ? "#00" : item.number < 99 ? "#0" : "#"}
+                {item.number}
+              </Box>
+              <Box sx={{ px: "5%" }}>
                 <Typography
                   sx={{ fontStyle: "oblique", color: "grey.800" }}
                   variant="h6"
                 >
                   {item.title}
                 </Typography>
-              </Link>
-            </Grid>
-          </Box>
+              </Box>
+              <Box sx={{ p: 1 }}>
+                🖤 {item.likes}
+                💬 {item.comentariesCount}
+              </Box>
+            </Box>
+          </Link>
         ))}
         <Divider sx={{ m: 1, my: 3 }} />
         <Pagination
