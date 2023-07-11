@@ -6,7 +6,7 @@ import axios from "axios";
 import { Box, Grid, Typography } from "@mui/material";
 
 const api = axios.create({
-  baseURL: (process.env.DEV_API_URL || "https://api.cauebooks.com.br/api"),
+  baseURL: (process.env.REACT_APP_DEV_API_URL || "https://api.cauebooks.com.br/api"),
 });
 
 const CategoriesSmallScreen = () => {

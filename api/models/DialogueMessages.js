@@ -1,21 +1,21 @@
 const mongoose = require("mongoose");
 
-const ContactSchema = new mongoose.Schema(
+const DialogueMessagesSchema = new mongoose.Schema(
   {
-    title: {
-      type: String,
-      required: true,
-    },
     body: {
       type: String,
       required: true,
     },
-    user: {
-      type: Array,
+    userId: {
+      type: String,
+      required: true,
+    },
+    fromUser: {
+      type: Boolean,
       required: true,
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Contact", ContactSchema);
+module.exports = mongoose.model("DialogueMessages", DialogueMessagesSchema);

@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 
 const api = axios.create({
-  baseURL: process.env.DEV_API_URL || "https://api.cauebooks.com.br/api",
+  baseURL: process.env.REACT_APP_DEV_API_URL || "https://api.cauebooks.com.br/api",
 });
 
 export default function HomeLargeScreen() {
@@ -182,7 +182,7 @@ export default function HomeLargeScreen() {
           <Typography variant="h6">Atualizações &#128640;</Typography>
           <Grid container justifyContent="center">
             <Typography sx={{ fontStyle: "oblique", color: "#5f5f5f" }}>
-              "Teremos uma seção de Diálogo, ao invés de um chato Contato"
+              "Agora temos uma seção de Diálogo, ao invés de um chato Contato. Experimenta pô, <a href="/dialogue">manda uma mensagem :D</a>"
             </Typography>
           </Grid>
         </Grid>

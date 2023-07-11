@@ -17,7 +17,7 @@ export const ContextProvider = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(state.user));
   }, [state]);
 
-  // console.log("I load the state here faster (and once!!!) my nigga")
+  // console.log("I load the state here faster (and once!!!) my friend")
 
   return (
     <Context.Provider

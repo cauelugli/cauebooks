@@ -9,6 +9,7 @@ const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts");
 const categoriesRoute = require("./routes/categories");
+const dialogueRoute = require("./routes/dialogue");
 
 dotenv.config();
 app.use(cors());
@@ -27,6 +28,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/categories", categoriesRoute);
+app.use("/api/dialogue", dialogueRoute);
 
 app.listen("5000", () => {
   console.log("Backend is running.");

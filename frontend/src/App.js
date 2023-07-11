@@ -12,7 +12,7 @@ import Admin from "./pages/admin/Admin";
 import Favorites from "./pages/favorites/Favorites";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
-import Contact from "./pages/contact/Contact";
+import Dialogue from "./pages/dialogue/Dialogue";
 import PasswordReset from "./pages/passwordReset/PasswordReset";
 import Register from "./pages/register/Register";
 import Settings from "./pages/settings/Settings";
@@ -20,6 +20,7 @@ import SinglePost from "./pages/singlePost/SinglePost";
 import UserVerification from "./pages/userVerification/UserVerification";
 import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
 import Categories from "./pages/categories/Categories";
+import AdminDialogue from "./pages/adminDialogue/AdminDialogue";
 
 function App() {
   const { user } = useContext(Context);
@@ -45,7 +46,7 @@ function App() {
             <UserVerification />
           </Route>
           <Route path="/about">{user ? <About /> : <Login />}</Route>
-          <Route path="/contact">{user ? <Contact /> : <Login />}</Route>
+          <Route path="/dialogue">{user ? <Dialogue /> : <Login />}</Route>
           <Route path="/:userId/favorites">
             {user ? <Favorites /> : <Login />}
           </Route>
@@ -61,6 +62,9 @@ function App() {
           <Route path="/settings">{user ? <Settings /> : <Login />}</Route>
           <Route exact path="/admin">
             {user?.isAdmin ? <Admin /> : <Login />}
+          </Route>
+          <Route exact path="/admin/dialogue">
+            {user?.isAdmin ? <AdminDialogue /> : <Login />}
           </Route>
         </Switch>
 

@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 
 const User = require("../models/User");
-const Contact = require("../models/Contact");
+const DialogueMessages = require("../models/DialogueMessages");
 
 //REGISTERING
 router.post("/register", async (req, res) => {
@@ -101,24 +101,6 @@ router.post("/forgotPassword", async (req, res) => {
     }
   } catch (err) {
     res.status(400);
-  }
-});
-
-//CONTACT
-router.post("/contact", async (req, res) => {
-  try {
-    const newContact = new Contact({
-      user: req.body.user,
-      title: req.body.title,
-      body: req.body.body,
-    });
-
-    const contact = await newContact.save();
-
-    res.status(200).json(contact);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
   }
 });
 

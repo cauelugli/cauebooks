@@ -1,9 +1,6 @@
 import React from "react";
 
-import {
-  Button,
-  Menu,
-} from "@mui/material";
+import { Button, Menu } from "@mui/material";
 
 import NewCategory from "../../components/newCategory/NewCategory";
 import NewText from "../../components/newText/NewText";
@@ -26,7 +23,7 @@ export default function Admin() {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        sx={{ color: "#0E1428", backgroundColor: "#BDEFD8", m:2 }}
+        sx={{ color: "#0E1428", backgroundColor: "#BDEFD8", m: 2 }}
       >
         Nova Categoria
       </Button>
@@ -43,8 +40,14 @@ export default function Admin() {
         <NewCategory />
       </Menu>
 
+      <Button
+        href="/admin/dialogue"
+        sx={{ color: "#BDEFD8", backgroundColor: "#0E1428", m: 2 }}
+      >
+        Diálogo
+      </Button>
+
       <NewText />
-        
     </div>
   );
 }

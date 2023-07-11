@@ -53,10 +53,10 @@ export default function HomeSmallScreenHeaderButton() {
 
         <Divider sx={{ my: 1 }} />
 
-        <Link className="link" to="/contact">
+        <Link className="link" to="/dialogue">
           <MenuItem onClick={handleClose} sx={{ color: "#0E1428" }}>
             <Typography sx={{ width: "220px", textAlign: "center" }}>
-              CONTATO
+              DIÁLOGO
             </Typography>
           </MenuItem>
         </Link>

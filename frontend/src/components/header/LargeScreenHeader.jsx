@@ -44,9 +44,9 @@ const LargeScreenHeader = () => {
                 fontSize: "1.25em",
                 fontFamily: "Varela Round, sans-serif",
               }}
-              to="/contact"
+              to="/dialogue"
             >
-              CONTATO
+              DIÁLOGO
             </Link>
           </ListItem>
         </List>
