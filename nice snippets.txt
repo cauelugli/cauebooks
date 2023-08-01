@@ -1,0 +1,16 @@
+## merge two lists in Javascript in order to maintain their respective values as indexes ##
+
+let fruits = ['banana', 'apple'];
+let numbers = ['1', '2'];
+
+let mergedList = fruits.map((fruit, index) => `${numbers[index]} - ${fruit}`);
+
+console.log(mergedList);
+// Output: [ '1 - banana', '2 - apple' ]
+
+
+const addEmoji = (emoji) => () => setText(`${text}${emoji}`);
+
+Small (smaller than 640px)
+Medium (641px to 1007px)
+Large (1008px and larger)

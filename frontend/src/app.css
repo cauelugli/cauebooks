@@ -1,0 +1,12 @@
+:root {
+  --my-black: #0E1428;
+  --my-grey: #2e2e2e;
+  --my-green: #92AF9E;
+  --my-light-green: #BDEFD8;
+  --my-dark-green: #658576;
+  --my-white: #e4e4e4;
+}
+
+body {
+  background: linear-gradient(to bottom, #92AF9E, #0E1428);
+}

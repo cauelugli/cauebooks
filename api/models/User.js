@@ -1,46 +1,39 @@
 const mongoose = require("mongoose");
 
-userSchema = new mongoose.Schema({
-  customerId: {
-    type: String,
-    required: true,
+const UserSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    avatar: {
+      type: String,
+      default: "1",
+    },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
+    favoritesList: {
+      type: Array,
+      default: [],
+    },
+    likesList: {
+      type: Array,
+      default: [],
+    },
   },
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  phone: {
-    type: String,
-  },
-  position: {
-    type: String,
-  },
-  department: {
-    type: Array,
-  },
-  manager: {
-    type: String,
-  },
-  avatar: {
-    type: String,
-  },
-  avatarColor: {
-    type: String,
-  },
-  isActive: {
-    type: Boolean,
-    default: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  { timestamps: true }
+);
 
-const User = mongoose.model("User", userSchema);
-
-module.exports = User;
+module.exports = mongoose.model("User", UserSchema);
