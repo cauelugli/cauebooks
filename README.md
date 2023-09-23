@@ -1,5 +1,4 @@
-# This code repository is about my personal blog :)
-# My very first project
+# This code repository is about my personal blog :) My very first project
 
 Appart from technology, I love writting texts about different topics like phylosophy, family, humanity, society and etc.; talking about my own life experiences and perpection of things around the world and life, always with an informal approach. My writting style is to pretend I'm indeed talking to you, but for a while you just listen :)
 
